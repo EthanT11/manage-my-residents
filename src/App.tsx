@@ -7,28 +7,40 @@ import TopNavBar from './components/Top-Nav-Bar'
 const data = { 
 	residents: [
 		{
-			name: "bill",
+			name: "Bill Billington",
 			age: "65",
 			wing: "Left",
 			room: "100"
 		},
 		{
-			name: "jill",
+			name: "Jill Jillington",
 			age: "50",
-			wing: "Left",
+			wing: "Right",
 			room: "101"
 		},
 		{
-			name: "billy",
+			name: "Billy Billington",
 			age: "93",
-			wing: "Right",
+			wing: "Left",
 			room: "102"
 		},
+		{
+			name: "Jilly Jillington",
+			age: "45",
+			wing: "Right",
+			room: "103"
+		},
+		{
+			name: "Steve Stevenson",
+			age: "87",
+			wing: "Left",
+			room: "104"
+		}
 	]
 }
 
 const listDummyCards = data.residents.map(resident => 
-	<ResidentCard name={resident.name} age={resident.age} info={[resident.wing, resident.room]}/>
+	<ResidentCard name={resident.name} info={[resident.wing, resident.room]}/>
 )
 
 
