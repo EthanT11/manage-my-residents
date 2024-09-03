@@ -1,7 +1,6 @@
 // TODO: think of a cool way to display the resident card
 // TODO: make hover effect on the card title better
 // TODO: add smoothening effect on the card expansion
-// TODO: stop the card in the next column from expanding when one card is expanded
 // TODO: make it so only one card can be expanded at one time
 import {
   Card,
@@ -17,10 +16,11 @@ import { useState } from "react"
 export default function ResidentCard( {name, info} : {name: string, info: [string, string]} ) {
 	const [isCollapsed, setIsCollapsed] = useState(true);
 
-	const handleClick = () => {
+	const handleClick = () => { // function to toggle the card expansion
 		setIsCollapsed(!isCollapsed);
 	}
 
+	// Ask if there is a better way to do this. Specifically the isCollapsed check
 	return (
 		<Card className={`grow-0 shadow-lg rounded-lg m-2
 			${isCollapsed ? 'bg-white h-30' : 'bg-sky-200 h-60'}

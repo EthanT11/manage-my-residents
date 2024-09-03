@@ -1,8 +1,7 @@
 import CardHeader from "./CardHeader"
 import ResidentCard from "./ResidentCard"
 
-// TODO: ask if there is a better way to do this?
-interface ResidentCardSideBarProps {
+interface ResidentCardSideBarProps { // type of the data prop
 	data: {
 		residents: {
 			name: string,
@@ -21,7 +20,7 @@ export default function ResidentCardSideBar({data}: ResidentCardSideBarProps) {
 			<ResidentCard name={name} info={[wing, room]} />							   // { name: string; wing: string; room: string }[] is the type of the residents parameter
 		))	                                                                               // square brackets at the end tell typescript that it is an array
 	}
-	return (														                       // ask if there is a better way to sort them by wing or something else
+	return (									// TODO: Add check for screen size so the cards go to one column											                       // ask if there is a better way to sort them by wing or something else
 		<div className="flex flex-col p-4">
 			<CardHeader />
 			<div className="flex bg-slate-500">
@@ -29,7 +28,7 @@ export default function ResidentCardSideBar({data}: ResidentCardSideBarProps) {
 					{listResidents(leftWingResidents)}
 				</div>
 				<div className="flex flex-col">
-					{listResidents(rightWingResidents)}
+					{/* {listResidents(rightWingResidents)} */}
 				</div>
 			</div>
 		</div>

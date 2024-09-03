@@ -41,10 +41,20 @@ const data = {
 
 function App() {
   return (
-	<div>
+	<div className="flex flex-col">
 		<TopNavBar />
-		<div className="flex w-full">
-			<ResidentCardSideBar data={data}/>
+		<div className="flex flex-1 shadow-lg">
+			<div className='flex-1 w-1/3 bg-white'>
+				<ResidentCardSideBar data={data}/>
+			</div>
+			<div className='flex flex-col bg-yellow-500'>
+				<div className='bg-slate-500'>
+					<p>Some other content</p>
+				</div>
+				<div className='bg-slate-400'>
+					<p>Some other content</p>
+				</div>
+			</div>
 		</div>
 	</div>
   )
