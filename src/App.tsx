@@ -1,9 +1,9 @@
 import './App.css'
-import ResidentCard from './components/ResidentCard'
-import CardHeader from './components/CardHeader'
 import TopNavBar from './components/Top-Nav-Bar'
+import ResidentCardSideBar from './components/ResidentCardSideBar'
 
 // Maybe a blue and lightgray theme?
+
 const data = { 
 	residents: [
 		{
@@ -39,22 +39,12 @@ const data = {
 	]
 }
 
-const listDummyCards = data.residents.map(resident => 
-	<ResidentCard name={resident.name} info={[resident.wing, resident.room]}/>
-)
-
-
 function App() {
   return (
 	<div>
 		<TopNavBar />
 		<div className="flex w-full">
-			<div className="flex flex-col p-4">
-				<CardHeader />
-				<div className="grid grid-cols-2">
-					{listDummyCards}
-				</div>
-			</div>
+			<ResidentCardSideBar data={data}/>
 		</div>
 	</div>
   )

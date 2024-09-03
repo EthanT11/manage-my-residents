@@ -1,5 +1,8 @@
 // TODO: think of a cool way to display the resident card
 // TODO: make hover effect on the card title better
+// TODO: add smoothening effect on the card expansion
+// TODO: stop the card in the next column from expanding when one card is expanded
+// TODO: make it so only one card can be expanded at one time
 import {
   Card,
   CardContent,
