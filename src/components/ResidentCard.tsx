@@ -22,12 +22,12 @@ export default function ResidentCard( {name, info} : {name: string, info: [strin
 	}
 
 	return (
-		<Card className={`grow-0 shadow-lg rounded-lg m-2 
-		${isCollapsed ? 'bg-white h-30' : 'bg-sky-200 h-60'}
+		<Card className={`grow-0 shadow-lg rounded-lg m-2
+			${isCollapsed ? 'bg-white h-30' : 'bg-sky-200 h-60'}
 		`}>
-			<CardHeader className="text-center" onClick={handleClick}>
+			<CardHeader className="text-center items-center" onClick={handleClick}>
 				<CardTitle className={`hover:bg-sky-600 hover:text-white cursor-pointer width-auto p-2 rounded-lg border-2
-					${isCollapsed ? 'text-blue-600' : 'bg-sky-600 text-white bold underline'}
+					${isCollapsed ? 'text-blue-600' : 'bg-sky-600 text-white'}
 				`}>
 					{name}
 				</CardTitle>
