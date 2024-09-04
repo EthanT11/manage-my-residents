@@ -23,7 +23,7 @@ export default function ResidentCard( {name, info} : {name: string, info: [strin
 	// Ask if there is a better way to do this. Specifically the isCollapsed check
 	return (
 		<Card className={`grow-0 shadow-lg rounded-lg m-2
-			${isCollapsed ? 'bg-white h-30' : 'bg-sky-200 h-60'}
+			${isCollapsed ? 'bg-white' : 'bg-sky-200'}
 		`}>
 			<CardHeader className="text-center items-center" onClick={handleClick}>
 				<CardTitle className={`hover:bg-sky-600 hover:text-white cursor-pointer width-auto p-2 rounded-lg border-2
