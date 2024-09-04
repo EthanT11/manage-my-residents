@@ -35,13 +35,26 @@ const data = {
 			age: "87",
 			wing: "Left",
 			room: "104"
-		}
+		},
+		{
+			name: "Bill Billington",
+			age: "65",
+			wing: "Left",
+			room: "100"
+		},
+		{
+			name: "Jill Jillington",
+			age: "50",
+			wing: "Right",
+			room: "101"
+		},
+
 	]
 }
 
 function App() {
   return (
-	<div className="flex flex-col"> {/* Container for the entire page */}
+	<div className="flex flex-col font-roboto"> {/* Container for the entire page */}
 		<TopNavBar />
 		<div className="flex flex-1 shadow-lg"> {/* Container for entire dashboard under main nav bar */}
 			<div className='flex-1 w-1/3 bg-white'> {/* Container for ResidentSideBar */}

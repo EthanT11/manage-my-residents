@@ -29,7 +29,7 @@ export default function ResidentCard( {name, info} : {name: string, info: [strin
 				<CardTitle className={`hover:bg-sky-600 hover:text-white cursor-pointer width-auto p-2 rounded-lg border-2
 					${isCollapsed ? 'text-blue-600' : 'bg-sky-600 text-white'}
 				`}>
-					{name}
+					{name} {isCollapsed ? '▼' : '▲'}
 				</CardTitle>
 			</CardHeader>
 			{!isCollapsed && (
