@@ -20,10 +20,20 @@ export default function ResidentCardSideBar({data}: ResidentCardSideBarProps) {
 			<ResidentCard key={room} name={name} info={[wing, room]} />							   // { name: string; wing: string; room: string }[] is the type of the residents parameter
 		))	                                                                               // square brackets at the end tell typescript that it is an array
 	}
+
+	const handleAddRes = () => { 
+		console.log("Add Resident button clicked");
+	}
+
+	const handleEdit = () => {
+		console.log("Edit button clicked");
+	}
+
+
 		// TODO: Add check for screen size so the cards go to one column
 	return (																			   // TODO: Add check for screen size so the cards go to one column											                       // ask if there is a better way to sort them by wing or something else
 		<div className="flex flex-col p-4">
-			<CardHeader text={"Resident Cards"} />
+			<CardHeader text={"Resident Cards"} handleAddRes={handleAddRes} handleEdit={handleEdit}/>
 			<div className="flex flex-1 bg-slate-500 justify-center">
 				<div className="flex flex-col">
 					{listResidents(leftWingResidents)}
