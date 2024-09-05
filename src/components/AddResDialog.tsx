@@ -15,33 +15,23 @@ import CardHeaderButton from "./CardHeaderButton"
 export default function AddResDialog() {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-		<CardHeaderButton text="Add Resident" variant="outline" />
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            {/* <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" /> */}
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            {/* <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" /> */}
-          </div>
-        </div>
-        <DialogFooter>
-          {/* <Button type="submit">Save changes</Button> */}
-        </DialogFooter>
+      	<DialogTrigger asChild>
+			<CardHeaderButton text="Add Resident" variant="outline" />
+      	</DialogTrigger>
+      	<DialogContent className="sm:max-w-[425px] bg-blue-500">
+			<DialogHeader>
+				<DialogTitle className="text-white text-center">New Resident</DialogTitle>
+				<DialogDescription className="text-white text-center">
+					Fill in the form below to add a new resident.
+				</DialogDescription>
+			</DialogHeader>
+
+			{/* Body Here*/}
+
+			<DialogFooter>
+				<CardHeaderButton text="Save" variant="outline" /> 
+				<CardHeaderButton text="Cancel" variant="secondary" />
+			</DialogFooter>
       </DialogContent>
     </Dialog>
   )
