@@ -24,10 +24,10 @@ interface CardHeaderButtonProps {
 // }
 
 const CardHeaderButton = React.forwardRef<HTMLButtonElement, CardHeaderButtonProps>( // typescript <HTMLButtonElement> is the type of the ref | <CardHeaderButtonProps> is the type of the props
-	({ text, onClick, variant}, ref) => {		 // takes two args props and ref 									
+	({ text, onClick, variant}, ref) => {		 									 // takes two args props and ref 									
 	  return (
 		<Button 
-		  ref={ref} // ref is passed to the button element
+		  ref={ref} 																// ref is passed to the button element
 		  className={`bg-white hover:bg-blue-600 hover:text-white ${variant}`}
 		  onClick={onClick}
 		>
