@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 
 interface CardHeaderButtonProps {
 	text: string; 
-	onClick: () => void; 
+	onClick?: () => void; 
 	variant?: 'secondary' | 'outline'
 }
 // TODO: Add custom styling for the button
