@@ -1,6 +1,6 @@
 import { Button } from "./ui/button";
 
-export default function AddResidentButton({text, onClick, variant}: {text: string; onClick: () => void; variant?: 'secondary' | 'outline'}) {
+export default function HeaderButton({text, onClick, variant}: {text: string; onClick: () => void; variant?: 'secondary' | 'outline'}) {
   return ( // TODO: maybe an interface for the props
     <>
 	  	<Button 

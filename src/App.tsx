@@ -3,6 +3,7 @@ import TopNavBar from './components/Top-Nav-Bar'
 import ResidentCardSideBar from './components/ResidentCardSideBar'
 
 // Maybe a blue and lightgray theme?
+// TODO: Add id to residents for key
 
 const data = { 
 	residents: [
@@ -40,13 +41,13 @@ const data = {
 			name: "Bill Billington",
 			age: "65",
 			wing: "Left",
-			room: "100"
+			room: "105"
 		},
 		{
 			name: "Jill Jillington",
 			age: "50",
 			wing: "Right",
-			room: "101"
+			room: "106"
 		},
 
 	]

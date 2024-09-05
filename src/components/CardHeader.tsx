@@ -1,5 +1,5 @@
 // TODO add functionality to the Add Resident button
-import AddResidentButton from "./AddResidentButton";
+import HeaderButton from "./HeaderButton";
 
 export default function CardHeader({text}: {text: React.ReactNode}) {
 	const handleClick = () => {
@@ -8,7 +8,7 @@ export default function CardHeader({text}: {text: React.ReactNode}) {
 	return (
 	  <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-t-xl shadow-lg flex justify-between items-center">
 		<h1 className="text-white text-2xl font-semibold">{text}</h1>
-		<AddResidentButton text="Add Resident" onClick={handleClick} />
+		<HeaderButton text="Add Resident" onClick={handleClick} />
 	  </div>
 	);
   }

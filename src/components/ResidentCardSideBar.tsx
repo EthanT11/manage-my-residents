@@ -16,8 +16,8 @@ export default function ResidentCardSideBar({data}: ResidentCardSideBarProps) {
 	const rightWingResidents = data.residents.filter((resident) => resident.wing === "Right")
 
 	const listResidents = (residents: { name: string; wing: string; room: string }[]) => { // NOTE FOR ME: This started to look confusing the more i built on it, just remember to break it down
-		return residents.map(({ name, wing, room }) => (								   // Takes in a list of residents and maps them to a ResidentCard component.
-			<ResidentCard name={name} info={[wing, room]} />							   // { name: string; wing: string; room: string }[] is the type of the residents parameter
+		return residents.map(({ name, wing, room }) => (							   // Takes in a list of residents and maps them to a ResidentCard component.
+			<ResidentCard key={room} name={name} info={[wing, room]} />							   // { name: string; wing: string; room: string }[] is the type of the residents parameter
 		))	                                                                               // square brackets at the end tell typescript that it is an array
 	}
 		// TODO: Add check for screen size so the cards go to one column
