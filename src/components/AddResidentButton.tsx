@@ -1,12 +1,14 @@
 import { Button } from "./ui/button";
 
-export default function AddResidentButton({text}: {text: string}) {
-  return (
+export default function AddResidentButton({text, onClick, variant}: {text: string; onClick: () => void; variant?: 'secondary' | 'outline'}) {
+  return ( // TODO: maybe an interface for the props
     <>
-	  <Button className="bg-white hover:bg-blue-600 hover:text-white">{text}</Button>
-  		{/* <button className="bg-white text-blue-600 font-semibold py-2 px-4 rounded-full shadow-md hover:bg-blue-50 transition duration-300">
-		  Add Resident
-		</button> */}
+	  	<Button 
+			className={`bg-white hover:bg-blue-600 hover:text-white ${variant}`}
+			onClick={onClick}
+		>
+			{text}
+		</Button>
     </>
   );
 }
