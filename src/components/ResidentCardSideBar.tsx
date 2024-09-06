@@ -1,4 +1,4 @@
-import CardHeader from "./CardHeader"
+import SideBarHeader from "./SidebarHeader"
 import ResidentCard from "./ResidentCard"
 
 interface ResidentCardSideBarProps { // type of the data prop
@@ -33,7 +33,7 @@ export default function ResidentCardSideBar({data}: ResidentCardSideBarProps) {
 		// TODO: Add check for screen size so the cards go to one column
 	return (																			   // TODO: Add check for screen size so the cards go to one column											                       // ask if there is a better way to sort them by wing or something else
 		<div className="flex flex-col p-4">
-			<CardHeader text={"Resident Cards"} handleAddRes={handleAddRes} handleEdit={handleEdit}/>
+			<SideBarHeader handleEdit={handleEdit}/>
 			<div className="flex flex-1 bg-slate-500 justify-center">
 				<div className="flex flex-col">
 					{listResidents(leftWingResidents)}

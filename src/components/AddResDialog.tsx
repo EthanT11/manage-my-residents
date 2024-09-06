@@ -18,7 +18,7 @@ export default function AddResDialog() {
       	<DialogTrigger asChild>
 			<CardHeaderButton text="Add Resident" variant="outline" />
       	</DialogTrigger>
-      	<DialogContent className="sm:max-w-[425px] bg-blue-500">
+      	<DialogContent className="sm:max-w-[425px] bg-blue-500"> {/* sm for small but behind : which deals with viewport */}
 			<DialogHeader>
 				<DialogTitle className="text-white text-center">New Resident</DialogTitle>
 				<DialogDescription className="text-white text-center">
@@ -27,10 +27,10 @@ export default function AddResDialog() {
 			</DialogHeader>
 
 			{/* Body Here*/}
-
-			<DialogFooter>
-				<CardHeaderButton text="Save" variant="outline" /> 
-				<CardHeaderButton text="Cancel" variant="secondary" />
+		
+			<DialogFooter>  {/*  */}
+				{/* <CardHeaderButton text="Save" variant="outline" /> 
+				<CardHeaderButton text="Cancel" variant="secondary" /> */}
 			</DialogFooter>
       </DialogContent>
     </Dialog>
