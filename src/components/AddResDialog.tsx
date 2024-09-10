@@ -8,9 +8,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import CardHeaderButton from "./CardHeaderButton"
-// import { Input } from "@/components/ui/input"
-// import { Label } from "@/components/ui/label"
-
+import AddResLabel from "./AddResLabel"
+import AddResInput from "./AddResInput"
  
 export default function AddResDialog() {
   return (
@@ -25,10 +24,12 @@ export default function AddResDialog() {
 					Fill in the form below to add a new resident.
 				</DialogDescription>
 			</DialogHeader>
-
-			{/* Body Here*/}
+			<div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
+				<AddResLabel htmlFor="name">Name</AddResLabel>
+				<AddResInput name="name" type="text" placeholder="Enter Name"/>
+			</div>
 		
-			<DialogFooter>  {/*  */}
+			<DialogFooter>
 				{/* <CardHeaderButton text="Save" variant="outline" /> 
 				<CardHeaderButton text="Cancel" variant="secondary" /> */}
 			</DialogFooter>
