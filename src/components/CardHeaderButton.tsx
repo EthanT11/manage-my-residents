@@ -2,7 +2,8 @@ import { Button } from "./ui/button";
 import React from "react";
 
 interface CardHeaderButtonProps {
-	text: string; 
+	text: string;
+	type?: 'submit' | 'button' | 'reset'; 
 	onClick?: () => void; 
 	variant?: 'secondary' | 'outline'
 }
@@ -12,12 +13,13 @@ interface CardHeaderButtonProps {
 
 
 const CardHeaderButton = React.forwardRef<HTMLButtonElement, CardHeaderButtonProps>( // typescript <HTMLButtonElement> is the type of the ref | <CardHeaderButtonProps> is the type of the props
-	({ text, onClick, variant}, ref) => {		 									 // takes two args props and ref 									
+	({ text, onClick, variant, type}, ref) => {		 									 // takes two args props and ref 									
 		return (
 			<Button 
 			ref={ref} 																// ref is passed to the button element
 			className={`bg-white hover:bg-blue-600 hover:text-white ${variant}`}
 			onClick={onClick}
+			type={type}
 			>
 		  {text}
 		</Button>
