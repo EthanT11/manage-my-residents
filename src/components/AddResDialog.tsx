@@ -3,19 +3,23 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import CardHeaderButton from "./CardHeaderButton";
 import AddResLabel from "./AddResLabel";
 import AddResInput from "./AddResInput";
+
+interface handleAddResidentDialogProps {
+	handleAddResident: (name: string, age: string, wing: string, roomNumber: string) => void;
+}
  
-export default function AddResDialog() {
+export default function AddResDialog({ handleAddResident }: handleAddResidentDialogProps) {
 	const [name, setName] = useState("");
 	const [age, setAge] = useState("");
 	const [wing, setWing] = useState("");
 	const [roomNumber, setRoomNumber] = useState("");
+	
+	
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log(name);
-		console.log(age);
-		console.log(wing)
-		console.log(roomNumber)
+		handleAddResident(name, age, wing, roomNumber);
+		console.log("Added: ", name, age, wing, roomNumber);
 	}
 
 

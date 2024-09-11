@@ -8,10 +8,11 @@ interface ResidentCardSideBarProps { // type of the data prop
 			wing: string,
 			room: string
 		}[]
-	}
+	},
+	handleAddResident: () => void,
 }
 
-export default function ResidentCardSideBar({data}: ResidentCardSideBarProps) {
+export default function ResidentCardSideBar({data, handleAddResident}: ResidentCardSideBarProps) {
 	const leftWingResidents = data.residents.filter((resident) => resident.wing === "Left") // filter residents by wing
 	const rightWingResidents = data.residents.filter((resident) => resident.wing === "Right")
 
@@ -33,7 +34,7 @@ export default function ResidentCardSideBar({data}: ResidentCardSideBarProps) {
 		// TODO: Add check for screen size so the cards go to one column
 	return (																			   // TODO: Add check for screen size so the cards go to one column											                       // ask if there is a better way to sort them by wing or something else
 		<div className="flex flex-col p-4">
-			<SideBarHeader handleEdit={handleEdit}/>
+			<SideBarHeader handleAddResident={handleAddRes}/>
 			<div className="flex flex-1 bg-slate-500 justify-center">
 				<div className="flex flex-col">
 					{listResidents(leftWingResidents)}
