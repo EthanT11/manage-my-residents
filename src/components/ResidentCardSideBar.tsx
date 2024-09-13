@@ -2,9 +2,9 @@ import SideBarHeader from "./SidebarHeader"
 import ResidentCard from "./ResidentCard"
 import { useState, useEffect } from "react"
 import useResidents from "@/hooks/useResidents"
-import CardHeaderButton from "./CardHeaderButton"
 
 interface Resident {
+	id: number;
 	name: string;
 	age: string;
 	wing: string;
@@ -17,14 +17,13 @@ export default function ResidentCardSideBar() {
 	const [rightWingResidents, setRightWingResidents] = useState<Resident[]>([]) // set up state for right wing residents
 
 	useEffect(() => {
-		console.log("Residents!!!!: ", residents);
 		setLeftWingResidents(residents.filter((resident: Resident) => resident.wing === "Left"));
 		setRightWingResidents(residents.filter((resident: Resident) => resident.wing === "Right"));
 	  }, [residents]);
 	
-	const listResidents = (residents: { name: string; wing: string; room: string }[]) => { // NOTE FOR ME: This started to look confusing the more i built on it, just remember to break it down
-		return residents.map(({ name, wing, room }) => (							   // Takes in a list of residents and maps them to a ResidentCard component.
-			<ResidentCard key={room} name={name} info={[wing, room]} />							   // { name: string; wing: string; room: string }[] is the type of the residents parameter
+	const listResidents = (residents: { id: number; name: string; wing: string; room: string }[]) => { // NOTE FOR ME: This started to look confusing the more i built on it, just remember to break it down
+		return residents.map(({ id, name, wing, room }) => (							   // Takes in a list of residents and maps them to a ResidentCard component.
+			<ResidentCard key={id} name={name} info={[wing, room]} />							   // { name: string; wing: string; room: string }[] is the type of the residents parameter
 		))	                                                                               // square brackets at the end tell typescript that it is an array
 	}
 																							// TODO: Add check for screen size so the cards go to one column
