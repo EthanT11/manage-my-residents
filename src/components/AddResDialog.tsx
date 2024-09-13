@@ -3,25 +3,28 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import CardHeaderButton from "./CardHeaderButton";
 import AddResLabel from "./AddResLabel";
 import AddResInput from "./AddResInput";
+import useResidents from "@/hooks/useResidents";
 
-interface handleAddResidentDialogProps {
-	handleAddResident: (name: string, age: string, wing: string, roomNumber: string) => void;
+interface AddResDialogProps {
+	addResident: (newResident: { name: string; age: string; wing: string; room: string }) => void;
 }
  
-export default function AddResDialog({ handleAddResident }: handleAddResidentDialogProps) {
+export default function AddResDialog({addResident}: AddResDialogProps) {
 	const [name, setName] = useState("");
 	const [age, setAge] = useState("");
 	const [wing, setWing] = useState("");
-	const [roomNumber, setRoomNumber] = useState("");
-	
-	
+	const [room, setRoom] = useState("");
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		handleAddResident(name, age, wing, roomNumber);
-		console.log("Added: ", name, age, wing, roomNumber);
+		const newResident = {
+			name: name,
+			age: age,
+			wing: wing,
+			room: room
+		}
+		addResident(newResident);
 	}
-
 
   return (
     <Dialog>
@@ -61,7 +64,7 @@ export default function AddResDialog({ handleAddResident }: handleAddResidentDia
 					<AddResLabel htmlFor="room">Room</AddResLabel>
 					<AddResInput 
 						name="room" type="number" placeholder="Enter Room #"
-						onChange={(e) => setRoomNumber(e.target.value)}
+						onChange={(e) => setRoom(e.target.value)}
 					/>
 				</div>
 				

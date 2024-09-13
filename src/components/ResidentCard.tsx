@@ -13,7 +13,13 @@ import {
 import pic from '../assets/test-stock-img.jpg' // stock image
 import { useState } from "react"
 
-export default function ResidentCard( {name, info} : {name: string, info: [string, string]} ) {
+
+interface ResidentCardProps {
+	name: string;
+	info: [string, string];
+}
+
+export default function ResidentCard( {name, info} : ResidentCardProps ) {
 	const [isCollapsed, setIsCollapsed] = useState(true);
 
 	const handleClick = () => { // function to toggle the card expansion
