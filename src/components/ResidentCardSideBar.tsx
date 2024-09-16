@@ -1,35 +1,25 @@
 import SideBarHeader from "./SidebarHeader"
 import ResidentCard from "./ResidentCard"
 import { useState, useEffect } from "react"
-import useResidents from "@/hooks/useResidents"
-
-interface Resident {
-	id: number;
-	name: string;
-	age: string;
-	wing: string;
-	room: string;
-}
+import useResidents, { Resident } from "@/hooks/useResidents"
 
 export default function ResidentCardSideBar() {
-	const { residents, addResident } = useResidents() // get the addResident function from the useResidents hook
+	const { residents, addResident, deleteResident } = useResidents() // get the addResident function from the useResidents hook
 	const [leftWingResidents, setLeftWingResidents] = useState<Resident[]>([]) // set up state for left wing residents
 	const [rightWingResidents, setRightWingResidents] = useState<Resident[]>([]) // set up state for right wing residents
 	const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
-	console.log(selectedCardId)
 
 	useEffect(() => {
 		setLeftWingResidents(residents.filter((resident: Resident) => resident.wing === "Left"));
 		setRightWingResidents(residents.filter((resident: Resident) => resident.wing === "Right"));
 	  }, [residents]);
-	
-	const deleteCard = () => { // take in id and delete the card with that id
-		console.log("Delete card");
-	}
 
 	const listResidents = (residents: Resident[]) => { 
 		return residents.map(({ id, name, wing, room }) => (							  
-			<ResidentCard key={id} id={id} name={name} info={[wing, room]} isSelected={selectedCardId === id} setisSelected={setSelectedCardId} deleteCard={deleteCard} />							   
+			<ResidentCard key={id} id={id} name={name} info={[wing, room]}
+						  isSelected={selectedCardId === id} setisSelected={setSelectedCardId} 
+				          deleteCard={() => deleteResident(id)} 
+						  />							   
 		))	                                                                             
 	}
 

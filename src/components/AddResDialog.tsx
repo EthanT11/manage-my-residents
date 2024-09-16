@@ -3,19 +3,10 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import CardHeaderButton from "./CardHeaderButton";
 import AddResLabel from "./AddResLabel";
 import AddResInput from "./AddResInput";
+import { Resident } from "../hooks/useResidents";
 
-interface Resident {
-	name: string;
-	age: string;
-	wing: string;
-	room: string;
-}
-
-interface AddResDialogProps {
-	addResident: (newResident: Resident) => void;
-}
  
-export default function AddResDialog({addResident}: AddResDialogProps) {
+export default function AddResDialog({addResident}: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
 	const [name, setName] = useState("");
 	const [age, setAge] = useState("");
 	const [wing, setWing] = useState("");

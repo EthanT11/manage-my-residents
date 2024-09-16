@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-interface Resident {
+export interface Resident { // Exporting the interface so that it can be used in other files and stop redefining it
 	id: number;
 	name: string;
 	age: string;
@@ -29,7 +29,7 @@ const data: Resident[] = [
 const useResidents = () => {
 	const [residents, setResidents] = useState<Resident[]>(data);
 
-	const addResident = (resident: Resident) => {
+	const addResident = (resident: Omit<Resident, 'id'>) => {
 		const nextId = residents.reduce((max, resident) => (resident.id > max ? resident.id : max), 0) + 1; // get the next id
 		console.log(nextId)
 		const newResident = { ...resident, id: nextId }; // add the id to the resident
@@ -37,7 +37,12 @@ const useResidents = () => {
 		console.log("Added: ", resident);
 	};
 
-  	return { residents, addResident };
+	const deleteResident = (id: number) => {
+		setResidents(residents.filter((resident) => resident.id !== id));
+		console.log("Deleted: ", id);
+	}
+
+  	return { residents, addResident, deleteResident };
 };
 
 export default useResidents;

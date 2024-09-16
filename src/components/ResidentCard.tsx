@@ -1,7 +1,3 @@
-// TODO: think of a cool way to display the resident card
-// TODO: make hover effect on the card title better
-// TODO: add smoothening effect on the card expansion
-// TODO: make it so only one card can be expanded at one time
 import {
   Card,
   CardContent,
@@ -12,7 +8,6 @@ import {
 } from "@/components/ui/card"
 import pic from '../assets/test-stock-img.jpg' // stock image
 import { useState } from "react"
-
 
 interface ResidentCardProps {
 	id: number;

@@ -1,18 +1,9 @@
 import CardHeaderButton from "./CardHeaderButton";
 import AddResDialog from "./AddResDialog";
+import { Resident } from "../hooks/useResidents";
 
-interface Resident {
-	name: string;
-	age: string;
-	wing: string;
-	room: string;
-}
 
-interface SideBarHeaderProps {
-	addResident: (resident: Resident) => void;
-}
-
-export default function SideBarHeader({addResident}: SideBarHeaderProps) {
+export default function SideBarHeader({addResident}: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
 	return (
 	  <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-t-xl shadow-lg flex flex-row justify-between items-center">
 		<h1 className="text-white text-2xl font-semibold">Resident Cards</h1>
