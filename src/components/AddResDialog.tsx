@@ -3,10 +3,16 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import CardHeaderButton from "./CardHeaderButton";
 import AddResLabel from "./AddResLabel";
 import AddResInput from "./AddResInput";
-import useResidents from "@/hooks/useResidents";
+
+interface Resident {
+	name: string;
+	age: string;
+	wing: string;
+	room: string;
+}
 
 interface AddResDialogProps {
-	addResident: (newResident: { name: string; age: string; wing: string; room: string }) => void;
+	addResident: (newResident: Resident) => void;
 }
  
 export default function AddResDialog({addResident}: AddResDialogProps) {

@@ -14,14 +14,14 @@ const data: Resident[] = [
 	name: "Bill Billson",
 	age: "30",
 	wing: "Left",
-	room: "101"
+	room: "101",
 }, 
 {
 	id: 2,
 	name: "Jill Jillson",
 	age: "25",
 	wing: "Right",
-	room: "102"
+	room: "102",
 }
 ];
 

@@ -15,15 +15,20 @@ import { useState } from "react"
 
 
 interface ResidentCardProps {
+	id: number;
 	name: string;
 	info: [string, string];
+	isSelected: boolean;
+	setisSelected: (id: number) => void;
+	deleteCard: () => void;
 }
 
-export default function ResidentCard( {name, info} : ResidentCardProps ) {
-	const [isCollapsed, setIsCollapsed] = useState(true);
+export default function ResidentCard( { id, name, info, isSelected, setisSelected, deleteCard} : ResidentCardProps ) {
+	const [isCollapsed, setIsCollapsed] = useState(isSelected);
 
 	const handleClick = () => { // function to toggle the card expansion
 		setIsCollapsed(!isCollapsed);
+		setisSelected(id);
 	}
 
 	// Ask if there is a better way to do this. Specifically the isCollapsed check
@@ -45,6 +50,10 @@ export default function ResidentCard( {name, info} : ResidentCardProps ) {
 			)}
 			<CardFooter>
 				<p>Wing - {info[0]} | Room - {info[1]}</p>
+				{isSelected && (
+                    <button onClick={deleteCard} className="ml-4 bg-red-500 text-white p-2 rounded-lg">
+                        Delete
+                    </button>)}
 			</CardFooter>
 		</Card>
 	)
