@@ -28,6 +28,7 @@ const data: Resident[] = [
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce 
 const useResidents = () => {
 	const [residents, setResidents] = useState<Resident[]>(data);
+	const [nextId, setNextId] = useState<number>(data.length > 0 ? Math.max(...data.map((resident) => resident.id)) + 1 : 1);
 
 	const addResident = (resident: Omit<Resident, 'id'>) => {
 		const nextId = residents.reduce((max, resident) => (resident.id > max ? resident.id : max), 0) + 1; // get the next id
