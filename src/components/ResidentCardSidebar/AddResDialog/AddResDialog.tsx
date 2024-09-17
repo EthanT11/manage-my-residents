@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import CardHeaderButton from "./CardHeaderButton";
+import CardHeaderButton from "../CardHeaderButton";
 import AddResLabel from "./AddResLabel";
 import AddResInput from "./AddResInput";
-import { Resident } from "../hooks/useResidents";
+import { Resident } from "../../../hooks/useResidents";
 
  
 export default function AddResDialog({addResident}: {addResident: (resident: Omit<Resident, 'id'>) => void}) {

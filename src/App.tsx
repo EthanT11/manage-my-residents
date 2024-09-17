@@ -1,9 +1,9 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import { supabase, Session } from './supabaseClient' // bring in Session type | Note: look into the other different types from index.ts in the supabaseClient folder
-import Auth from './components/Auth'
-import Account from './components/Account'
-import MainPage from './components/MainPage'
+import { Auth } from './components/Auth'
+import { Account } from './components/Profile'
+import { MainPage } from './components/MainPage'
 
 // Maybe a blue and lightgray theme?
 
@@ -21,7 +21,8 @@ function App() {
 
   return (
     <div>
-      {!session ? <Auth /> : <Account key={session.user.id} session={session} />}
+      {/* {!session ? <Auth /> : <Account key={session.user.id} session={session} />} */}
+      {!session ? <Auth /> : <MainPage />}
     </div>
   )
 }

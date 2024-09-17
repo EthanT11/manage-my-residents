@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import pic from '../assets/test-stock-img.jpg' // stock image
+import pic from '../../assets/test-stock-img.jpg' // stock image
 import { useEffect, useState } from "react"
 
 interface ResidentCardProps {

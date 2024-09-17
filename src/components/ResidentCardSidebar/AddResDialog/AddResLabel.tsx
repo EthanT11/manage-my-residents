@@ -1,4 +1,4 @@
-import { Label } from "./ui/label";
+import { Label } from "../../ui/label";
 
 
 export default function AddResLabel( {children, htmlFor} : {children: string, htmlFor: string} ) {

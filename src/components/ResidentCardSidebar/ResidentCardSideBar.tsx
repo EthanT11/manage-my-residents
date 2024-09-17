@@ -1,4 +1,4 @@
-import SideBarHeader from "./SidebarHeader"
+import  SideBarHeader  from "./SidebarHeader"
 import ResidentCard from "./ResidentCard"
 import { useState, useEffect } from "react"
 import useResidents, { Resident } from "@/hooks/useResidents"

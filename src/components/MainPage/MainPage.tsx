@@ -1,5 +1,5 @@
-import TopNavBar from './Top-Nav-Bar';
-import ResidentCardSideBar from './ResidentCardSideBar';
+import TopNavBar from '../Common/TopNavBar';
+import { ResidentCardSideBar } from '../ResidentCardSidebar';
 
 export default function MainPage() {
 

@@ -1,6 +1,6 @@
 import CardHeaderButton from "./CardHeaderButton";
-import AddResDialog from "./AddResDialog";
-import { Resident } from "../hooks/useResidents";
+import { AddResDialog } from "./AddResDialog";
+import { Resident } from "../../hooks/useResidents";
 
 
 export default function SideBarHeader({addResident}: {addResident: (resident: Omit<Resident, 'id'>) => void}) {

@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { supabase } from '../supabaseClient';
+import { supabase } from '../../supabaseClient'; // Ask about how to fix the type issue here
 
 export default function Auth() {
 	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState('');
 
-	const handleLogin = async (event) => {
+	const handleLogin = async (event: { preventDefault: () => void; }) => {
 		event.preventDefault();
 
 		setLoading(true);
