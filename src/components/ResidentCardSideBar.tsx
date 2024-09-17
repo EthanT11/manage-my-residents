@@ -23,11 +23,10 @@ export default function ResidentCardSideBar() {
 			<ResidentCard key={id} id={id} name={name} info={[wing, room]}
 						  isSelected={selectedCardId === id} setisSelected={handleCardSelection} 
 				          deleteCard={() => deleteResident(id)} 
-						  />							   
+			/>							   
 		))	                                                                             
 	}
-
-																							
+																				
 	return (
 		<div className="flex flex-col p-4">
 			<SideBarHeader addResident={addResident}/>

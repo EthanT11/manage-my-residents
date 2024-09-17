@@ -29,7 +29,6 @@ export default function ResidentCard( { id, name, info, isSelected, setisSelecte
 		setisSelected(id);
 	}
 
-	// Ask if there is a better way to do this. Specifically the isCollapsed check
 	return (
 		<Card className={`grow-0 shadow-lg rounded-lg m-2
 			${isCollapsed ? 'bg-white' : 'bg-sky-200'}
@@ -55,4 +54,5 @@ export default function ResidentCard( { id, name, info, isSelected, setisSelecte
 			</CardFooter>
 		</Card>
 	)
+	
 }
