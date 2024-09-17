@@ -12,12 +12,16 @@ export default function ResidentCardSideBar() {
 	useEffect(() => {
 		setLeftWingResidents(residents.filter((resident: Resident) => resident.wing === "Left"));
 		setRightWingResidents(residents.filter((resident: Resident) => resident.wing === "Right"));
-	  }, [residents]);
+	}, [residents]);
+
+	const handleCardSelection = (id: number) => {
+		setSelectedCardId(prevSelectedCardId => prevSelectedCardId === id ? null : id);
+	}
 
 	const listResidents = (residents: Resident[]) => { 
 		return residents.map(({ id, name, wing, room }) => (							  
 			<ResidentCard key={id} id={id} name={name} info={[wing, room]}
-						  isSelected={selectedCardId === id} setisSelected={setSelectedCardId} 
+						  isSelected={selectedCardId === id} setisSelected={handleCardSelection} 
 				          deleteCard={() => deleteResident(id)} 
 						  />							   
 		))	                                                                             

@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import pic from '../assets/test-stock-img.jpg' // stock image
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface ResidentCardProps {
 	id: number;
@@ -21,8 +21,11 @@ interface ResidentCardProps {
 export default function ResidentCard( { id, name, info, isSelected, setisSelected, deleteCard} : ResidentCardProps ) {
 	const [isCollapsed, setIsCollapsed] = useState(isSelected);
 
+	useEffect(() => {
+		setIsCollapsed(!isSelected);
+	}, [isSelected]);
+
 	const handleClick = () => { // function to toggle the card expansion
-		setIsCollapsed(!isCollapsed);
 		setisSelected(id);
 	}
 
