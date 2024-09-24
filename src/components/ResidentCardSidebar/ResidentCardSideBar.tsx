@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import useResidents, { Resident } from "@/hooks/useResidents"
 
 interface ResidentCardSideBarProps {
-	onSelectResident: (resident: Resident) => void
+	onSelectResident: (resident: Resident) => void;
 }
 
 export default function ResidentCardSideBar( { onSelectResident }: ResidentCardSideBarProps ) {
@@ -33,9 +33,9 @@ export default function ResidentCardSideBar( { onSelectResident }: ResidentCardS
 	}
 																				
 	return (
-		<div className="flex flex-col p-4">
+		<div className="flex flex-col p-4 h-full overflow-auto">
 			<SideBarHeader addResident={addResident}/>
-			<div className="flex flex-1 bg-slate-500 justify-center">
+			<div className="flex flex-1 bg-slate-500 justify-center overflow-auto">
 				<div className="flex flex-col">
 					{listResidents(leftWingResidents)}
 				</div>
