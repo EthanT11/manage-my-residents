@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../../supabaseClient'; // Ask about how to fix the type issue here
+import { TopNavBar } from '../Common';
 
 export default function Auth() {
 	const [loading, setLoading] = useState(false);

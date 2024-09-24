@@ -3,7 +3,11 @@ import ResidentCard from "./ResidentCard"
 import { useState, useEffect } from "react"
 import useResidents, { Resident } from "@/hooks/useResidents"
 
-export default function ResidentCardSideBar() {
+interface ResidentCardSideBarProps {
+	onSelectResident: (resident: Resident) => void
+}
+
+export default function ResidentCardSideBar( { onSelectResident }: ResidentCardSideBarProps ) {
 	const { residents, addResident, deleteResident } = useResidents() // get the addResident function from the useResidents hook
 	const [leftWingResidents, setLeftWingResidents] = useState<Resident[]>([]) // set up state for left wing residents
 	const [rightWingResidents, setRightWingResidents] = useState<Resident[]>([]) // set up state for right wing residents
@@ -16,6 +20,7 @@ export default function ResidentCardSideBar() {
 
 	const handleCardSelection = (id: number) => {
 		setSelectedCardId(prevSelectedCardId => prevSelectedCardId === id ? null : id);
+		onSelectResident(residents.find(resident => resident.id === id) as Resident);
 	}
 
 	const listResidents = (residents: Resident[]) => { 

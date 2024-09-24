@@ -1,5 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 // TODO add functionality to the home and login button
 export default function TopNavBar() {
+  const navigate = useNavigate();
+  
   return (
     <nav className="bg-sky-600 p-4 w-full font-roboto">
       <div className="container mx-auto flex justify-between items-center">
@@ -7,8 +11,9 @@ export default function TopNavBar() {
           Manage My Residents
         </div>
         <div className="space-x-4">
-          <button>Home</button>
-          <button>Login</button>
+          <button onClick={() => navigate("/")}>Home</button>
+          <button>Account</button>
+          <button onClick={() => navigate("sign-in")}>Login</button>
         </div>
       </div>
     </nav>

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { supabase } from "../../supabaseClient";
+import { useState, useEffect, SetStateAction } from "react";
+import { supabase } from "../../supabaseClient"; // TODO: look into generating the supabase types
 
-export default function Account({ session }) {
+export default function Account({ session }: { session: any }) { // TODO: change any type to correct type
 	const [loading, setLoading] = useState(true);
 	const [username, setUsername] = useState(null);
 	const [website, setWebsite] = useState(null);
@@ -40,7 +40,7 @@ export default function Account({ session }) {
 
 	}, [session]);
 
-	async function updateProfile(event, avatar_url) {
+	async function updateProfile(event: { preventDefault: () => void; }, avatar_url: any) { // TODO: change any type to correct type
 		event.preventDefault();
 
 		setLoading(true);

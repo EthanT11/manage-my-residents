@@ -5,9 +5,8 @@ import { RouterProvider } from 'react-router-dom'
 import router from './Routes'
 import { Auth } from './components/Auth'
 import { Account } from './components/Profile'
-import { MainPage } from './components/pages'
 
-
+// TODO: move session
 
 function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -22,7 +21,9 @@ function App() {
   }, [])
 
   return (
-    <RouterProvider router={router} />
+    <>
+      <RouterProvider router={router} />
+    </>
     // <div>
     //   {/* {!session ? <Auth /> : <Account key={session.user.id} session={session} />} */}
     //   {!session ? <Auth /> : <MainPage />}

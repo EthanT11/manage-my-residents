@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import { MainPage } from "./components/pages";
-import { Auth } from "./components/Auth";
-import { Account } from "./components/Profile"; // TODO: add Account page to routes
+import { MainPage, Auth } from "./components/pages";
+// TODO: add Account page to routes
+// TODO: create a route and page for handing route not found | errorElement: <ErrorPage />
 
 const router = createBrowserRouter([
 	{
@@ -11,7 +11,7 @@ const router = createBrowserRouter([
 	{
 		path: "/sign-in",
 		element: <Auth />,
-	}
+	},
 ]);
 
 export default router;
