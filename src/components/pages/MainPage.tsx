@@ -20,9 +20,7 @@ export default function MainPage() {
           <ResidentCardSideBar onSelectResident={handleResidentSelect} />
         </div>
         <div className='w-2/3 flex flex-col p-4'> {/* Container for right side of dashboard */}
-          <div className='bg-slate-500 flex-1'>
             <InformationPanel resident={selectedResident}/>
-          </div>
           <div className='bg-slate-400 flex-1'>
             <p>Some other content</p>
           </div>

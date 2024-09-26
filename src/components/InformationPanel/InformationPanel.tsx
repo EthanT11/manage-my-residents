@@ -8,7 +8,7 @@ interface InformationPanelProps {
 
 export default function InformationPanel({ resident }: InformationPanelProps) {
   return (
-    <div className="bg-blue-50 shadow-md rounded-lg">
+    <div className="bg-blue-50 shadow-md rounded-lg flex flex-col">
       <div className="bg-gradient-to-r from-blue-600 to-blue-400 text-white p-4 rounded-t-lg flex items-center">
         <FaUser className="text-2xl mr-2" />
         <h2 className="text-xl font-semibold">Resident Information</h2>
