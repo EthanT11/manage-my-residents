@@ -12,12 +12,14 @@ export default function Auth() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const user = await supabase.auth.getUser();
-      console.log(user)
-      if (user) {
-        navigate('/'); // Redirect to home page if user is already signed in
-      } else {
-        console.log('User is not signed in');
+      try {
+        const { data, error} = await supabase.auth.getUser();
+        if (error) throw error;
+        if (data?.user) {
+          navigate('/', { replace: true });
+        }
+      } catch (error) {
+        console.warn('Error fetching user:', (error as Error).message); // probably remove these
       }
     }
 

@@ -1,9 +1,21 @@
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/supabaseClient";
 
 // TODO add functionality to the home and login button
 export default function TopNavBar() {
   const navigate = useNavigate();
   
+  const handleSignOut = async () => {
+    console.log("logged out");
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.log("Error signing out:", error.message);
+    } else {
+      console.log("Signed out successfully");
+      navigate("/sign-in");
+    }
+  }
+
   return (
     <nav className="bg-sky-600 p-4 w-full font-roboto">
       <div className="container mx-auto flex justify-between items-center">
@@ -12,8 +24,9 @@ export default function TopNavBar() {
         </div>
         <div className="space-x-4">
           <button onClick={() => navigate("/")}>Home</button>
-          <button onClick={() => navigate("account")}>Account</button>
-          <button onClick={() => navigate("sign-in")}>Login</button>
+          <button onClick={() => navigate("/account")}>Account</button>
+          <button onClick={() => navigate("/sign-in")}>Login</button>
+          <button onClick={handleSignOut}>Logout</button>
         </div>
       </div>
     </nav>
