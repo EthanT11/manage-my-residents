@@ -2,10 +2,9 @@ import { useState } from 'react';
 import TopNavBar from '../Common/TopNavBar';
 import { ResidentCardSideBar } from '../ResidentCardSidebar';
 import { InformationPanel } from '../InformationPanel';
-import useResidents, { Resident } from '@/hooks/useResidents';
+import { Resident } from '@/hooks/useResidents';
 
 export default function MainPage() {
-  const { residents } = useResidents();
   const [selectedResident, setSelectedResident] = useState<Resident | null>(null);
   
   const handleResidentSelect = (resident: Resident) => {

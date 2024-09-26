@@ -1,12 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from '../../supabaseClient';
 import { TopNavBar } from '../Common';
 import { SignUpDialog } from '../Profile';
+import { useNavigate } from 'react-router-dom';
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await supabase.auth.getUser();
+      console.log(user)
+      if (user) {
+        navigate('/'); // Redirect to home page if user is already signed in
+      } else {
+        console.log('User is not signed in');
+      }
+    }
+
+    fetchUser();
+  }, []);
 
   const handlePasswordLogin = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
@@ -16,9 +32,10 @@ export default function Auth() {
     console.log(error);
 
     if (error) {
-      alert(error.error_description || error.message); // Show error message if failed to sign in
+      alert(error.message); // Show error message if failed to sign in
     } else {
       alert('Successfully signed in!');
+	  navigate('/'); // Redirect to home page after successful sign in
     }
     setLoading(false);
   }
@@ -56,7 +73,7 @@ export default function Auth() {
               className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700"
               disabled={loading}
             >
-              {loading ? 'Loading...' : 'Sign In'}
+              {loading ? 'Signing In...' : 'Sign In'}
             </button>
 			<SignUpDialog />
           </form>

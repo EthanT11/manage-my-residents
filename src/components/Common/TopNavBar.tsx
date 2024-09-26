@@ -12,7 +12,7 @@ export default function TopNavBar() {
         </div>
         <div className="space-x-4">
           <button onClick={() => navigate("/")}>Home</button>
-          <button>Account</button>
+          <button onClick={() => navigate("account")}>Account</button>
           <button onClick={() => navigate("sign-in")}>Login</button>
         </div>
       </div>
