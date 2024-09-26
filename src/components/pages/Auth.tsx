@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '../../supabaseClient';
 import { TopNavBar } from '../Common';
+import { SignUpDialog } from '../Profile';
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
@@ -57,7 +58,7 @@ export default function Auth() {
             >
               {loading ? 'Loading...' : 'Sign In'}
             </button>
-			<button>Sign Up</button>
+			<SignUpDialog />
           </form>
         </div>
       </div>
