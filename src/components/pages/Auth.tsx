@@ -1,43 +1,32 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../../supabaseClient';
 import { TopNavBar } from '../Common';
 import { SignUpDialog } from '../Profile';
 import { useNavigate } from 'react-router-dom';
+import useSupabase from '@/hooks/useSupabase';
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { fetchUser, signIn } = useSupabase();
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const { data, error} = await supabase.auth.getUser();
-        if (error) throw error;
-        if (data?.user) {
-          navigate('/', { replace: true });
-        }
-      } catch (error) {
-        console.warn('Error fetching user:', (error as Error).message); // probably remove these
+    fetchUser().then(({ user }) => {
+      if (user) {
+        console.log('User found');
+        navigate('/');
       }
-    }
-
-    fetchUser();
+    });
   }, []);
 
   const handlePasswordLogin = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    console.log(error);
-
-    if (error) {
-      alert(error.message); // Show error message if failed to sign in
-    } else {
-      alert('Successfully signed in!');
-	  navigate('/'); // Redirect to home page after successful sign in
+    const signedIn = await signIn(email, password);
+    if (signedIn) {
+      navigate('/');
     }
     setLoading(false);
   }

@@ -4,10 +4,11 @@ import { ResidentCardSideBar } from '../ResidentCardSidebar';
 import { InformationPanel } from '../InformationPanel';
 import { Resident } from '@/hooks/useResidents';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/supabaseClient';
+import useSupabase from '@/hooks/useSupabase';
 
 export default function MainPage() {
   const [selectedResident, setSelectedResident] = useState<Resident | null>(null);
+  const { fetchUser } = useSupabase();
   const navigate = useNavigate();
   
   const handleResidentSelect = (resident: Resident) => {
@@ -15,20 +16,12 @@ export default function MainPage() {
   }
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const { data, error } = await supabase.auth.getUser();
-        if (error) throw error;
-        if (!data?.user) {
-          navigate('/sign-in');
-        }
-      } catch (error) {
-        console.warn('Error fetching user:', (error as Error).message);
+    fetchUser().then(({ user }) => {
+      if (!user) {
+        console.log('User not found');
         navigate('/sign-in');
       }
-    }
-
-    fetchUser();
+    });
   }, []);
 
   return (
