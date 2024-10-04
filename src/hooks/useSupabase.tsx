@@ -38,8 +38,29 @@ const useSupabase = () => {
 			return true;
 		}
 	}
+	const fetchProfileData = async (user_id: string) => {
+		if (!user_id) {
+			console.error('User not found');
+			return;
+		}
 
-	return { fetchUser, signOut, signIn };
+		const { data, error, count } = await supabase
+			.from('profiles') // from profiles table
+			.select('*', { count: 'exact' }) // select all columns and count
+			.eq('user_id', user_id) // where "user_id" is equal to the user's id
+			.single() // get the first result
+		if (error) {
+			console.error('Error fetching profile data:', error.message);
+		} else if (count !== 1) { // If there is no profile for the user
+			console.error('Profile not found');
+		} else {
+			console.log('Profile data found')
+			return data;
+		}
+		return null;
+	};
+
+	return { fetchUser, signOut, signIn, fetchProfileData };
 }
 
 export default useSupabase;

@@ -1,71 +1,69 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from '@supabase/supabase-js';
-import { supabase } from "@/supabaseClient";
 import useSupabase from "@/hooks/useSupabase";
 import { TopNavBar } from "../Common";
 
+interface Profile {
+    first_name: string | null;
+    last_name: string | null;
+    home_name: string | null;
+    position: string | null;
+}
+
 export default function Account() {
 	const [user, setUser] = useState<User | null>(null);
+    const [profile, setProfile] = useState<Profile | null>({
+        first_name: null,
+        last_name: null,
+        home_name: null,
+        position: null,
+    });
 	const navigate = useNavigate();
-	const { fetchUser } = useSupabase();
-	const [firstName, setFirstName] = useState(null);
-	const [lastName, setLastName] = useState(null);
-	const [home, setHome] = useState(null);
-	const [position, setPosition] = useState(null);
+	const { fetchUser, fetchProfileData } = useSupabase();
 
-	useEffect(() => {
-		fetchUser().then(({ user }) => {
-			if (!user) {
-				console.log('User not found');
-				navigate('/sign-in');
-			}
-			setUser(user);
-		});
+    useEffect(() => {
+        const fetchData = async () => {
+            const { user } = await fetchUser();
+            if (!user) {
+                console.log('User not found');
+                navigate('/sign-in');
+                return;
+            }
+            setUser(user);
 
-	}, []); 
-	
-	useEffect(() => {
-		  const fetchProfileData = async () => {
-			  if (!user?.id) {
-				  console.error('User not found');
-				  return;
-			  }
+            const profileData = await fetchProfileData(user.id);
+            if (profileData) {
+                setProfile({
+                    first_name: profileData.first_name ?? null, // If first_name is null, set it to null
+                    last_name: profileData.last_name ?? null,
+                    home_name: profileData.home_name ?? null,
+                    position: profileData.position ?? null,
+                });
+            }
+        }
 
-			  const { data, error, count } = await supabase
-				  .from('profiles') // from profiles table
-				  .select('*', { count: 'exact' }) // select all columns and count
-				  .eq('user_id', user.id) // where "user_id" is equal to the user's id
-				  .single() // get the first result
-			  if (error) {
-				  console.error('Error fetching profile data:', error.message);
-			  } else if (count !== 1) { // If there is no profile for the user
-				  console.error('Profile not found');
-			  } else {
-				  console.log('Profile data:', data);
-				  setFirstName(data['first_name']);
-				  setLastName(data['last_name']);
-				  setHome(data['home_name']);
-				  setPosition(data['position']);
-			  }
-		  }
-		  if (user) {
-			  fetchProfileData();
-		  }
+        fetchData();
+    }, []);
 
-	  }, [user]);
 	return (
-		<div>
-			<TopNavBar />
-			<h1>Account</h1>
-			{user ? (
-				<div>
-					<h1>Welcome, {firstName + " " + lastName}</h1>
-					<h2>Home: {home} - Position: {position}</h2>
-				</div>
-			) : (
-				<h1>Not signed in</h1>
-			)}
-		</div>
+<div className="min-h-screen bg-gray-100">
+            <TopNavBar />
+            {user ? <div className="container mx-auto p-4">
+                <h1 className="text-2xl font-bold mb-4">Account Page</h1>
+                <div className="bg-white p-4 rounded-md shadow-md">
+                    <h2 className="text-lg font-bold mb-4">User Information</h2>
+                    <p><strong>Email:</strong> {user?.email}</p>
+                    <p><strong>Home Name:</strong> {profile?.home_name}</p>
+                    <p><strong>Role:</strong> {profile?.position}</p>
+                    <h2 className="text-lg font-bold mt-4 mb-4">Profile Information</h2>
+                    <p><strong>First Name:</strong> {profile?.first_name}</p>
+                    <p><strong>Last Name:</strong> {profile?.last_name}</p>
+                </div>
+            </div>
+            :
+            <div>Loading...</div>}
+            
+        </div>
 	);
 }
