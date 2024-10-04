@@ -14,6 +14,7 @@ export default function Account() {
         home_name: null,
         position: null,
     });
+    const [avatarUrl, setAvatarUrl] = useState("");
 	const navigate = useNavigate();
 	const { fetchUser, fetchProfileData } = useSupabase();
 
@@ -44,7 +45,7 @@ export default function Account() {
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
-            const fileName = `${user?.id}/${file.name}`;
+            const fileName = `${user?.id}/avatar.jpg`;
 
             const { data, error } = await supabase
                 .storage
@@ -61,6 +62,21 @@ export default function Account() {
 
     const handleUploadClick = () => {
         document.getElementById('fileInput')?.click(); // Trigger file input click event
+    }
+
+    const handleViewImage = async () => {
+        if (user) {
+            const { data, error } = await supabase
+                .storage
+                .from('profile-avatars')
+                .getPublicUrl(`${user.id}/avatar.jpg`);
+
+            if (error) {
+                console.error('Error fetching avatar URL:', error.message);
+            } else {
+                setAvatarUrl(data.publicUrl);
+            }
+        }
     }
 
 	return (
@@ -86,6 +102,8 @@ export default function Account() {
                         onChange={handleFileChange}
                     />
                     <button onClick={handleUploadClick}>Upload Photo</button>
+                    <button onClick={handleViewImage}>View Image</button>
+                    {avatarUrl && <img src={avatarUrl} alt="Profile Avatar" />}
                 </div>
             :
                 <div>Loading...</div>}
