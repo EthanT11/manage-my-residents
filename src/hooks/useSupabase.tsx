@@ -1,5 +1,12 @@
 import { supabase } from "@/supabaseClient";
 
+export interface Profile {
+	first_name: string | null;
+	last_name: string | null;
+	home_name: string | null;
+	position: string | null;
+}
+
 const useSupabase = () => {
 	const fetchUser = async () => {
 		try {
@@ -59,8 +66,16 @@ const useSupabase = () => {
 		}
 		return null;
 	};
+	const updateProfileData = async (user_id: string, profile: Profile) => {
+		const { data, error } = await supabase
+			.from('profiles')
+			.update(profile)
+			.eq('user_id', user_id)
+		if (error) throw error;
+		return data;
+	}
 
-	return { fetchUser, signOut, signIn, fetchProfileData };
+	return { fetchUser, signOut, signIn, fetchProfileData, updateProfileData };
 }
 
 export default useSupabase;
