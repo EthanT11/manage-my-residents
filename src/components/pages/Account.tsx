@@ -6,6 +6,8 @@ import { supabase } from "@/supabaseClient";
 import { TopNavBar } from "../Common";
 import { EditProfileDialog } from "../Profile";
 
+// TODO: use id not user_id *****
+
 export default function Account() {
 	const [user, setUser] = useState<User | null>(null);
     const [profile, setProfile] = useState<Profile | null>({
@@ -16,8 +18,9 @@ export default function Account() {
     });
     const [avatarUrl, setAvatarUrl] = useState("");
 	const navigate = useNavigate();
-	const { fetchUser, fetchProfileData } = useSupabase();
-
+	const { fetchUser, fetchProfileData, getPublicUrl, uploadAvatar } = useSupabase();
+    
+    
     useEffect(() => {
         const fetchData = async () => {
             const { user } = await fetchUser();
@@ -27,7 +30,7 @@ export default function Account() {
                 return;
             }
             setUser(user);
-
+            
             const profileData = await fetchProfileData(user.id);
             if (profileData) {
                 setProfile({
@@ -36,26 +39,23 @@ export default function Account() {
                     home_name: profileData.home_name ?? null,
                     position: profileData.position ?? null,
                 });
+                
+                const avatarUrl = await getPublicUrl(`${user.id}/avatar.jpg`);
+                setAvatarUrl(avatarUrl ?? ""); // TODO - set default avatar
             }
         }
-
+        
         fetchData();
     }, [navigate]);
-
-    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => { 
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
-            const fileName = `${user?.id}/avatar.jpg`;
 
-            const { data, error } = await supabase
-                .storage
-                .from('profile-avatars')
-                .upload(fileName, file);
-            
-            if (error) {
-                console.error('Error uploading file:', error.message);
+            if (user?.id) {
+                await uploadAvatar(user.id, file);
             } else {
-                console.log('File uploaded successfully:', data);
+                console.error("User ID is undefined");
             }
         }
     }
@@ -64,28 +64,14 @@ export default function Account() {
         document.getElementById('fileInput')?.click(); // Trigger file input click event
     }
 
-    const handleViewImage = async () => {
-        if (user) {
-            const { data, error } = await supabase
-                .storage
-                .from('profile-avatars')
-                .getPublicUrl(`${user.id}/avatar.jpg`);
-
-            if (error) {
-                console.error('Error fetching avatar URL:', error.message);
-            } else {
-                setAvatarUrl(data.publicUrl);
-            }
-        }
-    }
-
 	return (
-        <div className="min-h-screen bg-gray-100">
-            <TopNavBar />
-            {user ?
-                <div className="container mx-auto p-4">
-                    <h1 className="text-2xl font-bold mb-4">Account Page</h1>
-                    <div className="bg-white p-4 rounded-md shadow-md">
+<div className="min-h-screen bg-gray-100">
+        <TopNavBar />
+        {user ? (
+            <div className="container mx-auto p-4">
+                <h1 className="text-2xl font-bold mb-4">Account Page</h1>
+                <div className="bg-white p-4 rounded-md shadow-md flex justify-between items-center">
+                    <div className="flex-1">
                         <h2 className="text-lg font-bold mb-4">User Information</h2>
                         <p><strong>Email:</strong> {user?.email}</p>
                         <p><strong>Home Name:</strong> {profile?.home_name}</p>
@@ -94,19 +80,22 @@ export default function Account() {
                         <p><strong>First Name:</strong> {profile?.first_name}</p>
                         <p><strong>Last Name:</strong> {profile?.last_name}</p>
                     </div>
-                    <EditProfileDialog />
-                    <input
-                        type="file"
-                        id="fileInput"
-                        style={{ display: 'none' }}
-                        onChange={handleFileChange}
-                    />
-                    <button onClick={handleUploadClick}>Upload Photo</button>
-                    <button onClick={handleViewImage}>View Image</button>
-                    {avatarUrl && <img src={avatarUrl} alt="Profile Avatar" />}
+                    <div className="flex flex-col items-center ml-auto">
+                        {avatarUrl && <img src={avatarUrl} alt="Profile Avatar" className="w-24 h-24 rounded-full mb-4" />}
+                        <button onClick={handleUploadClick} className="ml-4 p-2 ">Upload Photo</button>
+                        <EditProfileDialog />   
+                    </div>
                 </div>
-            :
-                <div>Loading...</div>}
-        </div>
+                <input
+                    type="file"
+                    id="fileInput"
+                    style={{ display: 'none' }}
+                    onChange={handleFileChange}
+                />
+            </div>
+        ) : (
+            <div>Loading...</div>
+        )}
+    </div>
 	);
 }
