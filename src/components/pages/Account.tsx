@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from '@supabase/supabase-js';
 import useSupabase, { Profile } from "@/hooks/useSupabase";
+import { supabase } from "@/supabaseClient";
 import { TopNavBar } from "../Common";
 import { EditProfileDialog } from "../Profile";
 
@@ -40,8 +41,26 @@ export default function Account() {
         fetchData();
     }, [navigate]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0];
+            const fileName = `${user?.id}/${file.name}`;
 
+            const { data, error } = await supabase
+                .storage
+                .from('profile-avatars')
+                .upload(fileName, file);
+            
+            if (error) {
+                console.error('Error uploading file:', error.message);
+            } else {
+                console.log('File uploaded successfully:', data);
+            }
+        }
+    }
+
+    const handleUploadClick = () => {
+        document.getElementById('fileInput')?.click(); // Trigger file input click event
     }
 
 	return (
@@ -60,6 +79,13 @@ export default function Account() {
                         <p><strong>Last Name:</strong> {profile?.last_name}</p>
                     </div>
                     <EditProfileDialog />
+                    <input
+                        type="file"
+                        id="fileInput"
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange}
+                    />
+                    <button onClick={handleUploadClick}>Upload Photo</button>
                 </div>
             :
                 <div>Loading...</div>}
