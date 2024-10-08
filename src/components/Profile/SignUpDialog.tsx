@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { supabase } from "@/supabaseClient";
+import useSupabase from "@/hooks/useSupabase";
 
 export default function SignUpDialog() {
   const [email, setEmail] = useState("");
@@ -8,26 +8,21 @@ export default function SignUpDialog() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-
-  const handleSignUp = async (event: { preventDefault: () => void; }) => { // Commented it out, it works but need to setup custom SMTP server to send email confirmation since Supabase rate limits email sending
+  const { signUp } = useSupabase();
+  const handleSignUp = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    // setLoading(true);
-    // setError(null);
-    // setSuccess(null);
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
 
-    // const { error } = await supabase.auth.signUp({
-    //   email,
-    //   password,
-    // });
+    const result = await signUp(email, password);
+    if (!result.success) {
+      setError(result.message);
+    } else {
+      setSuccess(result.message);
+    }
 
-    // if (error) {
-    //   setError(error.message);
-    // } else {
-    //   setSuccess("Successfully signed up! Please check your email to confirm your account.");
-    // }
-
-    // setLoading(false);
-	console.log("Sign up button clicked"); 
+    setLoading(false);
   };
 
   return (
@@ -39,39 +34,28 @@ export default function SignUpDialog() {
         <DialogHeader>
           <DialogTitle className="text-white text-center">Sign Up</DialogTitle>
           <DialogDescription className="text-white text-center">
-            Fill in the information below.
+            {error && <p className="text-red-500">{error}</p>}
+            {success && <p className="text-green-500">{success}</p>}
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSignUp} className="space-y-6">
-          <div>
-            <input
-              className="w-full px-4 py-2 text-gray-900 bg-gray-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              type="email"
-              placeholder="Your email"
-              value={email}
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <input
-              className="w-full px-4 py-2 text-gray-900 bg-gray-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              type="password"
-              placeholder="Your password"
-              value={password}
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full px-4 py-2 font-bold text-white bg-green-500 rounded-lg hover:bg-green-700"
-            disabled={loading}
-          >
-            {loading ? 'Loading...' : 'Sign Up'}
+        <form onSubmit={handleSignUp}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? "Signing up..." : "Sign Up"}
           </button>
-          {error && <p className="text-red-500 text-center">{error}</p>}
-          {success && <p className="text-green-500 text-center">{success}</p>}
         </form>
       </DialogContent>
     </Dialog>

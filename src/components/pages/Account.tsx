@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from '@supabase/supabase-js';
 import useSupabase, { Profile } from "@/hooks/useSupabase";
-import { supabase } from "@/supabaseClient";
 import { TopNavBar } from "../Common";
 import { EditProfileDialog } from "../Profile";
 
@@ -18,7 +17,7 @@ export default function Account() {
     });
     const [avatarUrl, setAvatarUrl] = useState("");
 	const navigate = useNavigate();
-	const { fetchUser, fetchProfileData, getPublicUrl, uploadAvatar } = useSupabase();
+	const { fetchUser, fetchProfileData, uploadAvatar, getAvatarUrl } = useSupabase();
     
     
     useEffect(() => {
@@ -40,17 +39,17 @@ export default function Account() {
                     position: profileData.position ?? null,
                 });
                 
-                const avatarUrl = await getPublicUrl(`${user.id}/avatar.jpg`);
+                const avatarUrl = await getAvatarUrl(user.id);
                 setAvatarUrl(avatarUrl ?? ""); // TODO - set default avatar
             }
         }
         
         fetchData();
     }, [navigate]);
-    
+
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => { 
         if (e.target.files && e.target.files.length > 0) {
-            const file = e.target.files[0];
+            const file = e.target.files[0]; // Get the first file
 
             if (user?.id) {
                 await uploadAvatar(user.id, file);
@@ -80,9 +79,9 @@ export default function Account() {
                         <p><strong>First Name:</strong> {profile?.first_name}</p>
                         <p><strong>Last Name:</strong> {profile?.last_name}</p>
                     </div>
-                    <div className="flex flex-col items-center ml-auto">
-                        {avatarUrl && <img src={avatarUrl} alt="Profile Avatar" className="w-24 h-24 rounded-full mb-4" />}
-                        <button onClick={handleUploadClick} className="ml-4 p-2 ">Upload Photo</button>
+                    <div className="flex flex-col items-center ml-auto space-y-2">
+                        {avatarUrl && <img src={avatarUrl} alt="Profile Avatar" className="w-24 h-24 rounded-full " />}
+                        <button onClick={handleUploadClick} className="border text-black py-2 px-4 rounded-md text-center">Upload Photo</button>
                         <EditProfileDialog />   
                     </div>
                 </div>

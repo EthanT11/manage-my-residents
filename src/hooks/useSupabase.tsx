@@ -24,6 +24,7 @@ const useSupabase = () => {
 			return { user: null };
 		}
 	};
+
 	const signOut = async () => {
 		const { error } = await supabase.auth.signOut();
 		if (error) {
@@ -34,6 +35,7 @@ const useSupabase = () => {
 			return true;
 		}
 	}
+
 	const signIn = async (email: string, password: string) => {
 		const { error } = await supabase.auth.signInWithPassword({ email, password})
 
@@ -45,6 +47,18 @@ const useSupabase = () => {
 			return true;
 		}
 	}
+
+	const signUp = async (email: string, password: string) => {
+		const { error } = await supabase.auth.signUp({ email, password });
+		if (error) {
+			console.error('Error signing up:', error.message);
+			return { success: false, message: error.message };
+		} else {
+			console.log('Signed up successfully');
+			return { success: true, message: 'Signed up successfully' };
+		}
+	}
+
 	const fetchProfileData = async (user_id: string) => {
 		if (!user_id) {
 			console.error('User not found');
@@ -66,6 +80,7 @@ const useSupabase = () => {
 		}
 		return null;
 	};
+
 	const updateProfileData = async (user_id: string, profile: Profile) => {
 		const { data, error } = await supabase
 			.from('profiles')
@@ -74,6 +89,7 @@ const useSupabase = () => {
 		if (error) throw error;
 		return data;
 	}
+
 	const uploadAvatar = async (user_id: string, file: File) => {
 		const fileName = `${user_id}/avatar.jpg`;
 		const { data, error } = await supabase
@@ -86,19 +102,23 @@ const useSupabase = () => {
 			console.log('Avatar uploaded successfully:', data);
 		}
 	}
-	const getPublicUrl = async (path: string) => { // TODO ask about error red underline
-		const { data, error } = await supabase
+
+	const getPublicUrl = (path: string) => { // TODO ask about error red underline
+		const { data } = supabase
 			.storage
 			.from('profile-avatars')
 			.getPublicUrl(path);
-		if (error) {
-			console.error('Error fetching avatar URL:', error.message);
-		} else {
-			return data?.publicUrl;
-		}
+			return data?. publicUrl
 	}
 
-	return { fetchUser, signOut, signIn, fetchProfileData, updateProfileData, getPublicUrl, uploadAvatar };
+	const getAvatarUrl = async (user_id: string) => {
+		const path = `${user_id}/avatar.jpg`;
+		return getPublicUrl(path);
+	}
+
+	
+
+	return { fetchUser, signOut, signIn, signUp, fetchProfileData, updateProfileData, uploadAvatar, getAvatarUrl };
 }
 
 export default useSupabase;
