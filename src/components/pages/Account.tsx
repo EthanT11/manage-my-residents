@@ -19,6 +19,12 @@ export default function Account() {
 	const navigate = useNavigate();
 	const { fetchUser, fetchProfileData, uploadAvatar, getAvatarUrl } = useSupabase();
     
+    const getInitials = (firstName: string | null, lastName: string | null) => {
+        if (!firstName && !lastName) return "N/A";
+        const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : "";
+        const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : "";
+        return `${firstInitial}${lastInitial}`;
+    }
     
     useEffect(() => {
         const fetchData = async () => {
@@ -40,7 +46,12 @@ export default function Account() {
                 });
                 
                 const avatarUrl = await getAvatarUrl(user.id);
-                setAvatarUrl(avatarUrl ?? ""); // TODO - set default avatar
+                if (!avatarUrl) {
+                    setAvatarUrl(avatarUrl);
+                } else {
+                    const initials = getInitials(profileData.first_name, profileData.last_name);
+                    setAvatarUrl(`https://via.placeholder.com/150/000000/FFFFFF/?text=${initials}`);
+                }
             }
         }
         
