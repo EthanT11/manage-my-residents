@@ -8,6 +8,7 @@ export interface Resident { // Exporting the interface so that it can be used in
 	room: string;
 }
 
+
 const data: Resident[] = [
 {
 	id: 1,

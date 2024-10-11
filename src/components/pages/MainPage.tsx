@@ -14,6 +14,7 @@ export default function MainPage() {
   const handleResidentSelect = (resident: Resident) => {
     setSelectedResident(resident);
   }
+  
 
   useEffect(() => {
     fetchUser().then(({ user }) => {

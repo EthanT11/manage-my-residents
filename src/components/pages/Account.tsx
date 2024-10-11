@@ -75,16 +75,8 @@ export default function Account() {
         document.getElementById('fileInput')?.click(); // Trigger file input click event
     }
 
-    const handleRes = async () => {
-        if (user?.id) {
-            getResidents();
-        } else {
-            console.error("User ID is undefined");
-        }
-    }
-
 	return (
-<div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-gray-100">
         <TopNavBar />
         {user ? (
             <div className="container mx-auto p-4">
@@ -102,7 +94,6 @@ export default function Account() {
                     <div className="flex flex-col items-center ml-auto space-y-2">
                         {avatarUrl && <img src={avatarUrl} alt="Profile Avatar" className="w-24 h-24 rounded-full " />}
                         <button onClick={handleUploadClick} className="border text-black py-2 px-4 rounded-md text-center">Upload Photo</button>
-                        <button onClick={handleRes}>HandleRes</button>
                         {profile && <EditProfileDialog profile={profile} setProfile={setProfile} />}   
                     </div>
                 </div>

@@ -1,11 +1,18 @@
 import { supabase } from "@/supabaseClient";
-import { get } from "http";
 
 export interface Profile {
 	first_name: string | null;
 	last_name: string | null;
 	home_name: string | null;
 	position: string | null;
+}
+
+export interface Resident {
+	first_name: string;
+	last_name: string;
+	age: number;
+	wing: string;
+	room: string;
 }
 
 const useSupabase = () => {
@@ -116,7 +123,7 @@ const useSupabase = () => {
 			if (error) {
 				console.error('Error fetching home id:', error.message);
 			} else {
-				console.log('Home id found:', data);
+				// console.log('Home id found:', data);
 				return data;
 			}
 		}
@@ -132,8 +139,20 @@ const useSupabase = () => {
 			console.error('Error fetching residents:', error.message);
 			return null;
 		} else {
-			console.log('Residents found:', data);
+			// console.log('Residents found:', data);
 			return data;
+		}
+	}
+
+	const _addResident = async (resident: Resident) => {
+		const home_id = await getHomeId().then((data) => data?.id);
+		const { data, error } = await supabase
+			.from('residents')
+			.insert([{ ...resident, home_id }]);
+		if (error) {
+			console.error('Error adding resident:', error.message);
+		} else {
+			console.log('Resident added successfully:', data);
 		}
 	}
 
@@ -176,7 +195,8 @@ const useSupabase = () => {
 		updateProfileData, 
 		uploadAvatar, 
 		getAvatarUrl,
-		getResidents
+		getResidents,
+		_addResident
 	};
 }
 
