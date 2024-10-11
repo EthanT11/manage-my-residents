@@ -106,7 +106,7 @@ const useSupabase = () => {
 		}
 	}
 	
-	// Get Residents Data via home_id
+	// Residents Data
 	const getHomeId = async () => {
 		const { user } = await fetchUser();
 		if (!user) {
@@ -166,6 +166,18 @@ const useSupabase = () => {
 			console.error('Error removing resident:', error.message);
 		} else {
 			console.log('Resident removed successfully');
+		}
+	}
+
+	const editResident = async (resident: Resident) => {
+		const { data, error } = await supabase
+			.from('residents')
+			.update(resident)
+			.eq('id', resident.id);
+		if (error) {
+			console.error('Error editing resident:', error.message);
+		} else {
+			console.log('Resident edited successfully:', data);
 		}
 	}
 
