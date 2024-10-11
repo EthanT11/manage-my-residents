@@ -2,7 +2,6 @@ import CardHeaderButton from "./CardHeaderButton";
 import { AddResDialog } from "./AddResDialog";
 import { Resident } from "@/hooks/useSupabase";
 
-
 export default function SideBarHeader({addResident}: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
 	return (
 	  <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-t-xl shadow-lg flex flex-row justify-between items-center">

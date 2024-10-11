@@ -1,7 +1,6 @@
 import  SideBarHeader  from "./SidebarHeader"
 import ResidentCard from "./ResidentCard"
 import { useState, useEffect } from "react"
-// import useResidents, { Resident } from "@/hooks/useResidents"
 import useSupabase, { Resident } from "@/hooks/useSupabase"
 
 interface ResidentCardSideBarProps {
@@ -9,7 +8,6 @@ interface ResidentCardSideBarProps {
 }
 
 export default function ResidentCardSideBar( { onSelectResident }: ResidentCardSideBarProps ) {
-	// const { residents, addResident, deleteResident } = useResidents() // get the addResident function from the useResidents hook
 	const [leftWingResidents, setLeftWingResidents] = useState<Resident[]>([]) // set up state for left wing residents
 	const [rightWingResidents, setRightWingResidents] = useState<Resident[]>([]) // set up state for right wing residents
 	const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
