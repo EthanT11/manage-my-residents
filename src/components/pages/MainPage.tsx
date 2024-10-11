@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import TopNavBar from '../Common/TopNavBar';
 import { ResidentCardSideBar } from '../ResidentCardSidebar';
 import { InformationPanel } from '../InformationPanel';
-import { Resident } from '@/hooks/useResidents';
+// import { Resident } from '@/hooks/useResidents';
 import { useNavigate } from 'react-router-dom';
-import useSupabase from '@/hooks/useSupabase';
+import useSupabase, { Resident } from '@/hooks/useSupabase';
 
 export default function MainPage() {
   const [selectedResident, setSelectedResident] = useState<Resident | null>(null);
@@ -14,7 +14,7 @@ export default function MainPage() {
   const handleResidentSelect = (resident: Resident) => {
     setSelectedResident(resident);
   }
-  
+
 
   useEffect(() => {
     fetchUser().then(({ user }) => {

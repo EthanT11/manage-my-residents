@@ -8,6 +8,7 @@ export interface Profile {
 }
 
 export interface Resident {
+	id?: string;
 	first_name: string;
 	last_name: string;
 	age: number;
@@ -144,7 +145,7 @@ const useSupabase = () => {
 		}
 	}
 
-	const _addResident = async (resident: Resident) => {
+	const addResident = async (resident: Resident) => {
 		const home_id = await getHomeId().then((data) => data?.id);
 		const { data, error } = await supabase
 			.from('residents')
@@ -156,7 +157,7 @@ const useSupabase = () => {
 		}
 	}
 
-	const _removeResident = async (resident_id: string) => { // TODO: when doing RLS this will need to be checked against policies
+	const removeResident = async (resident_id: string) => { // TODO: when doing RLS this will need to be checked against policies
 		const { error } = await supabase
 			.from('residents')
 			.delete()
@@ -208,8 +209,8 @@ const useSupabase = () => {
 		uploadAvatar, 
 		getAvatarUrl,
 		getResidents,
-		_addResident,
-		_removeResident,
+		addResident,
+		removeResident,
 	};
 }
 

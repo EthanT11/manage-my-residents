@@ -3,11 +3,11 @@ import pic from '../../assets/test-stock-img.jpg'; // stock image
 import { useEffect, useState } from "react";
 
 interface ResidentCardProps {
-  id: number;
-  name: string;
+  id?: string;
+  name: [string, string];
   info: [string, string];
   isSelected: boolean;
-  setisSelected: (id: number) => void;
+  setisSelected: (id: string) => void;
   deleteCard: () => void;
 }
 
@@ -19,7 +19,11 @@ export default function ResidentCard({ id, name, info, isSelected, setisSelected
   }, [isSelected]);
 
   const handleClick = () => { // function to toggle the card expansion
-    setisSelected(id);
+    if (id) {
+      setisSelected(id);
+    } else {
+      console.log("Error(ResidentCard): id is undefined");
+    }
   }
 
   return (
@@ -30,7 +34,7 @@ export default function ResidentCard({ id, name, info, isSelected, setisSelected
         <CardTitle className={`hover:bg-blue-600 hover:text-white cursor-pointer p-2 rounded-lg border-2 transition-colors
           ${isCollapsed ? 'text-white' : 'bg-blue-600 text-white'}
         `}>
-          {name} {isCollapsed ? '▼' : '▲'}
+          {name[0] + " " + name[1]} {isCollapsed ? '▼' : '▲'}
         </CardTitle>
       </CardHeader>
       {!isCollapsed && (

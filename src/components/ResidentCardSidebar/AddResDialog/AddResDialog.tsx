@@ -3,19 +3,21 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import CardHeaderButton from "../CardHeaderButton";
 import AddResLabel from "./AddResLabel";
 import AddResInput from "./AddResInput";
-import { Resident } from "../../../hooks/useResidents";
+import { Resident } from "@/hooks/useSupabase";
 
  
 export default function AddResDialog({addResident}: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
-	const [name, setName] = useState("");
-	const [age, setAge] = useState("");
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [age, setAge] = useState(0);
 	const [wing, setWing] = useState("");
 	const [room, setRoom] = useState("");
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		const newResident = {
-			name: name,
+			first_name: firstName,
+			last_name: lastName,
 			age: age,
 			wing: wing,
 			room: room
@@ -37,17 +39,24 @@ export default function AddResDialog({addResident}: {addResident: (resident: Omi
 			</DialogHeader>
 			<form onSubmit={handleSubmit}>
 				<div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
-					<AddResLabel htmlFor="name">Name</AddResLabel>
+					<AddResLabel htmlFor="first_name">First Name</AddResLabel>
 					<AddResInput 
-						name="name" type="text" placeholder="Enter Name"
-						onChange={(e) => setName(e.target.value)}
+						name="first_name" type="text" placeholder="Enter First Name"
+						onChange={(e) => setFirstName(e.target.value)}
+					/>
+				</div>
+				<div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
+					<AddResLabel htmlFor="last_name">Last Name</AddResLabel>
+					<AddResInput 
+						name="last_name" type="text" placeholder="Enter Last Name"
+						onChange={(e) => setLastName(e.target.value)}
 					/>
 				</div>
 				<div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
 					<AddResLabel htmlFor="age">Age</AddResLabel>
 					<AddResInput 
 						name="age" type="number" placeholder="Enter Age"
-						onChange={(e) => setAge(e.target.value)}
+						onChange={(e) => setAge(Number(e.target.value))}
 					/>
 				</div>
 				<div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
