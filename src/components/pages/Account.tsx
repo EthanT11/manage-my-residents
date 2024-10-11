@@ -17,7 +17,7 @@ export default function Account() {
     });
     const [avatarUrl, setAvatarUrl] = useState("");
 	const navigate = useNavigate();
-	const { fetchUser, fetchProfileData, uploadAvatar, getAvatarUrl } = useSupabase();
+	const { fetchUser, fetchProfileData, uploadAvatar, getAvatarUrl, getResidents } = useSupabase();
     
     const getInitials = (firstName: string | null, lastName: string | null) => {
         if (!firstName && !lastName) return "N/A";
@@ -43,10 +43,11 @@ export default function Account() {
                     last_name: profileData.last_name ?? null,
                     home_name: profileData.home_name ?? null,
                     position: profileData.position ?? null,
+                    // TODO: Add maybe number of residents?
                 });
                 
                 const avatarUrl = await getAvatarUrl(user.id);
-                if (!avatarUrl) {
+                if (avatarUrl) {
                     setAvatarUrl(avatarUrl);
                 } else {
                     const initials = getInitials(profileData.first_name, profileData.last_name);
@@ -74,6 +75,14 @@ export default function Account() {
         document.getElementById('fileInput')?.click(); // Trigger file input click event
     }
 
+    const handleRes = async () => {
+        if (user?.id) {
+            getResidents();
+        } else {
+            console.error("User ID is undefined");
+        }
+    }
+
 	return (
 <div className="min-h-screen bg-gray-100">
         <TopNavBar />
@@ -93,6 +102,7 @@ export default function Account() {
                     <div className="flex flex-col items-center ml-auto space-y-2">
                         {avatarUrl && <img src={avatarUrl} alt="Profile Avatar" className="w-24 h-24 rounded-full " />}
                         <button onClick={handleUploadClick} className="border text-black py-2 px-4 rounded-md text-center">Upload Photo</button>
+                        <button onClick={handleRes}>HandleRes</button>
                         {profile && <EditProfileDialog profile={profile} setProfile={setProfile} />}   
                     </div>
                 </div>

@@ -1,4 +1,5 @@
 import { supabase } from "@/supabaseClient";
+import { get } from "http";
 
 export interface Profile {
 	first_name: string | null;
@@ -59,6 +60,7 @@ const useSupabase = () => {
 		}
 	}
 
+	// Profile Data
 	const fetchProfileData = async (user_id: string) => {
 		if (!user_id) {
 			console.error('User not found');
@@ -95,7 +97,48 @@ const useSupabase = () => {
 			return data;
 		}
 	}
+	
+	// Get Residents Data via home_id
+	const getHomeId = async () => {
+		const { user } = await fetchUser();
+		if (!user) {
+			console.error('User not found');
+			return;
+		}
+		const profileData = await fetchProfileData(user.id);
+		
+		if (profileData) {
+			const { data, error } = await supabase
+				.from('personal_care_homes')
+				.select('*')
+				.eq('home_name', profileData.home_name)
+				.single();
+			if (error) {
+				console.error('Error fetching home id:', error.message);
+			} else {
+				console.log('Home id found:', data);
+				return data;
+			}
+		}
+	}
 
+	const getResidents = async () => {
+		const home_id = await getHomeId().then((data) => data?.id);
+		const { data, error } = await supabase
+			.from('residents')
+			.select('*')
+			.eq('home_id', home_id);
+		if (error) {
+			console.error('Error fetching residents:', error.message);
+			return null;
+		} else {
+			console.log('Residents found:', data);
+			return data;
+		}
+	}
+
+
+	// Profile Avatar
 	const uploadAvatar = async (user_id: string, file: File) => {
 		const fileName = `${user_id}/avatar.jpg`;
 		const { data, error } = await supabase
@@ -124,7 +167,17 @@ const useSupabase = () => {
 
 	
 
-	return { fetchUser, signOut, signIn, signUp, fetchProfileData, updateProfileData, uploadAvatar, getAvatarUrl };
+	return { 
+		fetchUser,
+		signOut, 
+		signIn, 
+		signUp, 
+		fetchProfileData, 
+		updateProfileData, 
+		uploadAvatar, 
+		getAvatarUrl,
+		getResidents
+	};
 }
 
 export default useSupabase;
