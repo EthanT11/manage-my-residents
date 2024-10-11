@@ -156,6 +156,18 @@ const useSupabase = () => {
 		}
 	}
 
+	const _removeResident = async (resident_id: string) => { // TODO: when doing RLS this will need to be checked against policies
+		const { error } = await supabase
+			.from('residents')
+			.delete()
+			.eq('id', resident_id);
+		if (error) {
+			console.error('Error removing resident:', error.message);
+		} else {
+			console.log('Resident removed successfully');
+		}
+	}
+
 
 	// Profile Avatar
 	const uploadAvatar = async (user_id: string, file: File) => {
@@ -196,7 +208,8 @@ const useSupabase = () => {
 		uploadAvatar, 
 		getAvatarUrl,
 		getResidents,
-		_addResident
+		_addResident,
+		_removeResident,
 	};
 }
 
