@@ -93,7 +93,7 @@ export default function Account() {
                     <div className="flex flex-col items-center ml-auto space-y-2">
                         {avatarUrl && <img src={avatarUrl} alt="Profile Avatar" className="w-24 h-24 rounded-full " />}
                         <button onClick={handleUploadClick} className="border text-black py-2 px-4 rounded-md text-center">Upload Photo</button>
-                        <EditProfileDialog />   
+                        {profile && <EditProfileDialog profile={profile} setProfile={setProfile} />}   
                     </div>
                 </div>
                 <input

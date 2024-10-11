@@ -9,6 +9,7 @@ export default function SignUpDialog() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const { signUp } = useSupabase();
+  
   const handleSignUp = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     setLoading(true);

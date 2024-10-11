@@ -81,13 +81,19 @@ const useSupabase = () => {
 		return null;
 	};
 
-	const updateProfileData = async (user_id: string, profile: Profile) => {
-		const { data, error } = await supabase
-			.from('profiles')
-			.update(profile)
-			.eq('user_id', user_id)
-		if (error) throw error;
-		return data;
+	const updateProfileData = async (profile: Profile) => {
+		const user_id = await fetchUser().then((data) => data.user?.id);
+		if (!user_id) {
+			console.error('User not found');
+			return;
+		} else {
+			const { data, error } = await supabase
+				.from('profiles')
+				.update(profile)
+				.eq('user_id', user_id)
+			if (error) throw error;
+			return data;
+		}
 	}
 
 	const uploadAvatar = async (user_id: string, file: File) => {
