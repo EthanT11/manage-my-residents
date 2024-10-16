@@ -2,6 +2,7 @@ import  SideBarHeader  from "./SidebarHeader"
 import ResidentCard from "./ResidentCard"
 import { useState, useEffect } from "react"
 import useSupabase, { Resident } from "@/hooks/useSupabase"
+import NewResidentCard from "./NewResidentCard"
 
 interface ResidentCardSideBarProps {
 	onSelectResident: (resident: Resident) => void;
@@ -32,7 +33,7 @@ export default function ResidentCardSideBar( { onSelectResident }: ResidentCardS
 
 	const renderResidents = (residents: Resident[]) => {
         return residents.map(({ id, first_name, last_name, wing, room }) => (
-            <ResidentCard
+            <NewResidentCard
                 key={id}
                 id={id}
                 name={[first_name, last_name]}
