@@ -27,6 +27,3 @@ dist-ssr
 .env
 .env.test
 .env*.local
-
-# tools folder
-tools/

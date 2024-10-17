@@ -29,8 +29,8 @@ export default function NewResidentCard( { id, name, info, isSelected, setisSele
 	}
 
 	return (
-    <Card className="w-full max-w-sm border-0 shadow-lg">
-      <CardHeader className="bg-[#0077be] text-white p-4 flex flex-row items-center justify-between rounded-t-lg">
+    <Card className="grow-0 shadow-lg m-2 border-0 transition-transform transform hover:scale-105">
+      <CardHeader className="bg-residentCard-primary text-white p-4 flex flex-row items-center justify-between rounded-t-lg">
         <div className="flex items-center space-x-2">
           <Avatar className="h-8 w-8 bg-white text-[#0077be]">
             <AvatarFallback>{name[0].charAt(0)}{name[1].charAt(0)}</AvatarFallback>
@@ -47,7 +47,7 @@ export default function NewResidentCard( { id, name, info, isSelected, setisSele
       </CardHeader>
 	  {!isCollapsed && (
 		<>
-		<CardContent className="p-4 bg-[#e6f3f8]">
+		<CardContent className="p-4 bg-residentCard-secondary">
 		  <div className="flex justify-between items-center">
 			<div>
 			  <p className="text-sm text-[#005580] font-medium">Wing</p>
@@ -59,7 +59,7 @@ export default function NewResidentCard( { id, name, info, isSelected, setisSele
 			</div>
 		  </div>
 		</CardContent>
-		<CardFooter className="bg-[#e6f3f8] p-4 rounded-b-lg">
+		<CardFooter className="bg-residentCard-secondary p-4 rounded-b-lg">
 			<Button 
 			variant="destructive" 
 			size="sm" 

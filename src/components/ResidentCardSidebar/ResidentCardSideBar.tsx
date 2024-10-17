@@ -1,5 +1,4 @@
 import  SideBarHeader  from "./SidebarHeader"
-import ResidentCard from "./ResidentCard"
 import { useState, useEffect } from "react"
 import useSupabase, { Resident } from "@/hooks/useSupabase"
 import NewResidentCard from "./NewResidentCard"
@@ -9,6 +8,7 @@ interface ResidentCardSideBarProps {
 }
 
 export default function ResidentCardSideBar( { onSelectResident }: ResidentCardSideBarProps ) {
+	const [filter, setFilter] = useState<boolean>(false);
 	const [leftWingResidents, setLeftWingResidents] = useState<Resident[]>([]) // set up state for left wing residents
 	const [rightWingResidents, setRightWingResidents] = useState<Resident[]>([]) // set up state for right wing residents
 	const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
@@ -44,18 +44,33 @@ export default function ResidentCardSideBar( { onSelectResident }: ResidentCardS
             />
         ));
     };
-																				
+	
 	return (
-		<div className="flex flex-col p-4 h-full overflow-auto">
-			<SideBarHeader addResident={addResident}/>
-			<div className="flex flex-1 bg-slate-500 justify-center overflow-auto">
-				<div className="flex flex-col">
-					{renderResidents(leftWingResidents)}
-				</div>
-				<div className="flex flex-col">
-					{renderResidents(rightWingResidents)}
-				</div>
-			</div>
-		</div>
+		<div className="flex flex-col p-4 h-full overflow-auto bg-gray-800">
+			<SideBarHeader toggleFilter={{ filter, setFilter }} addResident={addResident} />
+        	<div className="flex flex-1 bg-gray-700 shadow-lg rounded-lg justify-center overflow-auto">
+				{filter ?
+				<>
+            		<div className="flex flex-row justify-between w-full ">
+						<div className="flex flex-col m-2 w-1/2 bg-gray-600 p-4 rounded-lg shadow-md">
+							{renderResidents(leftWingResidents)}
+						</div>
+						<div className="flex flex-col m-2 w-1/2 bg-gray-600 p-4 rounded-lg shadow-md">
+							{renderResidents(rightWingResidents)}
+						</div>
+					</div>
+				</>
+				:
+				<>
+					<div className="flex flex-row justify-center w-full ">
+						<div className="flex flex-col m-2 w-full bg-gray-600 p-4 rounded-lg shadow-md">
+							{renderResidents(leftWingResidents.concat(rightWingResidents))}
+						</div>
+					</div>
+				</>
+				}
+        	</div>
+    	</div>
 	)
 }
+// TODO: Fix card when name is too long

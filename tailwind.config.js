@@ -5,16 +5,25 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-  	extend: {
-		fontFamily: {
-			roboto: ['Roboto', 'sans-serif'],
-		},
+	fontFamily: {
+		roboto: ['Roboto', 'sans-serif'],
+	},
+	extend: {
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+			// Custom colors
+			residentCard: {
+				primary: '#0077be',
+				secondary: '#e6f3f8',
+			},
+
+
+
+			// shadcn
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
