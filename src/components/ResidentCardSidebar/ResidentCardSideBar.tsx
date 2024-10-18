@@ -51,18 +51,18 @@ export default function ResidentCardSideBar( { onSelectResident }: ResidentCardS
 				{filter ?
 				<>
             		<div className="flex flex-row justify-between w-full ">
-						<div className="flex flex-col m-2 w-1/2 bg-gray-600 p-4 rounded-lg shadow-md">
+						<div className="flex flex-col m-2 w-1/2 bg-gray-600 p-4 rounded-lg shadow-md overflow-auto hide-scrollbar">
 							{renderResidents(leftWingResidents)}
 						</div>
-						<div className="flex flex-col m-2 w-1/2 bg-gray-600 p-4 rounded-lg shadow-md">
+						<div className="flex flex-col m-2 w-1/2 bg-gray-600 p-4 rounded-lg shadow-md overflow-auto hide-scrollbar">
 							{renderResidents(rightWingResidents)}
 						</div>
 					</div>
 				</>
 				:
 				<>
-					<div className="flex flex-row justify-center w-full ">
-						<div className="flex flex-col m-2 w-full bg-gray-600 p-4 rounded-lg shadow-md">
+					<div className="flex flex-row justify-center w-full">
+						<div className="flex flex-col m-2 w-full bg-gray-600 p-4 rounded-lg shadow-md overflow-auto">
 							{renderResidents(leftWingResidents.concat(rightWingResidents))}
 						</div>
 					</div>
