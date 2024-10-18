@@ -85,7 +85,7 @@ const useSupabase = () => {
 		} else if (count !== 1) { // If there is no profile for the user
 			console.error('Profile not found');
 		} else {
-			console.log('Profile data found')
+			// console.log('Profile data found:', data);
 			return data;
 		}
 		return null;
@@ -146,7 +146,7 @@ const useSupabase = () => {
 	}
 
 	const addResident = async (resident: Resident) => {
-		const home_id = await getHomeId().then((data) => data?.id);
+		const home_id = await getHomeId().then((home) => home?.id);
 		const { data, error } = await supabase
 			.from('residents')
 			.insert([{ ...resident, home_id }]);
@@ -208,8 +208,6 @@ const useSupabase = () => {
 		const path = `${user_id}/avatar.jpg`;
 		return getPublicUrl(path);
 	}
-
-	
 
 	return { 
 		fetchUser,

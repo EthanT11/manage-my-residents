@@ -13,7 +13,6 @@ export default function ResidentCardSideBar( { onSelectResident }: ResidentCardS
 	const [rightWingResidents, setRightWingResidents] = useState<Resident[]>([]) // set up state for right wing residents
 	const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
 	const { getResidents, addResident, removeResident } = useSupabase()
-	
 	useEffect(() => {
 		const fetchData = async () => {
 			const resData = await getResidents()
@@ -39,7 +38,7 @@ export default function ResidentCardSideBar( { onSelectResident }: ResidentCardS
                 name={[first_name, last_name]}
                 info={[wing, room]}
                 isSelected={selectedCardId === id}
-                setisSelected={handleCardSelection}
+                setIsSelected={handleCardSelection}
 				deleteCard={() => id && removeResident(id)}
             />
         ));

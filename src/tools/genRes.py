@@ -20,7 +20,6 @@ TXT_FILE_NAME = 'residents.txt'
 CSV_HEADER_NAMES = ['first_name', 'last_name', 'age', 'room', 'wing']
 NUMBER_OF_RESIDENTS = 30
 
-
 def generate_resident():
 	first_name = random.choice(first_names)
 	last_name = random.choice(last_names)

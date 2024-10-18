@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { ChevronDown, ChevronUp, Trash2 } from "lucide-react"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -9,20 +9,25 @@ interface NewResidentCardProps {
 	name: [string, string];
 	info: [string, string];
 	isSelected: boolean;
-	setisSelected: (id: string) => void;
+	setIsSelected: (id: string) => void;
 	deleteCard: () => void;
 }
 
-export default function NewResidentCard( { id, name, info, isSelected, setisSelected, deleteCard }: NewResidentCardProps ) {
-	const [isCollapsed, setIsCollapsed] = useState(isSelected);
+export default function NewResidentCard( { id, name, info, isSelected, setIsSelected, deleteCard }: NewResidentCardProps ) {
+	const [isCollapsed, setIsCollapsed] = useState(!isSelected);
+	const [contentHeight, setContentHeight] = useState('0px');
+  	const contentRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		setIsCollapsed(!isSelected);
-	}, [isSelected]);
-
+		if (contentRef.current) { 
+			setContentHeight(!isCollapsed ? `${contentRef.current.scrollHeight}px` : `0px`);
+		}
+	}, [isCollapsed]);
+	
 	const handleCardSelection = () => {
 		if (id) {
-			setisSelected(id);
+			setIsCollapsed(!isCollapsed);
+			setIsSelected(id);
 		} else {
 			console.log("Error(ResidentCard): id is undefined");
 		}
@@ -45,33 +50,35 @@ export default function NewResidentCard( { id, name, info, isSelected, setisSele
 			}
         </Button>
       </CardHeader>
-	  {!isCollapsed && (
-		<>
-		<CardContent className="p-4 bg-residentCard-secondary">
-		  <div className="flex justify-between items-center">
-			<div>
-			  <p className="text-sm text-[#005580] font-medium">Wing</p>
-			  <p className="font-semibold text-[#003366]">{info[0]}</p>
-			</div>
-			<div>
-			  <p className="text-sm text-[#005580] font-medium">Room</p>
-			  <p className="font-semibold text-[#003366]">{info[1]}</p>
-			</div>
-		  </div>
-		</CardContent>
-		<CardFooter className="bg-residentCard-secondary p-4 rounded-b-lg">
-			<Button 
-			variant="destructive" 
-			size="sm" 
-			className="w-full bg-[#ff6b6b] hover:bg-[#ff4757] text-white"
-			onClick={deleteCard}
-			>
-			<Trash2 className="h-4 w-4 mr-2" />
-			Delete Record
-			</Button>
-		</CardFooter>
-		</>
-	  )}
+	  <div
+        ref={contentRef}
+        style={{ height: contentHeight }}
+        className="overflow-hidden transition-height duration-300 ease-in-out"
+      >
+        <CardContent className="p-4 bg-residentCard-secondary">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="text-sm text-[#005580] font-medium">Wing</p>
+              <p className="font-semibold text-[#003366]">{info[0]}</p>
+            </div>
+            <div>
+              <p className="text-sm text-[#005580] font-medium">Room</p>
+              <p className="font-semibold text-[#003366]">{info[1]}</p>
+            </div>
+          </div>
+        </CardContent>
+        <CardFooter className="bg-residentCard-secondary p-4 rounded-b-lg">
+          <Button
+            variant="destructive"
+            size="sm"
+            className="w-full bg-[#ff6b6b] hover:bg-[#ff4757] text-white"
+            onClick={deleteCard}
+          >
+            <Trash2 className="h-4 w-4 mr-2" />
+            Delete Record
+          </Button>
+        </CardFooter>
+      </div>
 
     </Card>
   )
