@@ -13,6 +13,7 @@ export default function ResidentCardSideBar( { onSelectResident }: ResidentCardS
 	const [rightWingResidents, setRightWingResidents] = useState<Resident[]>([]) // set up state for right wing residents
 	const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
 	const { getResidents, addResident, removeResident } = useSupabase()
+	
 	useEffect(() => {
 		const fetchData = async () => {
 			const resData = await getResidents()
@@ -73,3 +74,7 @@ export default function ResidentCardSideBar( { onSelectResident }: ResidentCardS
 	)
 }
 // TODO: Fix card when name is too long
+// TODO: Fix card / change card when using the filter by wings wince the names seem to break the card.
+// Maybe change font size depending on the length of the name? Or cut off the name if it's too long?
+
+//TODO: Add indicator if filter is active

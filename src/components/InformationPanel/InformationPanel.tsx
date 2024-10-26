@@ -1,4 +1,3 @@
-import { Resident } from "@/hooks/useResidents"
 import pic from '../../assets/test-stock-img.jpg'; // stock image
 import { FaUser } from 'react-icons/fa'; // Importing an icon from react-icons
 
@@ -17,7 +16,7 @@ export default function InformationPanel({ resident }: InformationPanelProps) {
         {resident ? (
           <>
             <div className="flex-1">
-              <h2 className="text-2xl font-semibold text-blue-700 mb-4">{resident.name}</h2>
+              <h2 className="text-2xl font-semibold text-blue-700 mb-4">{resident.first_name} {resident.last_name}</h2>
               <p className="text-lg text-gray-700 mb-2"><strong>Age:</strong> {resident.age}</p>
               <p className="text-lg text-gray-700 mb-2"><strong>Wing:</strong> {resident.wing}</p>
               <p className="text-lg text-gray-700 mb-2"><strong>Room:</strong> {resident.room}</p>

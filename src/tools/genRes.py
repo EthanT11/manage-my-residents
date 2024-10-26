@@ -47,6 +47,5 @@ def main():
 	create_csv_file()
 	create_res_file()
 
-
 if __name__ == '__main__':
 	main()

@@ -69,7 +69,7 @@ export default {
   },
   plugins: [
 	require("tailwindcss-animate"),
-	function ({ addUtilities }) {
+	function ({ addUtilities }) { /* Hide scrollbar */
 	  addUtilities({
 		'.hide-scrollbar': {
 		  'scrollbar-width': 'none', /* Firefox */

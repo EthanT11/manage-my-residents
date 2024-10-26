@@ -25,6 +25,7 @@ export default function SignUpDialog() {
 
     setLoading(false);
   };
+  
 
   return (
     <Dialog>
