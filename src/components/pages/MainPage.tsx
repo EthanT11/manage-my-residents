@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TopNavBar from '../Common/TopNavBar';
 import { ResidentCardSideBar } from '../ResidentCardSidebar';
-import { InformationPanel } from '../InformationPanel';
+import { InformationPanel, NewInformationPanel } from '../InformationPanel';
 import { useNavigate } from 'react-router-dom';
 import useSupabase, { Resident } from '@/hooks/useSupabase';
 
@@ -31,7 +31,8 @@ export default function MainPage() {
           <ResidentCardSideBar onSelectResident={handleResidentSelect} />
         </div>
         <div className='w-2/3 flex flex-col p-4'> {/* Container for right side of dashboard */}
-            <InformationPanel resident={selectedResident}/>
+            {/* <InformationPanel resident={selectedResident}/> */}
+            <NewInformationPanel />
           <div className='bg-slate-400 flex-1'>
             <p>Some other content</p>
           </div>

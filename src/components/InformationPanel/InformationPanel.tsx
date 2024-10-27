@@ -1,5 +1,6 @@
 import pic from '../../assets/test-stock-img.jpg'; // stock image
 import { FaUser } from 'react-icons/fa'; // Importing an icon from react-icons
+import { Resident } from '@/hooks/useSupabase'; // Importing the Resident type from useSupabase
 
 interface InformationPanelProps {
   resident: Resident | null
