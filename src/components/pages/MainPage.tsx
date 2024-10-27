@@ -27,15 +27,12 @@ export default function MainPage() {
     <div className="flex flex-col font-roboto h-screen bg-gray-100"> {/* Container for the entire page */}
       <TopNavBar />
       <div className="flex flex-1 shadow-lg h-full overflow-auto"> {/* Container for entire dashboard under main nav bar */}
-        <div className='flex-1 w-1/3 h-full overflow-auto'> {/* Container for ResidentSideBar */}
-          <ResidentCardSideBar onSelectResident={handleResidentSelect} />
+        <div className='flex-1 w-1/4 h-full overflow-auto bg-black'> {/* Container for ResidentSideBar */}
+          {/* <ResidentCardSideBar onSelectResident={handleResidentSelect} /> */}
         </div>
-        <div className='w-2/3 flex flex-col p-4'> {/* Container for right side of dashboard */}
+        <div className='w-3/4 flex flex-col p-4'> {/* Container for right side of dashboard */}
             {/* <InformationPanel resident={selectedResident}/> */}
             <NewInformationPanel />
-          <div className='bg-slate-400 flex-1'>
-            <p>Some other content</p>
-          </div>
         </div>
       </div>
     </div>
