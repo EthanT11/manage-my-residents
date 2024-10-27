@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import  useSupabase, { Resident }  from '@/hooks/useSupabase';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import PanelCard from './PanelCard';
 
 export default function NewInformationPanel() {
     const [residents, setResidents] = useState<Resident[] | null>(null);
     const { getResidents } = useSupabase();
+	const totalResidents = residents ? residents.length : 0;
+	const averageAge = residents ? residents.reduce((acc, curr) => acc + curr.age, 0) / residents.length : 0;
 
     useEffect(() => {
         async function fetchResidents() {
@@ -14,30 +16,6 @@ export default function NewInformationPanel() {
         fetchResidents();
     }, []); // add getResidents to the dependency array | removed for now to stop all the calls
 
-	interface PanelCardProps {
-		title: string,
-		condition?: any, // eg: residents ? residents.length : 0 | Type any for now till i can narrow it down a bit better 
-		subTitle?: string
-	}
-
-	function PanelCard({ title, condition, subTitle }: PanelCardProps) {
-		return (
-			<>
-				<Card className="bg-blue-100">
-					<CardHeader>
-						<CardTitle className="text-blue-700">{title}</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<div className="text-3xl font-bold text-blue-900">{condition}</div>
-						<p className="text-blue-600">{subTitle}</p>
-					</CardContent>
-				</Card>
-			</>
-		)
-	}
-
-	const totalResidents = residents ? residents.length : 0;
-	const averageAge = residents ? residents.reduce((acc, curr) => acc + curr.age, 0) / residents.length : 0;
 
     return (
         <div className="flex-1 overflow-auto">
