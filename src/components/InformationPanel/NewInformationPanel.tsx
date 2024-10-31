@@ -45,21 +45,14 @@ export default function NewInformationPanel() {
                 </div>
             </header>
             <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8"> {/* Container for the main content */}
-				{!selectedResident ? (
-					<>
-						<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'> {/* Container for the panel cards */}
-							<PanelCard title="Resident Overview" condition={totalResidents} subTitle='Total Residents'/>
-							<PanelCard title="Average Age" condition={averageAge} subTitle='Years'/>		
-						</div>
-						<div>
-							<ResidentList residents={residents || []} setSelectedResident={setSelectedResident}/>
-						</div>
-					</>
-					) : (
-						<div>
-
-						</div>
-					)}
+				<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'> {/* Container for the panel cards */}
+					<PanelCard title="Resident Overview" condition={totalResidents} subTitle='Total Residents'/>
+					<PanelCard title="Average Age" condition={averageAge} subTitle='Years'/>		
+				</div>
+				<div>
+					<ResidentList residents={residents || []} setSelectedResident={setSelectedResident} selectedResident={selectedResident} clearSelectedResident={clearSelectedResident}/>
+				</div>
+	
 
 				{/* Selected Resident Information */}
 				{selectedResident ? (
@@ -80,7 +73,7 @@ export default function NewInformationPanel() {
 									<p className="mb-1 text-blue-700">Room: {selectedResident.wing}</p>
 								 </div>
 							</CardContent>
-							</Card>
+						</Card>
 					</div>
 				) : (
 					<div>
