@@ -12,10 +12,14 @@ function getInitials(name: [string, string]) {
 	return name.map(n => n[0]).join('');
 }
 
+function handleSetResident({ resident, setSelectedResident }: { resident: Resident, setSelectedResident: (resident: Resident) => void }) {
+	setSelectedResident(resident);
+}
+
 function ResidentTag( {resident, setSelectedResident}: {resident: Resident, setSelectedResident: (resident: Resident) => void} ) {
 	const residentName = [resident.first_name, resident.last_name];
 	return (
-			<Card key={resident.id} className="cursor-pointer hover:bg-blue-50" onClick={() => setSelectedResident(resident)}>
+			<Card key={resident.id} className="cursor-pointer hover:bg-blue-50" onClick={() => handleSetResident({resident, setSelectedResident})}>
 				<CardContent className="flex items-center p-4">
 				<Avatar className="h-12 w-12 mr-4">
 					<AvatarImage src={testStockImage} alt={residentName[0] + " " + residentName[1]} />
