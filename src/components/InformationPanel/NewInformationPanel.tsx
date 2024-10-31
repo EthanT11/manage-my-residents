@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import  useSupabase, { Resident }  from '@/hooks/useSupabase';
 import PanelCard from './PanelCard';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import testStockImage from '@/assets/test-stock-img.jpg';
+import ResidentList from './ResidentList';
 
 export default function NewInformationPanel() {
     const [residents, setResidents] = useState<Resident[] | null>(null);
@@ -21,27 +19,6 @@ export default function NewInformationPanel() {
         fetchResidents();
     }, []); // add getResidents to the dependency array | removed for now to stop all the calls
 
-	function getInitials(name: [string, string]) {
-		return name.map(n => n[0]).join('');
-	}
-	
-	function ResidentTag( {resident, setSelectedResident}: {resident: Resident, setSelectedResident: (resident: Resident) => void} ) {
-		const residentName = [resident.first_name, resident.last_name];
-		return (
-				<Card key={resident.id} className="cursor-pointer hover:bg-blue-50" onClick={() => setSelectedResident(resident)}>
-                    <CardContent className="flex items-center p-4">
-					<Avatar className="h-12 w-12 mr-4">
-                        <AvatarImage alt={residentName[0] + " " + residentName[1]} />
-                        <AvatarFallback>{getInitials([resident.first_name, resident.last_name])}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <h3 className="font-semibold text-blue-700">{resident.first_name + " " + resident.last_name}</h3>
-                        <p className="text-sm text-blue-600">Room {resident.room}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-		)
-	}
 
     return (
         <div className="flex-1 overflow-auto">
@@ -53,24 +30,14 @@ export default function NewInformationPanel() {
                 </div>
             </header>
 
-            <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+            <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8"> {/* Container for the main content */}
+                <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'> {/* Container for the panel cards */}
 					<PanelCard title="Resident Overview" condition={totalResidents} subTitle='Total Residents'/>
-					<PanelCard title="Average Age" condition={averageAge} subTitle='Years'/>
-					<Card className="mt-6">
-						<CardHeader>
-							<CardTitle className="text-blue-700">Resident List</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-								{residents?.map((resident, index) => (
-									<ResidentTag key={index} resident={resident} setSelectedResident={setSelectedResident} />
-									// <p key={index}>{resident.first_name + " " + resident.last_name}</p>
-								))}
-							</div>
-						</CardContent>
-					</Card>
+					<PanelCard title="Average Age" condition={averageAge} subTitle='Years'/>		
                 </div>
+				<div>
+                    <ResidentList residents={residents || []} setSelectedResident={setSelectedResident}/>
+				</div>
             </main>
         </div>
     );
