@@ -53,7 +53,6 @@ export default function NewInformationPanel() {
 					<ResidentList residents={residents || []} setSelectedResident={setSelectedResident} selectedResident={selectedResident} clearSelectedResident={clearSelectedResident}/>
 				</div>
 	
-
 				{/* Selected Resident Information */}
 				{selectedResident ? (
 					<div>
