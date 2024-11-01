@@ -36,6 +36,9 @@ function ResidentTag( {resident, setSelectedResident}: {resident: Resident, setS
 	)
 }
 
+// TODO: Set specific sizes for cards and add maybe elipses for long names
+// TODO: Add way to change resident list for number of rows
+// TODO: Maybe fill empty div
 export default function ResidentList( {residents, setSelectedResident, selectedResident, clearSelectedResident}: ResidentListProps ) {
 	return (
 		<Card className="mt-6">
@@ -48,7 +51,7 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 			</CardHeader>
 			{!selectedResident ? (
 				<CardContent>
-					<div className="grid grid-flow-col sm:grid-rows-1 md:grid-rows-2 lg:grid-rows-3 gap-4 overflow-auto">
+					<div className="grid grid-flow-col sm:grid-rows-1 md:grid-rows-2 lg:grid-rows-2 gap-4 overflow-auto">
 						{residents?.map((resident, index) => (
 							<ResidentTag key={index} resident={resident} setSelectedResident={setSelectedResident} />
 							// <p key={index}>{resident.first_name + " " + resident.last_name}</p>
@@ -56,9 +59,7 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 					</div>
 				</CardContent>
 			) : (
-				<div>
-
-				</div>
+				<div></div>
 			)}
 		</Card>
 	)
