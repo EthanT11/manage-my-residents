@@ -1,18 +1,11 @@
 import { useEffect, useState } from 'react';
-import TopNavBar from '../Common/TopNavBar';
-import { ResidentCardSideBar } from '../ResidentCardSidebar';
-import { InformationPanel, NewInformationPanel } from '../InformationPanel';
+import { NewInformationPanel } from '../InformationPanel';
 import { useNavigate } from 'react-router-dom';
-import useSupabase, { Resident } from '@/hooks/useSupabase';
+import useSupabase from '@/hooks/useSupabase';
 
 export default function MainPage() {
-  const [selectedResident, setSelectedResident] = useState<Resident | null>(null);
   const { fetchUser } = useSupabase();
   const navigate = useNavigate();
-  
-  const handleResidentSelect = (resident: Resident) => {
-    setSelectedResident(resident);
-  }
 
   useEffect(() => {
     fetchUser().then(({ user }) => {
@@ -23,16 +16,31 @@ export default function MainPage() {
     });
   }, []);
 
+
+  // TODO: factor out SideManager
+  // Route the links to the appropriate pages
+  function SideManager() {
+    return (
+      <div className="flex flex-col w-64 bg-blue-00 text-white shadow-md">
+        
+        <h1 className="text-2xl font-bold mb-4">Manage My Residents</h1>    
+          <ul>
+            <li className="p-4 hover:bg-blue-800 cursor-pointer">Home</li>
+            <li className="p-4 hover:bg-blue-800 cursor-pointer">Account</li>
+            <li className="p-4 hover:bg-blue-800 cursor-pointer">SignOut</li>
+          </ul>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col font-roboto h-screen bg-gray-100"> {/* Container for the entire page */}
-      {/* <TopNavBar /> */}
-      <div className="flex flex-1 shadow-lg h-full overflow-auto"> {/* Container for entire dashboard under main nav bar */}
-        <div className='flex-1 w-1/4 h-full overflow-auto bg-black'> {/* Container for ResidentSideBar */}
-          {/* <ResidentCardSideBar onSelectResident={handleResidentSelect} /> */}
+      <div className="flex flex-1 shadow-lg h-full overflow-auto">
+        <div className="flex bg-blue-700">
+          <SideManager />
         </div>
-        <div className='w-3/4 flex flex-col p-4'> {/* Container for right side of dashboard */}
-            {/* <InformationPanel resident={selectedResident}/> */}
-            <NewInformationPanel />
+        <div className='w-3/4 flex flex-col p-4'>
+          <NewInformationPanel />
         </div>
       </div>
     </div>
