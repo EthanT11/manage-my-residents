@@ -23,7 +23,7 @@ export default function MainPage() {
         <div className="flex bg-blue-700">
           <SideManager />
         </div>
-        <div className='flex flex-col overflow-auto p-4'>
+        <div className='flex flex-col overflow-auto p-4 w-3/4'>
           <NewInformationPanel />
         </div>
       </div>

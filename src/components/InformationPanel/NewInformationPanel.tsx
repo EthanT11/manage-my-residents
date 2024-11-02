@@ -18,7 +18,7 @@ export default function NewInformationPanel() {
     const { getResidents } = useSupabase();
 	// conditions for the panel cards
 	const totalResidents = residents ? residents.length : 0;
-	const averageAge = residents ? residents.reduce((acc, curr) => acc + curr.age, 0) / residents.length : 0;
+	const averageAge = residents ? residents.reduce((acc, curr) => acc + curr.age, 0) / residents.length : 0; 
 	
     useEffect(() => {
 		async function fetchResidents() {
@@ -45,14 +45,21 @@ export default function NewInformationPanel() {
                 </div>
             </header>
             <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8"> {/* Container for the main content */}
-				<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'> {/* Container for the panel cards */}
-					<PanelCard title="Resident Overview" condition={totalResidents} subTitle='Total Residents'/>
-					<PanelCard title="Average Age" condition={averageAge} subTitle='Years'/>		
-				</div>
-				<div>
-					<ResidentList residents={residents || []} setSelectedResident={setSelectedResident} selectedResident={selectedResident} clearSelectedResident={clearSelectedResident}/>
-				</div>
+				{!selectedResident ? (
+					<>
+						<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'> {/* Container for the panel cards */}
+							<PanelCard title="Resident Overview" condition={totalResidents} subTitle='Total Residents'/>
+							<PanelCard title="Average Age" condition={averageAge} subTitle='Years'/>		
+						</div>
+					</>
+
+				) : (
+					<></>
+				)}
 	
+					<div>
+						<ResidentList residents={residents || []} setSelectedResident={setSelectedResident} selectedResident={selectedResident} clearSelectedResident={clearSelectedResident}/>
+					</div>
 				{/* Selected Resident Information */}
 				{selectedResident ? (
 					<div>
@@ -76,7 +83,11 @@ export default function NewInformationPanel() {
 					</div>
 				) : (
 					<div>
-
+						<Card className="lg:col-span-2">
+							<CardHeader>
+								<CardTitle className="text-blue-700">Resident Details - Select A Resident For Details</CardTitle>
+							</CardHeader>
+						</Card>
 					</div>
 				)}
             </main>
