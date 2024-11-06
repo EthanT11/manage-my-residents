@@ -5,6 +5,7 @@ import ResidentList from './ResidentList';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import testStockImage from '@/assets/test-stock-img.jpg';
+import { SidebarTrigger } from '../ui/sidebar';
 
 // TODO: Add transition for the different types of opens and closes for the dash board, eg: select/deselect resident and move panels up and down
 // TODO: Maybe have a minimize button for the resident list
@@ -36,6 +37,7 @@ export default function NewInformationPanel() {
         <div className="flex-1 overflow-auto">
             <header className="bg-white shadow-sm">
                 <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+					<SidebarTrigger />
                     <h2 className="text-2xl font-bold leading-7 text-blue-900 sm:text-3xl sm:truncate">
                         Information Panel
                     </h2>

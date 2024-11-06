@@ -3,6 +3,7 @@ import { NewInformationPanel } from '../InformationPanel';
 import { SideManager } from '../SideManager';
 import { useNavigate } from 'react-router-dom';
 import useSupabase from '@/hooks/useSupabase';
+import { SidebarTrigger } from "@/components/ui/sidebar"
 
 export default function MainPage() {
   const { fetchUser } = useSupabase();
@@ -20,7 +21,7 @@ export default function MainPage() {
   return (
     <div className="flex flex-col font-roboto h-screen bg-gray-100"> {/* Container for the entire page */}
       <div className="flex flex-1 shadow-lg h-full overflow-auto">
-        <div className="flex bg-blue-700">
+        <div className="flex">
           <SideManager />
         </div>
         <div className='flex flex-col overflow-auto p-4 w-3/4'>

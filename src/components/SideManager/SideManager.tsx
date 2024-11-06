@@ -1,15 +1,68 @@
 // TODO: Add routes for the links | Maybe use Nav as well
-// TODO: Add Icons to the links
-// TODO: Add a way to minimize the side manager | Show only icons and probably have a hover effect to show the text
+
+import { Calendar, Home, Settings, User, ForkKnife } from "lucide-react"
+ 
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar"
+ 
+const items = [
+  {
+    title: "Home",
+    url: "#",
+    icon: Home,
+  },
+  {
+    title: "Calendar",
+    url: "#",
+    icon: Calendar,
+  },
+  {
+    title: "Meals",
+    url: "#",
+    icon: ForkKnife,
+  },
+  {
+    title: "Residents",
+    url: "#",
+    icon: User,
+  },
+  {
+    title: "Settings",
+    url: "#",
+    icon: Settings,
+  },
+]
+ 
 export default function SideManager() {
-    return (
-      <div className="flex flex-col w-64 bg-blue-00 text-white shadow-md"> 
-        <h1 className="text-2xl font-bold mb-4">Manage My Residents</h1>    
-          <ul>
-            <li className="p-4 hover:bg-blue-800 cursor-pointer">Home</li>
-            <li className="p-4 hover:bg-blue-800 cursor-pointer">Account</li>
-            <li className="p-4 hover:bg-blue-800 cursor-pointer">SignOut</li>
-          </ul>
-      </div>
-    )
-  }
+  return (
+    <Sidebar collapsible="icon">
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Probably put home name here?</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+  )
+}
