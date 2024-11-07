@@ -4,10 +4,6 @@ import { supabase, Session } from './supabaseClient' // bring in Session type | 
 import { RouterProvider } from 'react-router-dom'
 import router from './Routes'
 
-// TODO: move session
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { SideManager } from './components/SideManager'
-
 function App() {
   const [session, setSession] = useState<Session | null>(null)
   useEffect(() => {
@@ -22,10 +18,7 @@ function App() {
 
   return (
     <>
-      <SidebarProvider >
-        <RouterProvider router={router} />
-        <SideManager />
-      </SidebarProvider>
+      <RouterProvider router={router} />
     </>
     // <div>
     //   {/* {!session ? <Auth /> : <Account key={session.user.id} session={session} />} */}

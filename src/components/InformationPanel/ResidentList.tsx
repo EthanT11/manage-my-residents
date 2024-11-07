@@ -51,7 +51,7 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 			</CardHeader>
 			{!selectedResident ? (
 				<CardContent>
-					<div className="grid grid-flow-col sm:grid-rows-1 md:grid-rows-2 lg:grid-rows-2 gap-4 overflow-auto">
+					<div className="grid grid-flow-col sm:grid-rows-1 md:grid-rows-2 lg:grid-rows-2 gap-4 overflow-auto no-scrollbar">
 						{residents?.map((resident, index) => (
 							<ResidentTag key={index} resident={resident} setSelectedResident={setSelectedResident} />
 							// <p key={index}>{resident.first_name + " " + resident.last_name}</p>
