@@ -28,8 +28,10 @@ export default function MainPage() {
           <main className="flex flex-col font-roboto h-screen w-screen bg-gray-100 overflow-auto">
             <div className='flex flex-col overflow-auto p-4'>
               <header className="bg-white shadow-sm">
-                  <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-                    <SidebarTrigger />
+                  <div className="max-w-7xl py-4 px-4 sm:px-6 lg:px-8 flex items-center">
+                    <div className='flex flex-1'>
+                      <SidebarTrigger className='hover:bg-gray-200'/>
+                    </div>
                     <h2 className="text-2xl font-bold leading-7 text-blue-900 sm:text-3xl sm:truncate">Home name here Dashboard</h2>
                   </div>
               </header>

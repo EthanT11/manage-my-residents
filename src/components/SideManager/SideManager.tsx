@@ -46,7 +46,7 @@ export default function SideManager() {
     <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Probably put home name here?</SidebarGroupLabel>
+          <SidebarGroupLabel>Manage My Residents</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (

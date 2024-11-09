@@ -21,7 +21,7 @@ function handleSetResident({ resident, setSelectedResident }: { resident: Reside
 function ResidentTag( {resident, setSelectedResident}: {resident: Resident, setSelectedResident: (resident: Resident) => void} ) {
 	const residentName = [resident.first_name, resident.last_name];
 	return (
-		<Card key={resident.id} className="cursor-pointer hover:bg-blue-50" onClick={() => handleSetResident({resident, setSelectedResident})}>
+		<Card key={resident.id} className="cursor-pointer hover:bg-blue-50 w-64" onClick={() => handleSetResident({resident, setSelectedResident})}>
 			<CardContent className="flex items-center p-4">
 			<Avatar className="h-12 w-12 mr-4">
 				<AvatarImage src={testStockImage} alt={residentName[0] + " " + residentName[1]} />
@@ -51,10 +51,9 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 			</CardHeader>
 			{!selectedResident ? (
 				<CardContent>
-					<div className="grid grid-flow-col sm:grid-rows-1 md:grid-rows-2 lg:grid-rows-2 gap-4 overflow-auto no-scrollbar">
+					<div className="grid grid-flow-col sm:grid-rows-1 md:grid-rows-2 lg:grid-rows-2 gap-4 overflow-auto">
 						{residents?.map((resident, index) => (
 							<ResidentTag key={index} resident={resident} setSelectedResident={setSelectedResident} />
-							// <p key={index}>{resident.first_name + " " + resident.last_name}</p>
 						))}
 					</div>
 				</CardContent>
