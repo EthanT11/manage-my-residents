@@ -17,7 +17,7 @@ export default function Account() {
     });
     const [avatarUrl, setAvatarUrl] = useState("");
 	const navigate = useNavigate();
-	const { fetchUser, fetchProfileData, uploadAvatar, getAvatarUrl, getResidents } = useSupabase();
+	const { fetchUser, fetchProfileData, uploadAvatar, getAvatarUrl } = useSupabase();
     
     const getInitials = (firstName: string | null, lastName: string | null) => {
         if (!firstName && !lastName) return "N/A";

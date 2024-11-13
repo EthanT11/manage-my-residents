@@ -169,17 +169,18 @@ const useSupabase = () => {
 		}
 	}
 
-	const editResident = async (resident: Resident) => {
-		const { data, error } = await supabase
-			.from('residents')
-			.update(resident)
-			.eq('id', resident.id);
-		if (error) {
-			console.error('Error editing resident:', error.message);
-		} else {
-			console.log('Resident edited successfully:', data);
-		}
-	}
+	// TODO: Implement editResident
+	// const editResident = async (resident: Resident) => {
+	// 	const { data, error } = await supabase
+	// 		.from('residents')
+	// 		.update(resident)
+	// 		.eq('id', resident.id);
+	// 	if (error) {
+	// 		console.error('Error editing resident:', error.message);
+	// 	} else {
+	// 		console.log('Resident edited successfully:', data);
+	// 	}
+	// }
 
 
 	// Profile Avatar

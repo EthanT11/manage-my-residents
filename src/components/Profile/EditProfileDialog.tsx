@@ -10,10 +10,11 @@ interface EditProfileDialogProps {
   setProfile: (profile: Profile) => void;
 }
 
+// TODO: implement loading state
 const EditProfileDialog = ({ profile, setProfile }: EditProfileDialogProps) => {
   const currentProfile = profile;
   const { updateProfileData } = useSupabase();
-  const [Loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   
   const handleUpdateProfile = async (event: { preventDefault: () => void; }) => {
@@ -24,10 +25,10 @@ const EditProfileDialog = ({ profile, setProfile }: EditProfileDialogProps) => {
       home_name: (document.getElementById('home_name') as HTMLSelectElement).value,
       position: (document.getElementById('position') as HTMLSelectElement).value,
     };
-    setLoading(true);
+    // setLoading(true);
     await updateProfileData(profile);
     setProfile(profile);
-    setLoading(false); // TODO: Add visual loading indicator
+    // setLoading(false); // TODO: Add visual loading indicator
     setIsDialogOpen(false);
   };
 
