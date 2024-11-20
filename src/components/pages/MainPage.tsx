@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { NewInformationPanel } from '../InformationPanel';
+import { InformationPanel } from '../InformationPanel';
 import { SideManager } from '../SideManager';
 import { useNavigate } from 'react-router-dom';
 import useSupabase from '@/hooks/useSupabase';
@@ -32,7 +32,7 @@ export default function MainPage() {
                     <h2 className="text-2xl font-bold leading-7 text-blue-900 sm:text-3xl sm:truncate">Home name here Dashboard</h2>
                   </div>
               </header>
-              <NewInformationPanel />
+              <InformationPanel />
             </div>         
           </main>
         </SidebarProvider>
