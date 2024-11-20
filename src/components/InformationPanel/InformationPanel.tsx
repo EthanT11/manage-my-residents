@@ -37,13 +37,13 @@ export default function InformationPanel() {
 				{!selectedResident ? (
 					<>
 						<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'> {/* Container for the panel cards */}
-							<PanelCard title="Resident Overview" condition={totalResidents} subTitle='Total Residents'/>
-							<PanelCard title="Average Age" condition={averageAge} subTitle='Years'/>		
+							<PanelCard title="Home Overview" condition={totalResidents} subTitle='Total Residents'/>
+							<PanelCard title="Average Age" condition={averageAge} subTitle='Years'/>
 						</div>
 					</>
 				) : (
 					<>
-					{/* TODO: Figure out what to do here */}
+					{/* TODO: Add Resident overview for selected Resident*/}
 					</>
 				)}
 					<div>
@@ -65,7 +65,7 @@ export default function InformationPanel() {
 									<h3 className="text-2xl font-semibold mb-2 text-blue-900">{selectedResidentName}</h3>
 									<p className="mb-1 text-blue-700">Age: {selectedResident.age}</p>
 									<p className="mb-1 text-blue-700">Room: {selectedResident.room}</p>
-									<p className="mb-1 text-blue-700">Room: {selectedResident.wing}</p>
+									<p className="mb-1 text-blue-700">Wing: {selectedResident.wing}</p>
 								 </div>
 							</CardContent>
 						</Card>

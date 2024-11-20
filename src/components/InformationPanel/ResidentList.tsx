@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import testStockImage from '@/assets/test-stock-img.jpg';
 import { Resident } from '@/hooks/useSupabase';
+import { AddResDialog } from "../ResidentCardSidebar/AddResDialog";
+import testStockImage from '@/assets/test-stock-img.jpg';
 
 interface ResidentListProps {
 	residents: Resident[],
@@ -23,22 +24,24 @@ function ResidentTag( {resident, setSelectedResident}: {resident: Resident, setS
 	return (
 		<Card key={resident.id} className="cursor-pointer hover:bg-blue-50 w-64" onClick={() => handleSetResident({resident, setSelectedResident})}>
 			<CardContent className="flex items-center p-4">
-			<Avatar className="h-12 w-12 mr-4">
-				<AvatarImage src={testStockImage} alt={residentName[0] + " " + residentName[1]} />
-				<AvatarFallback>{getInitials([resident.first_name, resident.last_name])}</AvatarFallback>
+				<Avatar className="h-12 w-12 mr-4">
+					<AvatarImage src={testStockImage} alt={residentName[0] + " " + residentName[1]} />
+					<AvatarFallback>{getInitials([resident.first_name, resident.last_name])}</AvatarFallback>
 				</Avatar>
 				<div>
-				<h3 className="font-semibold text-blue-700">{resident.first_name + " " + resident.last_name}</h3>
-				<p className="text-sm text-blue-600">Room {resident.room}</p>
+					<h3 className="font-semibold text-blue-700">{resident.first_name + " " + resident.last_name}</h3>
+					<p className="text-sm text-blue-600">Room {resident.room}</p>
 				</div>
 			</CardContent>
-			</Card>
+		</Card>
 	)
 }
 
-// TODO: Set specific sizes for cards and add maybe elipses for long names
+function handleAddRes() {
+	console.log('Add Resident');
+} 
+
 // TODO: Add way to change resident list for number of rows
-// TODO: Maybe fill empty div
 export default function ResidentList( {residents, setSelectedResident, selectedResident, clearSelectedResident}: ResidentListProps ) {
 	return (
 		<Card className="mt-6">
@@ -46,8 +49,13 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 				<CardTitle 
 					className={`text-blue-700 ${selectedResident ? 'cursor-pointer' : ''} `} 
 					onClick={clearSelectedResident}
-				>Resident List
+					>
+					Resident List
 				</CardTitle>
+				<div>
+				<AddResDialog addResident={handleAddRes}/>
+				<button>Filter</button>
+				</div>
 			</CardHeader>
 			{!selectedResident ? (
 				<CardContent>
