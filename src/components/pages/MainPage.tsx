@@ -5,9 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import useSupabase from '@/hooks/useSupabase';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
-// TODO: Factor out the header into a separate component
-// Make header opaque and sticky when scrolling down and maybe move the sidebar trigger from button to rail
-
 export default function MainPage() {
   const { fetchUser } = useSupabase();
   const navigate = useNavigate();
@@ -19,7 +16,7 @@ export default function MainPage() {
         navigate('/sign-in');
       }
     });
-  }, []);
+  }, [fetchUser, navigate]);
 
   return (
     <>

@@ -1,7 +1,5 @@
 // TODO: Add routes for the links | Maybe use Nav as well
-
-import { Calendar, Home, Settings, User, ForkKnife } from "lucide-react"
- 
+// TODO: Add better icon image for Sign-out/Logout
 import {
   Sidebar,
   SidebarContent,
@@ -12,6 +10,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+
+import { Calendar, Home, Settings, User, ForkKnife } from "lucide-react"
+import useSupabase from "@/hooks/useSupabase"
+const { signOut } = useSupabase();
  
 const items = [
   {
@@ -39,8 +41,14 @@ const items = [
     url: "#",
     icon: Settings,
   },
+  {
+    title: "Logout",
+    url: "/sign-in",
+    icon: User,
+    action: async () => await signOut(),
+  }
 ]
- 
+
 export default function SideManager() {
   return (
     <Sidebar collapsible="icon">
@@ -51,7 +59,7 @@ export default function SideManager() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild onClick={item.action}>
                     <a href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>

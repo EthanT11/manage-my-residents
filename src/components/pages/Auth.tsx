@@ -15,7 +15,7 @@ export default function Auth() {
     fetchUser().then(({ user }) => {
       if (user) {
         console.log('User found');
-        navigate('/');
+        navigate('/dashboard');
       }
     });
   }, []);
@@ -26,7 +26,7 @@ export default function Auth() {
     setLoading(true);
     const signedIn = await signIn(email, password);
     if (signedIn) {
-      navigate('/');
+      navigate('/dashboard');
     }
     setLoading(false);
   }
