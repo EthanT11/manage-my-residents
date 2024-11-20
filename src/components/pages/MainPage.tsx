@@ -9,14 +9,15 @@ export default function MainPage() {
   const { fetchUser } = useSupabase();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchUser().then(({ user }) => {
-      if (!user) {
-        console.log('User not found');
-        navigate('/sign-in');
-      }
-    });
-  }, [fetchUser, navigate]);
+  // TODO: Reenable when i have internet lol...
+  // useEffect(() => {
+  //   fetchUser().then(({ user }) => {
+  //     if (!user) {
+  //       console.log('User not found');
+  //       navigate('/sign-in');
+  //     }
+  //   });
+  // }, [fetchUser, navigate]);
 
   return (
     <>

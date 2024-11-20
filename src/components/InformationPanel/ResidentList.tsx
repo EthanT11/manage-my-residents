@@ -39,9 +39,12 @@ function ResidentTag( {resident, setSelectedResident}: {resident: Resident, setS
 
 function handleAddRes() {
 	console.log('Add Resident');
+	// TODO: Send information to Supabase
+	// TODO: Will have to setup bucket for images for residents
+	// Probably keep in the same one as "users"
 } 
 
-// TODO: Add way to change resident list for number of rows
+// TODO: Add way to change resident list for number of rows | filter
 export default function ResidentList( {residents, setSelectedResident, selectedResident, clearSelectedResident}: ResidentListProps ) {
 	return (
 		<Card className="mt-6">
@@ -54,7 +57,7 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 				</CardTitle>
 				<div>
 				<AddResDialog addResident={handleAddRes}/>
-				<button>Filter</button>
+				{/* <button>Filter</button> */}
 				</div>
 			</CardHeader>
 			{!selectedResident ? (
