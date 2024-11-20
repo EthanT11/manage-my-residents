@@ -1,4 +1,6 @@
 import { supabase } from "@/supabaseClient";
+import { useEffect, useState } from "react";
+import { Session } from "@supabase/supabase-js";
 
 export interface Profile {
 	first_name: string | null;
@@ -17,11 +19,16 @@ export interface Resident {
 }
 
 const useSupabase = () => {
+	// TODO: Fix supabase Authentication | Been to long since i've done anything with it
+	// and I'm not sure if some of things I did was correct or exactly how it works
+	// more then likely will strip out all supabase Auth and reimplement it now that I have a better understanding of it
+
 	const fetchUser = async () => {
 		try {
 			const { data, error } = await supabase.auth.getUser();
 			if (error) throw error;
 			if (!data?.user) {
+				// TODO: Redirect to sign in page
 				return { user: null };
 			}
 			return { user: data.user };
