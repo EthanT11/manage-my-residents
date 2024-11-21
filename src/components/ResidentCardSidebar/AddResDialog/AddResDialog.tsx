@@ -5,7 +5,31 @@ import AddResLabel from "./AddResLabel";
 import AddResInput from "./AddResInput";
 import { Resident } from "@/hooks/useSupabase";
 
- 
+interface FormFieldProps {
+	name: string,
+	label: string,
+	type: string,
+	placeholder: string,
+	value: any,
+	onChange: any // Change type after
+}
+
+function FormField({ name, label, type, placeholder, value, onChange }: FormFieldProps) {
+    return (
+        <div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
+            <AddResLabel htmlFor={name}>{label}</AddResLabel>
+            <AddResInput 
+                name={name} 
+                type={type} 
+                placeholder={placeholder} 
+                value={value}
+                onChange={onChange}
+            />
+        </div>
+    )
+}
+
+
 export default function AddResDialog({addResident}: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -40,21 +64,29 @@ export default function AddResDialog({addResident}: {addResident: (resident: Omi
 					</DialogDescription>
 				</DialogHeader>
 				<form onSubmit={handleSubmit}>
-					<div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
+					{/* <div className="flex items-center space-x-4">
 						<AddResLabel htmlFor="first_name">First Name</AddResLabel>
 						<AddResInput 
 							name="first_name" type="text" placeholder="Enter First Name"
 							onChange={(e) => setFirstName(e.target.value)}
 						/>
-					</div>
-					<div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
+					</div> */}
+					<FormField 
+						name="first_name" 
+						label="First Name" 
+						type="text" 
+						placeholder="Enter First Name" 
+						value={firstName}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
+					/>
+					{/* <div className="flex items-center space-x-4"> 
 						<AddResLabel htmlFor="last_name">Last Name</AddResLabel>
 						<AddResInput 
 							name="last_name" type="text" placeholder="Enter Last Name"
 							onChange={(e) => setLastName(e.target.value)}
 						/>
 					</div>
-					<div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
+					<div className="flex items-center space-x-4"> 
 						<AddResLabel htmlFor="age">Age</AddResLabel>
 						<AddResInput 
 							name="age" type="number" placeholder="Enter Age"
@@ -82,20 +114,20 @@ export default function AddResDialog({addResident}: {addResident: (resident: Omi
 							onChange={(e) => console.log(e.target.value)}
 						/>
 					</div>
-					<div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
+					<div className="flex items-center space-x-4"> 
 						<AddResLabel htmlFor="wing">Wing</AddResLabel>
 						<AddResInput 
 							name="wing" type="string" placeholder="Select Wing"
 							onChange={(e) => setWing(e.target.value)}
 						/>
 					</div>
-					<div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
+					<div className="flex items-center space-x-4">
 						<AddResLabel htmlFor="room">Room</AddResLabel>
 						<AddResInput 
 							name="room" type="number" placeholder="Enter Room #"
 							onChange={(e) => setRoom(e.target.value)}
 						/>
-					</div>
+					</div> */}
 					
 					<div className="flex space-x-4 ">
 						<CardHeaderButton type="submit" text="Save" variant="outline" /> 
