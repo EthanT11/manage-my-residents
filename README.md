@@ -16,4 +16,5 @@ I work in a personal care home and it's tough to know and keep track of a lot of
 - React
 - Tailwind
 - Supabase
+- Vite
 - Shadcn components
