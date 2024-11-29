@@ -1,33 +1,8 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import CardHeaderButton from "../CardHeaderButton";
-import AddResLabel from "./AddResLabel";
-import AddResInput from "./AddResInput";
+import FormField from "./FormField";
 import { Resident } from "@/hooks/useSupabase";
-
-interface FormFieldProps {
-	name: string,
-	label: string,
-	type: string,
-	placeholder: string,
-	value: any,
-	onChange: any // Change type after
-}
-
-function FormField({ name, label, type, placeholder, value, onChange }: FormFieldProps) {
-    return (
-        <div className="flex items-center space-x-4"> {/*space-x-4 for spacing between the label and input*/}
-            <AddResLabel htmlFor={name}>{label}</AddResLabel>
-            <AddResInput 
-                name={name} 
-                type={type} 
-                placeholder={placeholder} 
-                value={value}
-                onChange={onChange}
-            />
-        </div>
-    )
-}
 
 
 export default function AddResDialog({ addResident }: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
@@ -65,7 +40,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 						Fill in the form below to add a new resident.
 					</DialogDescription>
 				</DialogHeader>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4 bg-blue-300 rounded-lg">
 					<FormField 
 						name="first_name" 
 						label="First Name" 
@@ -131,7 +106,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWing(e.target.value)}
 					/>
 					
-					<div className="flex space-x-4 ">
+					<div className="flex justify-end space-x-4 ">
 						<CardHeaderButton type="submit" text="Save" variant="outline" /> 
 						{/* <CardHeaderButton text="Cancel" variant="secondary" /> */}
 					</div>
