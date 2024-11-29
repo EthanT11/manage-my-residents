@@ -17,10 +17,16 @@ export default function TopNavBar() {
   }, []);
   
   const handleSignOut = async () => {
-    const signedOut = await signOut();
-    if (signedOut) {
-      setUser(null);
-      navigate("/sign-in");
+    try {
+      const signedOut: boolean = await signOut();
+      if (signedOut) {
+        setUser(null);
+        navigate("/sign-in");
+      } else {
+        console.error("Sign out failed");
+      }
+    } catch (error) {
+      console.error("An error occurred during sign out:", error);
     }
   }
 

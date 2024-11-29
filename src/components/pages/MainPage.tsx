@@ -10,14 +10,14 @@ export default function MainPage() {
   const navigate = useNavigate();
 
   // TODO: Reenable when i have internet lol...
-  // useEffect(() => {
-  //   fetchUser().then(({ user }) => {
-  //     if (!user) {
-  //       console.log('User not found');
-  //       navigate('/sign-in');
-  //     }
-  //   });
-  // }, [fetchUser, navigate]);
+  useEffect(() => {
+    fetchUser().then(({ user }) => {
+      if (!user) {
+        console.log('User not found');
+        navigate('/sign-in');
+      }
+    });
+  }, [fetchUser, navigate]);
 
   return (
     <>

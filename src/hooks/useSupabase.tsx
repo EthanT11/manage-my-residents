@@ -45,9 +45,11 @@ const useSupabase = () => {
 		const { error } = await supabase.auth.signOut();
 		if (error) {
 			console.error('Error signing out:', error.message);
+			return false;
 		} else {
 			console.log('Signed out successfully');
 			sessionStorage.removeItem('supabase.auth.token'); // Remove token from session storage
+			return true;
 		}
 	}
 
