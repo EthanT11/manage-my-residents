@@ -1,7 +1,8 @@
 {
   "name": "manage-my-residents",
   "private": true,
-  "version": "0.0.0",
+  "homepage": "https://ethant11.github.io/manage-my-residents",
+  "version": "0.5.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
