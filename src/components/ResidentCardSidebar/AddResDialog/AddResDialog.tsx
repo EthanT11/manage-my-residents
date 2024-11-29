@@ -6,26 +6,36 @@ import { Resident } from "@/hooks/useSupabase";
 
 
 export default function AddResDialog({ addResident }: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [age, setAge] = useState(0); // change to calender input
-	const [gender, setGender] = useState("");
-	const [hair, setHair] = useState("");
-	const [eye, setEye] = useState("");
-	const [wing, setWing] = useState("");
-	const [room, setRoom] = useState("");
+	const [resForm, setResForm] = useState({
+		first_name: "",
+		last_name: "",
+		age: 0,
+		gender: "",
+		hair: "",
+		eye: "",
+		wing: "",
+		room: ""
+	})
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setResForm({
+			...resForm,
+			[name]: value
+		})
+	}
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		const newResident = {
-			first_name: firstName,
-			last_name: lastName,
-			age: age,
-			gender_identity: gender,
-			hair: hair,
-			eye: eye,
-			wing: wing,
-			room: room
+			first_name: resForm.first_name,
+			last_name: resForm.last_name,
+			age: resForm.age,
+			gender_identity: resForm.gender,
+			hair: resForm.hair,
+			eye: resForm.eye,
+			wing: resForm.wing,
+			room: resForm.room
 		}
 		addResident(newResident);
 	}
@@ -49,64 +59,64 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 						label="First Name" 
 						type="text" 
 						placeholder="Enter First Name" 
-						value={firstName}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
+						value={resForm.first_name}
+						onChange={handleChange}
 					/>
 					<FormField 
 						name="last_name" 
 						label="Last Name" 
 						type="text" 
 						placeholder="Enter First Name" 
-						value={lastName}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
+						value={resForm.last_name}
+						onChange={handleChange}
 					/>
 					<FormField 
 						name="age" 
 						label="Age" 
 						type="number" 
 						placeholder="Enter Age" 
-						value={age}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAge(Number(e.target.value))}
+						value={resForm.age}
+						onChange={handleChange}
 					/>
 					<FormField
 						name="gender_identity"
 						label="Gender Identity"
 						type="text"
 						placeholder="How do you identify?"
-						value={gender}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGender(e.target.value)}
+						value={resForm.gender}
+						onChange={handleChange}
 					/>
 					<FormField 
 						name="hair" 
 						label="Hair Color" 
 						type="string" 
 						placeholder="Select" 
-						value={hair}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHair(e.target.value)}
+						value={resForm.hair}
+						onChange={handleChange}
 					/>
 					<FormField 
 						name="eye" 
 						label="Eye Color" 
 						type="string" 
 						placeholder="Select" 
-						value={eye}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEye(e.target.value)}
+						value={resForm.eye}
+						onChange={handleChange}
 					/>
 					<FormField 
 						name="room" 
 						label="Room" 
 						type="number" 
 						placeholder="Enter Room #" 
-						value={room}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRoom(e.target.value)}
+						value={resForm.room}
+						onChange={handleChange}
 					/>
 					<FormField 
 						name="wing" 
 						label="Wing" 
 						type="string" 
 						placeholder="Select Wing" 
-						value={wing}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWing(e.target.value)}
+						value={resForm.wing}
+						onChange={handleChange}
 					/>
 					
 					<div className="flex justify-end space-x-4 ">
