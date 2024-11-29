@@ -1,6 +1,4 @@
 import { supabase } from "@/supabaseClient";
-import { useEffect, useState } from "react";
-import { Session } from "@supabase/supabase-js";
 
 export interface Profile {
 	first_name: string | null;

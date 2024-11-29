@@ -37,8 +37,8 @@ function ResidentTag( {resident, setSelectedResident}: {resident: Resident, setS
 	)
 }
 
-function handleAddRes() {
-	console.log('Add Resident');
+function handleAddRes( newResident: Omit<Resident, 'id'> ) {
+	console.log(`Adding Resident: ${newResident}`);
 	// TODO: Send information to Supabase
 	// TODO: Will have to setup bucket for images for residents
 	// Probably keep in the same one as "users"

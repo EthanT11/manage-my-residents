@@ -30,10 +30,13 @@ function FormField({ name, label, type, placeholder, value, onChange }: FormFiel
 }
 
 
-export default function AddResDialog({addResident}: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
+export default function AddResDialog({ addResident }: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
-	const [age, setAge] = useState(0);
+	const [age, setAge] = useState(0); // change to calender input
+	const [gender, setGender] = useState("");
+	const [hair, setHair] = useState("");
+	const [eye, setEye] = useState("");
 	const [wing, setWing] = useState("");
 	const [room, setRoom] = useState("");
 
@@ -49,7 +52,6 @@ export default function AddResDialog({addResident}: {addResident: (resident: Omi
 		addResident(newResident);
 	}
 
-	// TODO: Probably compress AddResLabel and AddResInput into one component along with the div
 	// TODO: Add validation for the form
 	return (
 		<Dialog>
@@ -64,13 +66,6 @@ export default function AddResDialog({addResident}: {addResident: (resident: Omi
 					</DialogDescription>
 				</DialogHeader>
 				<form onSubmit={handleSubmit}>
-					{/* <div className="flex items-center space-x-4">
-						<AddResLabel htmlFor="first_name">First Name</AddResLabel>
-						<AddResInput 
-							name="first_name" type="text" placeholder="Enter First Name"
-							onChange={(e) => setFirstName(e.target.value)}
-						/>
-					</div> */}
 					<FormField 
 						name="first_name" 
 						label="First Name" 
@@ -79,55 +74,62 @@ export default function AddResDialog({addResident}: {addResident: (resident: Omi
 						value={firstName}
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
 					/>
-					{/* <div className="flex items-center space-x-4"> 
-						<AddResLabel htmlFor="last_name">Last Name</AddResLabel>
-						<AddResInput 
-							name="last_name" type="text" placeholder="Enter Last Name"
-							onChange={(e) => setLastName(e.target.value)}
-						/>
-					</div>
-					<div className="flex items-center space-x-4"> 
-						<AddResLabel htmlFor="age">Age</AddResLabel>
-						<AddResInput 
-							name="age" type="number" placeholder="Enter Age"
-							onChange={(e) => setAge(Number(e.target.value))}
-						/>
-					</div>
-					<div className="flex items-center space-x-4">
-						<AddResLabel htmlFor="gender">Gender</AddResLabel>
-						<AddResInput
-							name="gender" type="string" placeholder="Select"
-							onChange={(e) => console.log(e.target.value)}
-						/>
-					</div>
-					<div className="flex items-center space-x-4">
-						<AddResLabel htmlFor="hair">Hair Color</AddResLabel>
-						<AddResInput
-							name="hair" type="string" placeholder="Select"
-							onChange={(e) => console.log(e.target.value)}
-						/>
-					</div>
-					<div className="flex items-center space-x-4">
-						<AddResLabel htmlFor="eye">Eye Color</AddResLabel>
-						<AddResInput
-							name="eye" type="string" placeholder="Select"
-							onChange={(e) => console.log(e.target.value)}
-						/>
-					</div>
-					<div className="flex items-center space-x-4"> 
-						<AddResLabel htmlFor="wing">Wing</AddResLabel>
-						<AddResInput 
-							name="wing" type="string" placeholder="Select Wing"
-							onChange={(e) => setWing(e.target.value)}
-						/>
-					</div>
-					<div className="flex items-center space-x-4">
-						<AddResLabel htmlFor="room">Room</AddResLabel>
-						<AddResInput 
-							name="room" type="number" placeholder="Enter Room #"
-							onChange={(e) => setRoom(e.target.value)}
-						/>
-					</div> */}
+					<FormField 
+						name="last_name" 
+						label="Last Name" 
+						type="text" 
+						placeholder="Enter First Name" 
+						value={lastName}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
+					/>
+					<FormField 
+						name="age" 
+						label="Age" 
+						type="number" 
+						placeholder="Enter Age" 
+						value={age}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAge(Number(e.target.value))}
+					/>
+					<FormField
+						name="gender_identity"
+						label="Gender Identity"
+						type="text"
+						placeholder="How do you identify?"
+						value={gender}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGender(e.target.value)}
+					/>
+					<FormField 
+						name="hair" 
+						label="Hair Color" 
+						type="string" 
+						placeholder="Select" 
+						value={hair}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHair(e.target.value)}
+					/>
+					<FormField 
+						name="eye" 
+						label="Eye Color" 
+						type="string" 
+						placeholder="Select" 
+						value={eye}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEye(e.target.value)}
+					/>
+					<FormField 
+						name="room" 
+						label="Room" 
+						type="number" 
+						placeholder="Enter Room #" 
+						value={room}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRoom(e.target.value)}
+					/>
+					<FormField 
+						name="wing" 
+						label="Wing" 
+						type="string" 
+						placeholder="Select Wing" 
+						value={wing}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWing(e.target.value)}
+					/>
 					
 					<div className="flex space-x-4 ">
 						<CardHeaderButton type="submit" text="Save" variant="outline" /> 
