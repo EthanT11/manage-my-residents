@@ -12,6 +12,9 @@ export interface Resident {
 	first_name: string;
 	last_name: string;
 	age: number;
+	gender_identity: string;
+	hair: string;
+	eye: string;
 	wing: string;
 	room: string;
 }

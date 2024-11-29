@@ -21,6 +21,9 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 			first_name: firstName,
 			last_name: lastName,
 			age: age,
+			gender_identity: gender,
+			hair: hair,
+			eye: eye,
 			wing: wing,
 			room: room
 		}
