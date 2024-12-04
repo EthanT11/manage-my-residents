@@ -2,7 +2,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Resident } from '@/hooks/useSupabase';
 import { AddResDialog } from "../ResidentCardSidebar/AddResDialog";
+import useSupabase from '@/hooks/useSupabase';
 import testStockImage from '@/assets/test-stock-img.jpg';
+
 
 interface ResidentListProps {
 	residents: Resident[],
@@ -38,14 +40,17 @@ function ResidentTag( {resident, setSelectedResident}: {resident: Resident, setS
 }
 
 function handleAddRes( newResident: Omit<Resident, 'id'> ) {
-	console.log(`Adding Resident: ${newResident}`);
-	// TODO: Send information to Supabase
+	const { addResident } = useSupabase();
+	console.log(`Adding Resident: ${newResident.first_name} ${newResident.last_name}`);
+	addResident(newResident);
 	// TODO: Will have to setup bucket for images for residents
 	// Probably keep in the same one as "users"
-} 
+}
 
 // TODO: Add way to change resident list for number of rows | filter
 export default function ResidentList( {residents, setSelectedResident, selectedResident, clearSelectedResident}: ResidentListProps ) {
+	
+
 	return (
 		<Card className="mt-6">
 			<CardHeader>

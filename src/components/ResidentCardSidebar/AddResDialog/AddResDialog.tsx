@@ -31,7 +31,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 			first_name: resForm.first_name,
 			last_name: resForm.last_name,
 			age: resForm.age,
-			gender_identity: resForm.gender,
+			gender: resForm.gender,
 			hair: resForm.hair,
 			eye: resForm.eye,
 			wing: resForm.wing,
@@ -79,7 +79,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 						onChange={handleChange}
 					/>
 					<FormField
-						name="gender_identity"
+						name="gender"
 						label="Gender Identity"
 						type="text"
 						placeholder="How do you identify?"

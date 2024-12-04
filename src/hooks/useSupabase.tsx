@@ -12,7 +12,7 @@ export interface Resident {
 	first_name: string;
 	last_name: string;
 	age: number;
-	gender_identity: string;
+	gender: string;
 	hair: string;
 	eye: string;
 	wing: string;
@@ -156,6 +156,7 @@ const useSupabase = () => {
 
 	const addResident = async (resident: Resident) => {
 		const home_id = await getHomeId().then((home) => home?.id);
+		console.log(resident, home_id);
 		const { data, error } = await supabase
 			.from('residents')
 			.insert([{ ...resident, home_id }]);
