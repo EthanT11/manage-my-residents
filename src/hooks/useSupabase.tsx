@@ -207,7 +207,7 @@ const useSupabase = () => {
 		}
 	}
 
-	const getPublicUrl = (path: string) => { // TODO ask about error red underline
+	const getPublicUrl = (path: string) => {
 		const { data } = supabase
 			.storage
 			.from('profile-avatars')

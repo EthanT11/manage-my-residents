@@ -25,7 +25,7 @@ export default function InformationPanel() {
             setResidents(residentsData);
         }
         fetchResidents();
-    }, []); // add getResidents to the dependency array | removed for now to stop all the calls
+    }, [getResidents]);
 
 	function clearSelectedResident() {
 		setSelectedResident(null);

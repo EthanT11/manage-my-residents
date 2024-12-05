@@ -11,7 +11,7 @@ export default function AddResInput( {name, type, placeholder, value, onChange} 
 	  value={value}
 	  placeholder={placeholder}
 	  onChange={onChange}
-	  className="w-36"
+	  className="w-42"
 	/>
   );
 }
