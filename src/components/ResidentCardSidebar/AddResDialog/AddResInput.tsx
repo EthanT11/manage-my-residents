@@ -1,8 +1,15 @@
 import { Input } from "../../ui/input";
 
-// TODO: Add a better type for value since it's not always going to be a string
+interface AddResInputProps {
+	name: string,
+	type: string,
+	placeholder: string,
+	value: string,
+	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+	className: string
+}
 
-export default function AddResInput( {name, type, placeholder, value, onChange} : {name: string, type: string, placeholder: string, value: string, onChange: (event: React.ChangeEvent<HTMLInputElement>) => void} ) {
+export default function AddResInput( {name, type, placeholder, value, onChange, className} : AddResInputProps ) {
   return (
 	<Input
 	  id={name}
@@ -11,7 +18,7 @@ export default function AddResInput( {name, type, placeholder, value, onChange} 
 	  value={value}
 	  placeholder={placeholder}
 	  onChange={onChange}
-	  className="w-42"
+	  className={className}
 	/>
   );
 }

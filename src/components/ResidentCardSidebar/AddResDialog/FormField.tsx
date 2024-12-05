@@ -13,13 +13,18 @@ interface FormFieldProps {
 export default function FormField({ name, label, type, placeholder, value, onChange }: FormFieldProps) {
     return (
         <div className="grid grid-cols-2 gap-4 items-center"> {/*space-x-4 for spacing between the label and input*/}
-			<AddResLabel htmlFor={name}>{label}</AddResLabel>
+			<AddResLabel 
+				htmlFor={name}
+				className="text-white bg-blue-700 p-2 rounded-lg"
+				>{label}
+			</AddResLabel>
 			<AddResInput 
 				name={name} 
 				type={type} 
 				placeholder={placeholder} 
 				value={value}
 				onChange={onChange}
+				className="bg-white p-2 rounded-lg"
 			/>
         </div>
     )
