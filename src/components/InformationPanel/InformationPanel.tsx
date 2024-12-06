@@ -17,7 +17,7 @@ export default function InformationPanel() {
     const { getResidents } = useSupabase();
 	// conditions for the panel cards
 	const totalResidents = residents ? residents.length : 0;
-	const averageAge = residents ? residents.reduce((acc, curr) => acc + curr.age, 0) / residents.length : 0; 
+	const averageAge = 0 // residents ? residents.reduce((acc, curr) => acc + curr.age, 0) / residents.length : 0; // fix this since will be using dob yyyy/mm/dd
 	
     useEffect(() => {
 		async function fetchResidents() {

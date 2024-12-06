@@ -9,7 +9,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 	const [resForm, setResForm] = useState({
 		first_name: "",
 		last_name: "",
-		age: 0,
+		age: "",
 		gender: "",
 		hair: "",
 		eye: "",
@@ -37,7 +37,8 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 			wing: resForm.wing,
 			room: resForm.room
 		}
-		addResident(newResident);
+		console.log(newResident.first_name, newResident.last_name, newResident.age)
+		// addResident(newResident);
 	}
 
 	// TODO: Add validation for the form
@@ -73,7 +74,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 					<FormField 
 						name="age" 
 						label="Age" 
-						type="number" 
+						type="text" 
 						placeholder="Enter Age" 
 						value={resForm.age}
 						onChange={handleChange}

@@ -21,6 +21,14 @@ function handleSetResident({ resident, setSelectedResident }: { resident: Reside
 	setSelectedResident(resident);
 }
 
+function handleAddRes( newResident: Omit<Resident, 'id'> ) {
+	const { addResident } = useSupabase();
+	console.log(`Adding Resident: ${newResident.first_name} ${newResident.last_name}`);
+	addResident(newResident);
+	// TODO: Will have to setup bucket for images for residents
+	// Probably keep in the same one as "users"
+}
+
 function ResidentTag( {resident, setSelectedResident}: {resident: Resident, setSelectedResident: (resident: Resident) => void} ) {
 	const residentName = [resident.first_name, resident.last_name];
 	return (
@@ -39,13 +47,6 @@ function ResidentTag( {resident, setSelectedResident}: {resident: Resident, setS
 	)
 }
 
-function handleAddRes( newResident: Omit<Resident, 'id'> ) {
-	const { addResident } = useSupabase();
-	console.log(`Adding Resident: ${newResident.first_name} ${newResident.last_name}`);
-	addResident(newResident);
-	// TODO: Will have to setup bucket for images for residents
-	// Probably keep in the same one as "users"
-}
 
 // TODO: Add way to change resident list for number of rows | filter
 export default function ResidentList( {residents, setSelectedResident, selectedResident, clearSelectedResident}: ResidentListProps ) {
