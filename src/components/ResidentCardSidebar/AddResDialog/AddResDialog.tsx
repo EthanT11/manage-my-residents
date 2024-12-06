@@ -123,7 +123,6 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 					
 					<div className="flex justify-end space-x-4 ">
 						<CardHeaderButton type="submit" text="Save" variant="outline" /> 
-						{/* <CardHeaderButton text="Cancel" variant="secondary" /> */}
 					</div>
 				</form>
 			</DialogContent>
