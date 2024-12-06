@@ -77,6 +77,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 						placeholder="Enter Age" 
 						value={resForm.age}
 						onChange={handleChange}
+						fieldType="calendar"
 					/>
 					<FormField
 						name="gender"

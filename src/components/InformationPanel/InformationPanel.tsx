@@ -25,7 +25,7 @@ export default function InformationPanel() {
             setResidents(residentsData);
         }
         fetchResidents();
-    }, [getResidents]);
+    }, []);
 
 	function clearSelectedResident() {
 		setSelectedResident(null);

@@ -6,10 +6,11 @@ interface AddResInputProps {
 	placeholder: string,
 	value: string,
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+	onFocus?: () => void,
 	className: string
 }
 
-export default function AddResInput( {name, type, placeholder, value, onChange, className} : AddResInputProps ) {
+export default function AddResInput( {name, type, placeholder, value, onChange, onFocus, className} : AddResInputProps ) {
   return (
 	<Input
 	  id={name}
@@ -19,6 +20,7 @@ export default function AddResInput( {name, type, placeholder, value, onChange, 
 	  placeholder={placeholder}
 	  onChange={onChange}
 	  className={className}
+	  onFocus={onFocus}
 	/>
   );
 }
