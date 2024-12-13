@@ -22,9 +22,7 @@ export default function InformationPanelHeader() {
 	return (
 		<header className="bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200">
 			<div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-				<div className='flex items-center space-x-4'>
-					<SidebarTrigger className='p-2 rounded-lg hover:bg-blue-200 transition-colors duration-200'/>
-				</div>
+				<div></div>
 				<div className="flex flex-col items-end">
 					<h2 className="text-2xl font-bold text-blue-900 sm:text-3xl">
 						{homeName}

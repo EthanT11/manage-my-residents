@@ -9,6 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarRail,
 } from "@/components/ui/sidebar"
 
 import { Calendar, Home, Settings, User, ForkKnife } from "lucide-react"
@@ -52,6 +53,7 @@ const items = [
 export default function SideManager() {
   return (
     <Sidebar collapsible="icon">
+      <SidebarRail />
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Manage My Residents</SidebarGroupLabel>
