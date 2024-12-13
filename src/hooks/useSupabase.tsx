@@ -45,6 +45,9 @@ export interface ResidentAdditional extends Resident {
 
 }
 
+// Generate Resident Image
+const aiGen = true;
+
 const useSupabase = () => {
 	// TODO: Fix supabase Authentication | Been to long since i've done anything with it
 	// and I'm not sure if some of things I did was correct or exactly how it works
@@ -143,7 +146,6 @@ const useSupabase = () => {
 		}
 	}
 	
-	// Residents Data
 	const getHomeId = async () => {
 		const { user } = await fetchUser();
 		if (!user) {
@@ -189,8 +191,7 @@ const useSupabase = () => {
 
 	const addResident = async (resident: Resident) => {
 		// If true, the AI will generate the profile picture
-		const aiGen = false;
-
+		
 		const home_id = await getHomeId().then((home) => home?.id);
 		let profile_picture_url = "";
 
