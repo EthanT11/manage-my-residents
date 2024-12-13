@@ -4,12 +4,11 @@ import CardHeaderButton from "../CardHeaderButton";
 import FormField from "./FormField";
 import { Resident } from "@/hooks/useSupabase";
 
-
 export default function AddResDialog({ addResident }: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
 	const [resForm, setResForm] = useState({
 		first_name: "",
 		last_name: "",
-		age: "",
+		dob: "",
 		gender: "",
 		hair: "",
 		eye: "",
@@ -17,8 +16,9 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 		room: ""
 	})
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
+		console.log(name, value);
 		setResForm({
 			...resForm,
 			[name]: value
@@ -30,15 +30,14 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 		const newResident = {
 			first_name: resForm.first_name,
 			last_name: resForm.last_name,
-			age: resForm.age,
+			dob: resForm.dob,
 			gender: resForm.gender,
 			hair: resForm.hair,
 			eye: resForm.eye,
 			wing: resForm.wing,
 			room: resForm.room
 		}
-		console.log(newResident.first_name, newResident.last_name, newResident.age)
-		// addResident(newResident);
+		addResident(newResident);
 	}
 
 	// TODO: Add validation for the form
@@ -67,16 +66,16 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 						name="last_name" 
 						label="Last Name" 
 						type="text" 
-						placeholder="Enter First Name" 
+						placeholder="Enter Last Name" 
 						value={resForm.last_name}
 						onChange={handleChange}
 					/>
 					<FormField 
-						name="age" 
-						label="Age" 
+						name="dob" 
+						label="Date of Birth" 
 						type="text" 
-						placeholder="Enter Age" 
-						value={resForm.age}
+						placeholder="Enter Date of Birth" 
+						value={resForm.dob}
 						onChange={handleChange}
 						fieldType="calendar"
 					/>
@@ -86,13 +85,15 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 						type="text"
 						placeholder="How do you identify?"
 						value={resForm.gender}
+						options={["Male", "Female", "Non-Binary", "Prefer not to say"]}
 						onChange={handleChange}
+						fieldType="dropdown"
 					/>
 					<FormField 
 						name="hair" 
 						label="Hair Color" 
 						type="string" 
-						placeholder="Select" 
+						placeholder="Enter Hair Color" 
 						value={resForm.hair}
 						onChange={handleChange}
 					/>
@@ -100,14 +101,14 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 						name="eye" 
 						label="Eye Color" 
 						type="string" 
-						placeholder="Select" 
+						placeholder="Enter Eye Color" 
 						value={resForm.eye}
 						onChange={handleChange}
 					/>
 					<FormField 
 						name="room" 
 						label="Room" 
-						type="number" 
+						type="string" 
 						placeholder="Enter Room #" 
 						value={resForm.room}
 						onChange={handleChange}
@@ -116,7 +117,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 						name="wing" 
 						label="Wing" 
 						type="string" 
-						placeholder="Select Wing" 
+						placeholder="Enter Wing" 
 						value={resForm.wing}
 						onChange={handleChange}
 					/>

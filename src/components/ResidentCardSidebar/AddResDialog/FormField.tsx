@@ -1,30 +1,33 @@
 import AddResLabel from "./AddResLabel";
 import AddResInput from "./AddResInput";
 import CalendarInput from "./CalendarInput";
+import DropdownInput from "./DropdownInput";
 
 export interface FormFieldProps {
 	name: string,
-	label: string,
-	type: string,
+	label?: string,
+	type?: string,
 	placeholder: string,
 	value: string,
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+	onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
 	fieldType?: string,
+	options?: string[],
 }
 
-export default function FormField({name, label, type, placeholder, value, onChange, fieldType = "input" }: FormFieldProps) {
+
+export default function FormField({name, label, type, placeholder, value, onChange, options, fieldType = "input" }: FormFieldProps) {
     return (
         <div className="grid grid-cols-2 gap-4 items-center"> {/*space-x-4 for spacing between the label and input*/}
 			<AddResLabel 
 				htmlFor={name}
 				className="text-white bg-blue-700 p-2 rounded-lg w-24 text-center"
 				>
-					{label}
+					{label || ""}
 			</AddResLabel>
 			{fieldType === 'input' && (
 				<AddResInput 
 					name={name} 
-					type={type} 
+					type={type || "text"} 
 					placeholder={placeholder} 
 					value={value}
 					onChange={onChange}
@@ -39,6 +42,15 @@ export default function FormField({name, label, type, placeholder, value, onChan
 					value={value}
 					onChange={onChange}
 					
+				/>
+			)}
+			{fieldType === 'dropdown' && (
+				<DropdownInput
+					name={name}
+					placeholder={placeholder}
+					value={value}
+					options={options}
+					onChange={onChange}
 				/>
 			)}
 			

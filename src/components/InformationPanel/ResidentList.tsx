@@ -1,24 +1,19 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Resident } from '@/hooks/useSupabase';
+import useSupabase, { Resident, ResidentAdditional } from '@/hooks/useSupabase';
 import { AddResDialog } from "../ResidentCardSidebar/AddResDialog";
-import useSupabase from '@/hooks/useSupabase';
-import testStockImage from '@/assets/test-stock-img.jpg';
-
+import { Dispatch, SetStateAction } from "react";
+// import testStockImage from '@/assets/test-stock-img.jpg';
 
 interface ResidentListProps {
-	residents: Resident[],
-	setSelectedResident: (resident: Resident) => void
-	selectedResident?: Resident | null
+	residents: (Resident & ResidentAdditional)[],
+	selectedResident?: (Resident & ResidentAdditional) | null
+	setSelectedResident: Dispatch<SetStateAction<(Resident & ResidentAdditional) | null>>
 	clearSelectedResident?: () => void
 }
 
 function getInitials(name: [string, string]) {
 	return name.map(n => n[0]).join('');
-}
-
-function handleSetResident({ resident, setSelectedResident }: { resident: Resident, setSelectedResident: (resident: Resident) => void }) {
-	setSelectedResident(resident);
 }
 
 function handleAddRes( newResident: Omit<Resident, 'id'> ) {
@@ -29,13 +24,23 @@ function handleAddRes( newResident: Omit<Resident, 'id'> ) {
 	// Probably keep in the same one as "users"
 }
 
-function ResidentTag( {resident, setSelectedResident}: {resident: Resident, setSelectedResident: (resident: Resident) => void} ) {
+interface ResidentTagProps {
+	resident: Resident & ResidentAdditional
+	setSelectedResident: Dispatch<SetStateAction<(Resident & ResidentAdditional) | null>>
+}
+
+function ResidentTag( {resident, setSelectedResident}: ResidentTagProps ) {
 	const residentName = [resident.first_name, resident.last_name];
+
+	const handleSetResident = () => {
+		setSelectedResident(resident as Resident & ResidentAdditional);
+	}
+
 	return (
-		<Card key={resident.id} className="cursor-pointer hover:bg-blue-50 w-64" onClick={() => handleSetResident({resident, setSelectedResident})}>
+		<Card key={resident.id} className="cursor-pointer hover:bg-blue-50 w-64" onClick={handleSetResident}>
 			<CardContent className="flex items-center p-4">
 				<Avatar className="h-12 w-12 mr-4">
-					<AvatarImage src={testStockImage} alt={residentName[0] + " " + residentName[1]} />
+					<AvatarImage src={resident.profile_picture_url} alt={residentName[0] + " " + residentName[1]} />
 					<AvatarFallback>{getInitials([resident.first_name, resident.last_name])}</AvatarFallback>
 				</Avatar>
 				<div>
