@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import useSupabase, { Resident, ResidentAdditional } from '@/hooks/useSupabase';
-import { AddResDialog } from "../ResidentCardSidebar/AddResDialog";
+import { AddResDialog } from "./AddResDialog";
 import { Dispatch, SetStateAction, useState, useMemo } from "react";
 import { Search } from "lucide-react";
 

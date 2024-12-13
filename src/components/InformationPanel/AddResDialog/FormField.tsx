@@ -14,15 +14,14 @@ export interface FormFieldProps {
 	options?: string[],
 }
 
-
 export default function FormField({name, label, type, placeholder, value, onChange, options, fieldType = "input" }: FormFieldProps) {
     return (
-        <div className="grid grid-cols-2 gap-4 items-center"> {/*space-x-4 for spacing between the label and input*/}
+        <div className="grid grid-cols-2 gap-4 items-center">
 			<AddResLabel 
 				htmlFor={name}
 				className="text-white bg-blue-700 p-2 rounded-lg w-24 text-center"
-				>
-					{label || ""}
+			>
+				{label || ""}
 			</AddResLabel>
 			{fieldType === 'input' && (
 				<AddResInput 
@@ -41,7 +40,6 @@ export default function FormField({name, label, type, placeholder, value, onChan
 					placeholder={placeholder}
 					value={value}
 					onChange={onChange}
-					
 				/>
 			)}
 			{fieldType === 'dropdown' && (
@@ -53,7 +51,6 @@ export default function FormField({name, label, type, placeholder, value, onChan
 					onChange={onChange}
 				/>
 			)}
-			
         </div>
     )
 }

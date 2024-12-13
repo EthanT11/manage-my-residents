@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import CardHeaderButton from "../CardHeaderButton";
+import CardHeaderButton from "./CardHeaderButton";
 import FormField from "./FormField";
 import { Resident } from "@/hooks/useSupabase";
 
@@ -40,13 +40,12 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 		addResident(newResident);
 	}
 
-	// TODO: Add validation for the form
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
 				<CardHeaderButton text="Add Resident" variant="outline" />
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px] bg-blue-500"> {/* sm for small but behind : which deals with viewport */}
+			<DialogContent className="sm:max-w-[425px] bg-blue-500">
 				<DialogHeader>
 					<DialogTitle className="text-white text-center">New Resident</DialogTitle>
 					<DialogDescription className="text-white text-center">
@@ -129,4 +128,4 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 			</DialogContent>
 		</Dialog>
   )
-}
+} 
