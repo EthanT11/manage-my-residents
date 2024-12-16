@@ -17,7 +17,7 @@ import {
 import { Calendar, Home, Settings, User, ForkKnife, LogOut, GithubIcon } from "lucide-react"
 import useSupabase from "@/hooks/useSupabase"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-const { signOut,  } = useSupabase();
+const { signOut, fetchProfileData} = useSupabase();
  
 const items = [
   {
@@ -100,7 +100,7 @@ export default function SideManager() {
               <AvatarFallback className="bg-blue-200 text-blue-700">JD</AvatarFallback>
             </Avatar>
             <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-              <span className="text-sm font-medium text-blue-900">John Doe</span>
+              <span className="text-sm font-medium text-blue-900"></span>
               <span className="text-xs text-blue-700">Administrator</span>
             </div>
           </div>
