@@ -1,11 +1,8 @@
-// TODO: Add routes for the links | Maybe use Nav as well
-// TODO: Add better icon image for Sign-out/Logout
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -17,27 +14,28 @@ import {
 import { Calendar, Home, Settings, User, ForkKnife, LogOut, GithubIcon } from "lucide-react"
 import useSupabase from "@/hooks/useSupabase"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-const { signOut, fetchProfileData} = useSupabase();
+const { signOut} = useSupabase();
  
+// TODO: Finish Calendar, Meals, and Residents | Out of scope for now
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/dashboard",
     icon: Home,
   },
   {
     title: "Calendar",
-    url: "#",
+    url: "/dashboard",
     icon: Calendar,
   },
   {
     title: "Meals",
-    url: "#",
+    url: "/dashboard",
     icon: ForkKnife,
   },
   {
     title: "Residents",
-    url: "#",
+    url: "/dashboard",
     icon: User,
   },
   {
@@ -52,6 +50,43 @@ const items = [
     action: async () => await signOut(),
   }
 ]
+
+// Little info section about myself
+// TODO: Add profile picture
+function SelfPlug() {
+  return (
+    <div className="p-4 flex flex-col gap-4 group-data-[collapsible=icon]:p-2">
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-3 group-data-[collapsible=icon]:justify-center">
+          <Avatar className="h-10 w-10 shrink-0">
+            <AvatarImage src="/path-to-your-photo.jpg" alt="Developer" />
+            <AvatarFallback className="bg-blue-200 text-blue-700">ET</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col group-data-[collapsible=icon]:hidden">
+            <span className="text-sm font-medium text-blue-900">Ethan T</span>
+            <span className="text-xs text-blue-700">Developer</span>
+          </div>
+        </div>
+        
+        <div className="group-data-[collapsible=icon]:hidden">
+          <p className="text-xs text-blue-700 mb-2">
+            Full-stack developer passionate about creating intuitive healthcare solutions.
+          </p>
+        </div>
+
+        <a 
+          href="https://github.com/EthanT11" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-blue-700 hover:text-blue-900 transition-colors group-data-[collapsible=icon]:justify-center"
+        >
+          <GithubIcon size={20} /> 
+          <span className="text-sm group-data-[collapsible=icon]:hidden">View My GitHub</span>
+        </a>
+      </div>
+    </div>
+  )
+}
 
 export default function SideManager() {
   return (
@@ -93,29 +128,7 @@ export default function SideManager() {
 
       <SidebarFooter className="mt-auto">
         <SidebarSeparator />
-        <div className="p-4 flex flex-col gap-4 group-data-[collapsible=icon]:p-2">
-          <div className="flex items-center gap-3 group-data-[collapsible=icon]:justify-center">
-            <Avatar className="h-10 w-10 shrink-0">
-              <AvatarImage src="/path-to-profile-image.jpg" />
-              <AvatarFallback className="bg-blue-200 text-blue-700">JD</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-              <span className="text-sm font-medium text-blue-900"></span>
-              <span className="text-xs text-blue-700">Administrator</span>
-            </div>
-          </div>
-
-          <a 
-            href="https://github.com/EthanT11" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-blue-700 hover:text-blue-900 transition-colors group-data-[collapsible=icon]:justify-center"
-          >
-            {/* Says deprecated but it works */}
-            <GithubIcon size={20} /> 
-            <span className="text-sm group-data-[collapsible=icon]:hidden">GitHub</span>
-          </a>
-        </div>
+        <SelfPlug />
       </SidebarFooter>
     </Sidebar>
   )
