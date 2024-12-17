@@ -23,7 +23,7 @@ export default function MainPage() {
     <>
       <SidebarProvider>
         <SideManager />
-          <main className="flex flex-col font-roboto h-screen w-screen bg-gray-100 overflow-auto">
+          <main className="flex flex-col font-roboto h-screen w-screen bg-gray-100 dark:bg-gray-900 overflow-auto">
             <div className='flex flex-col overflow-auto p-4'>
               <InformationPanelHeader />
               <InformationPanel />
