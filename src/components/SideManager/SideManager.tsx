@@ -60,13 +60,13 @@ export default function SideManager() {
   return (
     <Sidebar 
       collapsible="icon" 
-      className="bg-gradient-to-b from-blue-50 to-blue-100 border-r border-blue-200 dark:from-gray-800 dark:to-gray-900 dark:border-gray-700"
+      className="bg-[var(--sidebar-bg)] border-r border-[var(--sidebar-border)]"
     >
       <SidebarRail className="hover:after:bg-blue-200" />
       <SidebarContent>
         <SidebarGroup>
           <div className="px-4 py-3 border-b border-blue-200 group-data-[collapsible=icon]:px-1 group-data-[collapsible=icon]:py-2">
-            <h2 className="text-lg font-bold text-blue-900 dark:text-gray-100 group-data-[collapsible=icon]:hidden">
+            <h2 className="text-lg font-bold text-[var(--sidebar-text)] group-data-[collapsible=icon]:hidden">
               Manage My Residents
             </h2>
             <h2 className="hidden text-sm font-bold text-blue-900 dark:text-gray-100 group-data-[collapsible=icon]:block text-center">
@@ -80,11 +80,11 @@ export default function SideManager() {
                   <SidebarMenuButton 
                     asChild 
                     onClick={item.action}
-                    className="hover:bg-blue-200/50 hover:text-blue-900 dark:hover:bg-gray-700/50 dark:hover:text-gray-100 data-[active=true]:bg-blue-200 dark:data-[active=true]:bg-gray-700 data-[active=true]:text-blue-900 dark:data-[active=true]:text-gray-100"
+                    className="hover:bg-[var(--sidebar-hover)] hover:text-[var(--sidebar-text)] data-[active=true]:bg-[var(--sidebar-hover)] data-[active=true]:text-[var(--sidebar-text)]"
                   >
                     <a href={item.url}>
-                      <item.icon className="text-blue-700 dark:text-gray-300" />
-                      <span className="text-blue-700 dark:text-gray-300">{item.title}</span>
+                      <item.icon className="text-[var(--sidebar-text-secondary)]" />
+                      <span className="text-[var(--sidebar-text-secondary)]">{item.title}</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
