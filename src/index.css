@@ -9,19 +9,50 @@ html, body, #root {
 
 @layer base {
   :root {
-		--background: #ffffff;
-		--sidebar-bg: #f8fafc;
-		--sidebar-border: #e2e8f0;
-		--sidebar-text: #1e293b;
-		--sidebar-text-secondary: #334155;
-		--sidebar-hover: #f1f5f9;
-	}
+    /* Base colors */
+    --background: #ffffff;
+
+    /* Sidebar colors */
+    --sidebar-bg: #f8fafc;
+    --sidebar-border: #e2e8f0;
+    --sidebar-text: #1e293b;
+    --sidebar-text-secondary: #334155;
+    --sidebar-hover: #f1f5f9;
+
+    /* Header colors */
+    --header-bg: #f8fafc;
+    --header-border: #e2e8f0;
+    --header-text: #1e293b;
+    --header-text-secondary: #64748b;
+
+    /* Information Panel colors */
+    --infoheader-bg: #f8fafc;
+    --infoheader-border: #e2e8f0;
+    --infoheader-text: #1e293b;
+    --infoheader-text-secondary: #64748b;
+  }
+
   .dark {
-		--background: #0f172a;
-		--sidebar-bg: #1e293b;
-		--sidebar-border: #334155;
-		--sidebar-text: #f1f5f9;
-		--sidebar-text-secondary: #cbd5e1;
-		--sidebar-hover: #334155;
-	}
+    /* Base colors */
+    --background: #0f172a;
+
+    /* Sidebar colors */
+    --sidebar-bg: #1e293b;
+    --sidebar-border: #334155;
+    --sidebar-text: #f1f5f9;
+    --sidebar-text-secondary: #cbd5e1;
+    --sidebar-hover: #334155;
+
+    /* Header colors */
+    --header-bg: #1e293b;
+    --header-border: #334155;
+    --header-text: #f1f5f9;
+    --header-text-secondary: #94a3b8;
+
+    /* Information Panel colors */
+    --infoheader-bg: #1e293b;
+    --infoheader-border: #334155;
+    --infoheader-text: #f1f5f9;
+    --infoheader-text-secondary: #94a3b8;
+  }
 }

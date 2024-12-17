@@ -15,12 +15,14 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
-  			residentCard: {
-  				primary: '#0077be',
-  				secondary: '#e6f3f8'
-  			},
+  			// Base colors
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+  			border: 'hsl(var(--border))',
+  			input: 'hsl(var(--input))',
+  			ring: 'hsl(var(--ring))',
+
+  			// UI Component colors
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -49,9 +51,8 @@ export default {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
   			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
+
+  			// Chart colors
   			chart: {
   				'1': 'hsl(var(--chart-1))',
   				'2': 'hsl(var(--chart-2))',
@@ -59,6 +60,8 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			},
+
+  			// Sidebar colors
   			sidebar: {
   				DEFAULT: 'hsl(var(--sidebar-background))',
   				foreground: 'hsl(var(--sidebar-foreground))',
@@ -68,7 +71,18 @@ export default {
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
   				border: 'hsl(var(--sidebar-border))',
   				ring: 'hsl(var(--sidebar-ring))'
-  			}
+  			},
+  			'sidebar-bg': 'var(--sidebar-bg)',
+  			'sidebar-border': 'var(--sidebar-border)',
+  			'sidebar-text': 'var(--sidebar-text)',
+  			'sidebar-text-secondary': 'var(--sidebar-text-secondary)',
+  			'sidebar-hover': 'var(--sidebar-hover)',
+
+  			// Information Panel Header colors
+  			'infoheader-bg': 'var(--infoheader-bg)',
+  			'infoheader-border': 'var(--infoheader-border)',
+  			'infoheader-text': 'var(--infoheader-text)',
+  			'infoheader-text-secondary': 'var(--infoheader-text-secondary)',
   		}
   	}
   },
