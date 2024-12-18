@@ -19,13 +19,13 @@ html, body, #root {
 
 	/* Light Theme */
 	/* Base colors */
-   --light-page-bg: #ffffff;
-   --light-bg-color: #f8fafc;
-   --light-border-color: #e2e8f0;
-   --light-text-color: #1e293b;
-   --light-text-secondary-color: #334155;
-   --light-hover-color: #f1f5f9;
-   --light-active-color: #e2e8f0;
+   --light-page-bg: #e9eef2; 
+   --light-bg-color: #f3f6f9;  
+   --light-border-color: #ccd6e0;  
+   --light-text-color: #1c2838;  
+   --light-text-secondary-color: #4a5d77;  
+   --light-hover-color: #dde5ed; 
+   --light-active-color: #ccd6e0;  
 
    --dark-page-bg: #334155;
    --dark-bg-color: #0f172a;
