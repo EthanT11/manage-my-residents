@@ -9,57 +9,68 @@ html, body, #root {
 
 @layer base {
   :root {
-    /* Base colors */
-    --background: #ffffff;
+	/* TODO: Change the light colours to not be so painful on the eyes */
+	/* NOTE: Will add variety to the variables as needed to try and keep the theme consistent */
+
+	/* Light Theme */
+	/* Base colors */
+   --light-bg-color: #f8fafc;
+   --light-border-color: #e2e8f0;
+   --light-text-color: #1e293b;
+   --light-text-secondary-color: #334155;
+   --light-hover-color: #f1f5f9;
+   --light-active-color: #e2e8f0;
+
+
 
     /* Sidebar colors */
-    --sidebar-bg: #f8fafc;
-    --sidebar-border: #e2e8f0;
-    --sidebar-text: #1e293b;
-    --sidebar-text-secondary: #334155;
-    --sidebar-hover: #f1f5f9;
+    --sidebar-bg: var(--light-bg-color);
+    --sidebar-border: var(--light-border-color);
+    --sidebar-text: var(--light-text-color);
+    --sidebar-text-secondary: var(--light-text-secondary-color);
+    --sidebar-hover: var(--light-hover-color);
 
     /* Header colors */
-    --infoheader-bg: #f8fafc;
-    --infoheader-border: #e2e8f0;
-    --infoheader-text: #1e293b;
-    --infoheader-text-secondary: #64748b;
+    --infoheader-bg: var(--bg-color);
+    --infoheader-border: var(--border-color);
+    --infoheader-text: var(--text-color);
+    --infoheader-text-secondary: var(--text-secondary-color);
 
     /* Information Panel colors */
-    --infopanel-bg: #ffffff;
-    --infopanel-border: #e2e8f0;
-    --infopanel-text: #1e293b;
-    --infopanel-text-secondary: #334155;
+    --infopanel-bg: var(--light-bg-color);
+    --infopanel-border: var(--light-border-color);
+    --infopanel-text: var(--light-text-color);
+    --infopanel-text-secondary: var(--light-text-secondary-color);
 
 	/* Information Panel Card colors */
-    --infopanel-card-bg: #f8fafc;
-    --infopanel-card-border: #e2e8f0;
-    --infopanel-card-title: #1e293b;
-    --infopanel-card-text: #334155;
+    --infopanel-card-bg: var(--light-bg-color);
+    --infopanel-card-border: var(--light-border-color);
+    --infopanel-card-title: var(--light-text-color);
+    --infopanel-card-text: var(--light-text-secondary-color);
 
     /* Resident List/Tag colors */
-    --resident-list-bg: #f8fafc;
-    --resident-list-border: #e2e8f0;
-    --resident-tag-bg: #ffffff;
-    --resident-tag-border: #e2e8f0;
-    --resident-tag-text: #1e293b;
-    --resident-tag-hover: #f1f5f9;
-    --resident-tag-selected: #e2e8f0;
+    --resident-list-bg: var(--light-bg-color);
+    --resident-list-border: var(--light-border-color);
+    --resident-tag-bg: var(--light-bg-color);
+    --resident-tag-border: var(--light-border-color);
+    --resident-tag-text: var(--light-text-color);
+    --resident-tag-hover: var(--light-hover-color);
+    --resident-tag-selected: var(--light-active-color);
 
     /* Search Bar colors */
-    --search-bg: #ffffff;
-    --search-border: #e2e8f0;
-    --search-text: #1e293b;
-    --search-placeholder: #64748b;
-    --search-icon: #1e293b;
-    --search-ring: #e2e8f0;
+    --search-bg: var(--light-bg-color);
+    --search-border: var(--light-border-color);
+    --search-text: var(--light-text-color);
+    --search-placeholder: var(--light-text-secondary-color);
+    --search-icon: var(--light-text-color);
+    --search-ring: var(--light-border-color);
 
     /* Custom Button colors */
-    --button-bg: #f8fafc;
-    --button-border: #e2e8f0;
-    --button-text: #1e293b;
-    --button-hover: #f1f5f9;
-    --button-active: #e2e8f0;
+    --button-bg: var(--light-bg-color);
+    --button-border: var(--light-border-color);
+    --button-text: var(--light-text-color);
+    --button-hover: var(--light-hover-color);
+    --button-active: var(--light-active-color);
   }
 
   .dark {

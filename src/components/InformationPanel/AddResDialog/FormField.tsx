@@ -16,41 +16,43 @@ export interface FormFieldProps {
 
 export default function FormField({name, label, type, placeholder, value, onChange, options, fieldType = "input" }: FormFieldProps) {
     return (
-        <div className="grid grid-cols-2 gap-4 items-center">
-			<AddResLabel 
-				htmlFor={name}
-				className="text-white bg-blue-700 p-2 rounded-lg w-24 text-center"
-			>
-				{label || ""}
-			</AddResLabel>
-			{fieldType === 'input' && (
-				<AddResInput 
-					name={name} 
-					type={type || "text"} 
-					placeholder={placeholder} 
-					value={value}
-					onChange={onChange}
-					className="bg-white p-2 rounded-lg"
-				/>
-			)}
-			{fieldType === 'calendar' && (
-				<CalendarInput
-					name={name}
-					type={type}
-					placeholder={placeholder}
-					value={value}
-					onChange={onChange}
-				/>
-			)}
-			{fieldType === 'dropdown' && (
-				<DropdownInput
-					name={name}
-					placeholder={placeholder}
-					value={value}
-					options={options}
-					onChange={onChange}
-				/>
-			)}
+        <div className="flex flex-col space-y-2">
+            <AddResLabel 
+                htmlFor={name}
+                className="text-infopanel-text font-medium text-sm"
+            >
+                {label || ""}
+            </AddResLabel>
+            {fieldType === 'input' && (
+                <AddResInput 
+                    name={name} 
+                    type={type || "text"} 
+                    placeholder={placeholder} 
+                    value={value}
+                    onChange={onChange}
+                    className="w-full bg-search-bg text-search-text border border-search-border rounded-md px-3 py-2 
+                             focus:ring-2 focus:ring-search-ring focus:border-transparent
+                             placeholder:text-search-placeholder"
+                />
+            )}
+            {fieldType === 'calendar' && (
+                <CalendarInput
+                    name={name}
+                    type={type}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                />
+            )}
+            {fieldType === 'dropdown' && (
+                <DropdownInput
+                    name={name}
+                    placeholder={placeholder}
+                    value={value}
+                    options={options}
+                    onChange={onChange}
+                />
+            )}
         </div>
     )
 }
