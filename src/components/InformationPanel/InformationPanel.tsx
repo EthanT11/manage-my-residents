@@ -32,10 +32,11 @@ export default function InformationPanel() {
 	}
 
     return (
-        <div 
-			className="flex-1 overflow-auto no-scrollbar 
+        <div className="
+			flex-1 overflow-auto no-scrollbar 
 			bg-infopanel-bg border-l border-infopanel-border 
-			dark:bg-infopanel-bg dark:border-infopanel-border">
+			dark:bg-infopanel-bg dark:border-infopanel-border
+		">
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 "> {/* Container for the main content */}
 				{!selectedResident ? (
 					<>
