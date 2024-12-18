@@ -32,8 +32,11 @@ export default function InformationPanel() {
 	}
 
     return (
-        <div className="flex-1 overflow-auto no-scrollbar">
-            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8"> {/* Container for the main content */}
+        <div 
+			className="flex-1 overflow-auto no-scrollbar 
+			bg-infopanel-bg border-l border-infopanel-border 
+			dark:bg-infopanel-bg dark:border-infopanel-border">
+            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 "> {/* Container for the main content */}
 				{!selectedResident ? (
 					<>
 						<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'> {/* Container for the panel cards */}
@@ -43,7 +46,7 @@ export default function InformationPanel() {
 					</>
 				) : (
 					<>
-					{/* TODO: Add Resident overview for selected Resident*/}
+					{/* TODO: Add Panel Cards for selected Resident*/}
 					</>
 				)}
 					<div>

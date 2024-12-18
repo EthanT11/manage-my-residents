@@ -9,13 +9,13 @@ interface PanelCardProps {
 export default function PanelCard({ title, condition, subTitle }: PanelCardProps) {
 	return (
 		<>
-			<Card className="bg-blue-100">
+			<Card className="bg-infopanel-card-bg border-infopanel-card-border dark:bg-infopanel-card-bg dark:border-infopanel-card-border">
 				<CardHeader>
-					<CardTitle className="text-blue-700">{title}</CardTitle>
+					<CardTitle className="text-infopanel-card-title dark:text-infopanel-card-title">{title}</CardTitle>
 				</CardHeader>
 				<CardContent>
-					<div className="text-3xl font-bold text-blue-900">{condition}</div>
-					<p className="text-blue-600">{subTitle}</p>
+					<div className="text-3xl font-bold text-infopanel-card-text dark:text-infopanel-card-text">{condition}</div>
+					<p className="text-infopanel-card-text dark:text-infopanel-card-text ">{subTitle}</p>
 				</CardContent>
 			</Card>
 		</>

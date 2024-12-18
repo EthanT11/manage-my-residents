@@ -20,16 +20,22 @@ html, body, #root {
     --sidebar-hover: #f1f5f9;
 
     /* Header colors */
-    --header-bg: #f8fafc;
-    --header-border: #e2e8f0;
-    --header-text: #1e293b;
-    --header-text-secondary: #64748b;
-
-    /* Information Panel colors */
     --infoheader-bg: #f8fafc;
     --infoheader-border: #e2e8f0;
     --infoheader-text: #1e293b;
     --infoheader-text-secondary: #64748b;
+
+    /* Information Panel colors */
+    --infopanel-bg: #ffffff;
+    --infopanel-border: #e2e8f0;
+    --infopanel-text: #1e293b;
+    --infopanel-text-secondary: #334155;
+
+	/* Information Panel Card colors */
+    --infopanel-card-bg: #f8fafc;
+    --infopanel-card-border: #e2e8f0;
+    --infopanel-card-title: #1e293b;
+    --infopanel-card-text: #334155;
   }
 
   .dark {
@@ -37,22 +43,28 @@ html, body, #root {
     --background: #0f172a;
 
     /* Sidebar colors */
-    --sidebar-bg: #1e293b;
+    --sidebar-bg: #223452;
     --sidebar-border: #334155;
     --sidebar-text: #f1f5f9;
     --sidebar-text-secondary: #cbd5e1;
     --sidebar-hover: #334155;
 
     /* Header colors */
-    --header-bg: #1e293b;
-    --header-border: #334155;
-    --header-text: #f1f5f9;
-    --header-text-secondary: #94a3b8;
-
-    /* Information Panel colors */
     --infoheader-bg: #1e293b;
     --infoheader-border: #334155;
     --infoheader-text: #f1f5f9;
     --infoheader-text-secondary: #94a3b8;
+
+    /* Information Panel colors */
+    --infopanel-bg: #223452;
+    --infopanel-border: #334155;
+    --infopanel-text: #f1f5f9;
+    --infopanel-text-secondary: #cbd5e1;
+
+	/* Information Panel Card colors */
+    --infopanel-card-bg: #1e293b;
+    --infopanel-card-border: #334155;
+    --infopanel-card-title: #f1f5f9;
+    --infopanel-card-text: #cbd5e1;
   }
 }

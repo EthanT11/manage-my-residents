@@ -83,6 +83,18 @@ export default {
   			'infoheader-border': 'var(--infoheader-border)',
   			'infoheader-text': 'var(--infoheader-text)',
   			'infoheader-text-secondary': 'var(--infoheader-text-secondary)',
+
+  			// Information Panel colors
+  			'infopanel-bg': 'var(--infopanel-bg)',
+  			'infopanel-border': 'var(--infopanel-border)',
+  			'infopanel-text': 'var(--infopanel-text)',
+  			'infopanel-text-secondary': 'var(--infopanel-text-secondary)',
+  			'infopanel-card': {
+  				'bg': 'var(--infopanel-card-bg)',
+  				'border': 'var(--infopanel-card-border)',
+  				'title': 'var(--infopanel-card-title)',
+  				'text': 'var(--infopanel-card-text)',
+  			},
   		}
   	}
   },
