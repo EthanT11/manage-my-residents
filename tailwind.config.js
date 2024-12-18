@@ -118,6 +118,15 @@ export default {
   				'icon': 'var(--search-icon)',
   				'ring': 'var(--search-ring)',
   			},
+
+  			// Custom Button colors
+  			'button': {
+  				'bg': 'var(--button-bg)',
+  				'border': 'var(--button-border)',
+  				'text': 'var(--button-text)',
+  				'hover': 'var(--button-hover)',
+  				'active': 'var(--button-active)',
+  			},
   		}
   	}
   },

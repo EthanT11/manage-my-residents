@@ -53,6 +53,13 @@ html, body, #root {
     --search-placeholder: #64748b;
     --search-icon: #1e293b;
     --search-ring: #e2e8f0;
+
+    /* Custom Button colors */
+    --button-bg: #f8fafc;
+    --button-border: #e2e8f0;
+    --button-text: #1e293b;
+    --button-hover: #f1f5f9;
+    --button-active: #e2e8f0;
   }
 
   .dark {
@@ -100,5 +107,12 @@ html, body, #root {
     --search-placeholder: #94a3b8;
     --search-icon: #f1f5f9;
     --search-ring: #334155;
+
+    /* Custom Button colors */
+    --button-bg: #223452;
+    --button-border: #334155;
+    --button-text: #f1f5f9;
+    --button-hover: #334155;
+    --button-active: #1e293b;
   }
 }

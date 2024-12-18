@@ -13,7 +13,11 @@ const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
 		return (
 			<Button 
 				ref={ref}
-				className={`bg-white hover:bg-blue-600 hover:text-white ${variant}`}
+				className={`
+					bg-button-bg text-button-text border border-button-border
+					hover:bg-button-hover active:bg-button-active
+					transition-colors ${variant}
+				`}
 				onClick={onClick}
 				type={type}
 			>
