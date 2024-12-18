@@ -1,14 +1,14 @@
-import { Button } from "../../ui/button";
+import { Button } from "../ui/button";
 import React from "react";
 
-interface CardHeaderButtonProps {
+interface CustomButtonProps {
 	text: string;
 	type?: 'submit' | 'button' | 'reset'; 
 	onClick?: () => void; 
 	variant?: 'secondary' | 'outline'
 }
 
-const CardHeaderButton = React.forwardRef<HTMLButtonElement, CardHeaderButtonProps>(
+const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
 	({ text, onClick, variant, type}, ref) => {		 									
 		return (
 			<Button 
@@ -23,6 +23,6 @@ const CardHeaderButton = React.forwardRef<HTMLButtonElement, CardHeaderButtonPro
 	}
 );
 
-CardHeaderButton.displayName = "CardHeaderButton";
+CustomButton.displayName = "CustomButton";
 
-export default CardHeaderButton; 
+export default CustomButton; 

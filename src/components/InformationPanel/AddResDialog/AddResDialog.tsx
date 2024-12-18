@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import CardHeaderButton from "./CardHeaderButton";
+import { CustomButton } from "@/components/Common";
 import FormField from "./FormField";
 import { Resident } from "@/hooks/useSupabase";
 
@@ -43,7 +43,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<CardHeaderButton text="Add Resident" variant="outline" />
+				<CustomButton text="Add Resident" variant="outline" />
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px] bg-blue-500">
 				<DialogHeader>
@@ -122,7 +122,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 					/>
 					
 					<div className="flex justify-end space-x-4 ">
-						<CardHeaderButton type="submit" text="Save" variant="outline" /> 
+						<CustomButton type="submit" text="Save" variant="outline" /> 
 					</div>
 				</form>
 			</DialogContent>
