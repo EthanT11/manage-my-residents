@@ -5,6 +5,11 @@
 html, body, #root {
 	height: 100%;
 	margin: 0;
+	background-color: var(--page-bg);
+}
+
+.dark html, .dark body, .dark #root {
+	background-color: var(--page-bg);
 }
 
 @layer base {
@@ -14,6 +19,7 @@ html, body, #root {
 
 	/* Light Theme */
 	/* Base colors */
+   --light-page-bg: #ffffff;
    --light-bg-color: #f8fafc;
    --light-border-color: #e2e8f0;
    --light-text-color: #1e293b;
@@ -21,8 +27,17 @@ html, body, #root {
    --light-hover-color: #f1f5f9;
    --light-active-color: #e2e8f0;
 
+   --dark-page-bg: #334155;
+   --dark-bg-color: #0f172a;
+   --dark-border-color: #334155;
+   --dark-text-color: #f1f5f9;
+   --dark-text-secondary-color: #cbd5e1;
+   --dark-hover-color: #334155;
+   --dark-active-color: #1e293b;
 
-
+   	/* Page colors */
+   	--page-bg: var(--light-page-bg);
+   
     /* Sidebar colors */
     --sidebar-bg: var(--light-bg-color);
     --sidebar-border: var(--light-border-color);
@@ -74,56 +89,57 @@ html, body, #root {
   }
 
   .dark {
-    /* Base colors */
-    --background: #0f172a;
+
+	/* Page colors */
+    --page-bg: var(--dark-page-bg);
 
     /* Sidebar colors */
-    --sidebar-bg: #223452;
-    --sidebar-border: #334155;
-    --sidebar-text: #f1f5f9;
-    --sidebar-text-secondary: #cbd5e1;
-    --sidebar-hover: #334155;
+    --sidebar-bg: var(--dark-bg-color);
+    --sidebar-border: var(--dark-border-color);
+    --sidebar-text: var(--dark-text-color);
+    --sidebar-text-secondary: var(--dark-text-secondary-color);
+    --sidebar-hover: var(--dark-hover-color);
 
     /* Header colors */
-    --infoheader-bg: #1e293b;
-    --infoheader-border: #334155;
-    --infoheader-text: #f1f5f9;
-    --infoheader-text-secondary: #94a3b8;
+    --infoheader-bg: var(--dark-bg-color);
+    --infoheader-border: var(--dark-border-color);
+    --infoheader-text: var(--dark-text-color);
+    --infoheader-text-secondary: var(--dark-text-secondary-color);
 
     /* Information Panel colors */
-    --infopanel-bg: #223452;
-    --infopanel-border: #334155;
-    --infopanel-text: #f1f5f9;
-    --infopanel-text-secondary: #cbd5e1;
+    --infopanel-bg: var(--dark-bg-color);
+    --infopanel-border: var(--dark-border-color);
+    --infopanel-text: var(--dark-text-color);
+    --infopanel-text-secondary: var(--dark-text-secondary-color);
 
 	/* Information Panel Card colors */
-    --infopanel-card-bg: #1e293b;
-    --infopanel-card-border: #334155;
-    --infopanel-card-title: #f1f5f9;
-    --infopanel-card-text: #cbd5e1;
+    --infopanel-card-bg: var(--dark-bg-color);
+    --infopanel-card-border: var(--dark-border-color);
+    --infopanel-card-title: var(--dark-text-color);
+    --infopanel-card-text: var(--dark-text-secondary-color);
 
     /* Resident List/Tag colors */
-    --resident-list-bg: #1e293b;
-    --resident-list-border: #334155;
-    --resident-tag-bg: #223452;
-    --resident-tag-border: #334155;
-    --resident-tag-text: #f1f5f9;
-    --resident-tag-hover: #334155;
-    --resident-tag-selected: #1e293b;
+    --resident-list-bg: var(--dark-bg-color);
+    --resident-list-border: var(--dark-border-color);
+    --resident-tag-bg: var(--dark-bg-color);
+    --resident-tag-border: var(--dark-border-color);
+    --resident-tag-text: var(--dark-text-color);
+    --resident-tag-hover: var(--dark-hover-color);
+    /* --resident-tag-selected: #1e293b; Double check this */
 
     /* Search Bar colors */
-    --search-bg: #223452;
-    --search-border: #334155;
-    --search-text: #f1f5f9;
-    --search-placeholder: #94a3b8;
-    --search-icon: #f1f5f9;
-    --search-ring: #334155;
+    --search-bg: var(--dark-bg-color);
+    --search-border: var(--dark-border-color);
+    --search-text: var(--dark-text-color);
+    --search-placeholder: var(--dark-text-secondary-color);
+    --search-icon: var(--dark-text-color);
+    --search-ring: var(--dark-border-color);
 
     /* Custom Button colors */
-    --button-bg: #223452;
-    --button-border: #334155;
-    --button-text: #f1f5f9;
-    --button-hover: #334155;
-    --button-active: #1e293b;
+    --button-bg: var(--dark-bg-color);
+    --button-border: var(--dark-border-color);
+    --button-text: var(--dark-text-color);
+    --button-hover: var(--dark-hover-color);
+    --button-active: var(--dark-active-color);
   }
 }

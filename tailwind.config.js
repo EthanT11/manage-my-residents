@@ -61,17 +61,12 @@ export default {
   				'5': 'hsl(var(--chart-5))'
   			},
 
-  			// Sidebar colors
-  			sidebar: {
-  				DEFAULT: 'hsl(var(--sidebar-background))',
-  				foreground: 'hsl(var(--sidebar-foreground))',
-  				primary: 'hsl(var(--sidebar-primary))',
-  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-  				accent: 'hsl(var(--sidebar-accent))',
-  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-  				border: 'hsl(var(--sidebar-border))',
-  				ring: 'hsl(var(--sidebar-ring))'
-  			},
+			// Page colors
+			page: {
+				'light': 'hsl(var(--light-page-bg))',
+				'dark': 'hsl(var(--dark-page-bg))'
+			},
+
   			'sidebar-bg': 'var(--sidebar-bg)',
   			'sidebar-border': 'var(--sidebar-border)',
   			'sidebar-text': 'var(--sidebar-text)',
