@@ -95,6 +95,29 @@ export default {
   				'title': 'var(--infopanel-card-title)',
   				'text': 'var(--infopanel-card-text)',
   			},
+
+  			// Resident List/Tag colors
+  			'resident-list': {
+  				'bg': 'var(--resident-list-bg)',
+  				'border': 'var(--resident-list-border)',
+  			},
+  			'resident-tag': {
+  				'bg': 'var(--resident-tag-bg)',
+  				'border': 'var(--resident-tag-border)',
+  				'text': 'var(--resident-tag-text)',
+  				'hover': 'var(--resident-tag-hover)',
+  				'selected': 'var(--resident-tag-selected)',
+  			},
+
+  			// Search Bar colors
+  			'search': {
+  				'bg': 'var(--search-bg)',
+  				'border': 'var(--search-border)',
+  				'text': 'var(--search-text)',
+  				'placeholder': 'var(--search-placeholder)',
+  				'icon': 'var(--search-icon)',
+  				'ring': 'var(--search-ring)',
+  			},
   		}
   	}
   },

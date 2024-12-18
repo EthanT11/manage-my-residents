@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 // TODO: Add transition for the different types of opens and closes for the dash board, eg: select/deselect resident and move panels up and down
 // TODO: Maybe have a minimize button for the resident list
 // TODO: find a way to get stock images for new resident cards
+// TODO: Remove default scrollbar for the resident list
 
 export default function InformationPanel() {
     const [residents, setResidents] = useState<Resident[] | null>(null);
@@ -34,8 +35,7 @@ export default function InformationPanel() {
     return (
         <div className="
 			flex-1 overflow-auto no-scrollbar 
-			bg-infopanel-bg border-l border-infopanel-border 
-			dark:bg-infopanel-bg dark:border-infopanel-border
+			bg-infopanel-bg border-l border-infopanel-border
 		">
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 "> {/* Container for the main content */}
 				{!selectedResident ? (
