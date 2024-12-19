@@ -101,6 +101,7 @@ html, body, #root {
     --resident-details-title: var(--light-text-color);
     --resident-details-text: var(--light-text-secondary-color);
     --resident-details-section-title: var(--light-text-color);
+    --resident-details-section-bg: var(--light-bg-color);
   }
 
   .dark {
@@ -170,5 +171,7 @@ html, body, #root {
     --resident-details-title: var(--dark-text-color);
     --resident-details-text: var(--dark-text-secondary-color);
     --resident-details-section-title: var(--dark-text-color);
+    --resident-details-section-bg: var(--dark-bg-color);
   }
 }
+
