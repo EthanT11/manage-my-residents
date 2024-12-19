@@ -1,5 +1,4 @@
-import AddResLabel from "./AddResLabel";
-import AddResInput from "./AddResInput";
+import { CustomLabel, CustomInput } from "@/components/Common";
 import CalendarInput from "./CalendarInput";
 import DropdownInput from "./DropdownInput";
 
@@ -17,14 +16,14 @@ export interface FormFieldProps {
 export default function FormField({name, label, type, placeholder, value, onChange, options, fieldType = "input" }: FormFieldProps) {
     return (
         <div className="flex flex-col space-y-2">
-            <AddResLabel 
+            <CustomLabel 
                 htmlFor={name}
                 className="text-infopanel-text font-medium text-sm"
             >
                 {label || ""}
-            </AddResLabel>
+            </CustomLabel>
             {fieldType === 'input' && (
-                <AddResInput 
+                <CustomInput 
                     name={name} 
                     type={type || "text"} 
                     placeholder={placeholder} 

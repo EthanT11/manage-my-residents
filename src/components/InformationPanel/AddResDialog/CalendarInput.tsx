@@ -1,6 +1,6 @@
 import { Calendar } from "@/components/ui/calendar"
 import { useState } from "react";
-import AddResInput from "./AddResInput";
+import { CustomInput } from "@/components/Common";
 import { FormFieldProps } from "./FormField";
 
 interface CalendarInputProps extends Omit<FormFieldProps, 'label'> {
@@ -66,7 +66,7 @@ export default function CalendarInput( { name, type, placeholder, inputClassname
 	return (
 		<div className="relative">
 			{/* TODO: Add calendar icon and hover effects for ease of use */}
-			<AddResInput 
+			<CustomInput 
 				name={name} 
 				type={type ?? 'text'}
 				placeholder={placeholder}

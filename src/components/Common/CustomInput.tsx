@@ -1,6 +1,6 @@
-import { Input } from "../../ui/input";
+import { Input } from "../ui/input";
 
-interface AddResInputProps {
+interface CustomInputProps {
 	name: string,
 	type: string,
 	placeholder: string,
@@ -10,7 +10,7 @@ interface AddResInputProps {
 	className: string
 }
 
-export default function AddResInput( {name, type, placeholder, value, onChange, onFocus, className} : AddResInputProps ) {
+export default function CustomInput( {name, type, placeholder, value, onChange, onFocus, className} : CustomInputProps ) {
   return (
 	<Input
 	  id={name}

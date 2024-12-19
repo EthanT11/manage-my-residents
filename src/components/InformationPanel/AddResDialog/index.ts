@@ -1,6 +1,6 @@
 export { default as AddResDialog } from './AddResDialog'
-export { default as AddResInput } from './AddResInput'
-export { default as AddResLabel } from './AddResLabel'
+export { default as AddResInput } from '../../Common/CustomInput'
+export { default as AddResLabel } from '../../Common/CustomLabel'
 export { default as FormField } from './FormField'
 export { default as CalendarInput } from './CalendarInput'
 export { default as DropdownInput } from './DropdownInput' 
