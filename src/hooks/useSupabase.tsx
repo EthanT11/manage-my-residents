@@ -53,6 +53,9 @@ const useSupabase = () => {
 	// and I'm not sure if some of things I did was correct or exactly how it works
 	// more then likely will strip out all supabase Auth and reimplement it now that I have a better understanding of it
 
+	// TODO: After saving generated images to supabase, need to keep in mind that the image url expires hense why I'm getting a cors error.
+	// Will probably find a way to download the image rather then store the url directly from the AI
+
 
 	// User Data
 	const fetchUser = async () => {
