@@ -93,6 +93,13 @@ export default {
   			},
 
 			// TODO: Calendar colors
+            'resident-details': {
+                'bg': 'var(--resident-details-bg)',
+                'border': 'var(--resident-details-border)',
+                'title': 'var(--resident-details-title)',
+                'text': 'var(--resident-details-text)',
+                'section-title': 'var(--resident-details-section-title)',
+            },
   		}
   	}
   },

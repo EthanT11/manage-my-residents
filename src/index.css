@@ -15,6 +15,7 @@ html, body, #root {
 @layer base {
   :root {
 	/* TODO: Change the light colours to not be so painful on the eyes */
+	/* TODO: Try and see if i can make multiple css files for the components since this is getting messy */
 	/* NOTE: Will add variety to the variables as needed to try and keep the theme consistent */
 
 	/* Light Theme */
@@ -93,6 +94,13 @@ html, body, #root {
     --button-text: var(--light-text-color);
     --button-hover: var(--light-hover-color);
     --button-active: var(--light-active-color);
+
+    /* Resident Details Card colors */
+    --resident-details-bg: var(--light-bg-color);
+    --resident-details-border: var(--light-border-color);
+    --resident-details-title: var(--light-text-color);
+    --resident-details-text: var(--light-text-secondary-color);
+    --resident-details-section-title: var(--light-text-color);
   }
 
   .dark {
@@ -155,5 +163,12 @@ html, body, #root {
     --button-text: var(--dark-text-color);
     --button-hover: var(--dark-hover-color);
     --button-active: var(--dark-active-color);
+
+    /* Resident Details Card colors */
+    --resident-details-bg: var(--dark-bg-color);
+    --resident-details-border: var(--dark-border-color);
+    --resident-details-title: var(--dark-text-color);
+    --resident-details-text: var(--dark-text-secondary-color);
+    --resident-details-section-title: var(--dark-text-color);
   }
 }
