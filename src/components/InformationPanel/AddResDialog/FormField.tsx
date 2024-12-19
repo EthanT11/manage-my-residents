@@ -42,6 +42,9 @@ export default function FormField({name, label, type, placeholder, value, onChan
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
+                    inputClassname="w-full bg-search-bg text-search-text border border-search-border rounded-md px-3 py-2 
+                             focus:ring-2 focus:ring-search-ring focus:border-transparent
+                             placeholder:text-search-placeholder"
                 />
             )}
             {fieldType === 'dropdown' && (
@@ -51,6 +54,9 @@ export default function FormField({name, label, type, placeholder, value, onChan
                     value={value}
                     options={options}
                     onChange={onChange}
+                    className="w-full bg-search-bg text-search-text border border-search-border rounded-md px-3 py-2 
+                             focus:ring-2 focus:ring-search-ring focus:border-transparent
+                             placeholder:text-search-placeholder"
                 />
             )}
         </div>

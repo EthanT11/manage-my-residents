@@ -4,13 +4,12 @@ import AddResInput from "./AddResInput";
 import { FormFieldProps } from "./FormField";
 
 interface CalendarInputProps extends Omit<FormFieldProps, 'label'> {
-	
+	inputClassname?: string
 }
 
 interface CalendarLayoutProps {
 	date: Date | undefined,
 	handleDateSelect: (date: Date | undefined) => void,
-
 }
 
 function CalendarLayout( {date, handleDateSelect}: CalendarLayoutProps ) {
@@ -27,6 +26,7 @@ function CalendarLayout( {date, handleDateSelect}: CalendarLayoutProps ) {
 				captionLayout="dropdown"
 				// TODO: Fix dropdown placement: Year dropdown opens and populates up as opposed to down like the months dropdown
 				// TODO: When you click off calendar, close it. Probably need to use  to control visibility
+				// TODO: Add more styling to the calendar, hesitant to do since there's a lot of styling involved
 				classNames={{
 					caption: "flex flex-row items-center justify-center",
 					caption_label: "hidden",
@@ -43,7 +43,7 @@ function CalendarLayout( {date, handleDateSelect}: CalendarLayoutProps ) {
 }
 
 
-export default function CalendarInput( { name, type, placeholder, onChange } : CalendarInputProps ) {
+export default function CalendarInput( { name, type, placeholder, inputClassname, onChange } : CalendarInputProps ) {
 	const [date, setDate] = useState<Date | undefined>(new Date())
 	const [showCalendar, setShowCalendar] = useState(false)
 	
@@ -73,7 +73,7 @@ export default function CalendarInput( { name, type, placeholder, onChange } : C
 				value={date ? handleDateFormat(date) : ''}
 				onChange={onChange}
 				onFocus={() => setShowCalendar(true)}
-				className="bg-white p-2 rounded-lg"
+				className={inputClassname || 'bg-white p-2 rounded-lg'}
 			/>
 			{showCalendar && (
 				<CalendarLayout 
