@@ -11,7 +11,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar"
 
-import { Calendar, Home, Settings, User, ForkKnife, LogOut, Moon } from "lucide-react"
+import { Calendar, Home, Settings, User, ForkKnife, LogOut, Moon, Sun } from "lucide-react"
 import useSupabase from "@/hooks/useSupabase"
 import { useTheme } from "@/hooks/useTheme"
 import SelfPlug from "./SelfPlug"
@@ -55,7 +55,7 @@ export default function SideManager() {
   const settingsItems = [
     {
       title: theme === 'dark' ? 'Light Mode' : 'Dark Mode',
-      icon: Moon,
+      icon: theme === 'dark' ? Sun : Moon,
       action: () => toggleTheme(),  
     },
     {
