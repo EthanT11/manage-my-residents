@@ -77,11 +77,11 @@ export default function SideManager() {
         <SidebarMenuButton 
           asChild 
           onClick={item.action}
-          className="hover:bg-[var(--sidebar-hover)] hover:text-[var(--sidebar-text)] data-[active=true]:bg-[var(--sidebar-hover)] data-[active=true]:text-[var(--sidebar-text)]"
+          className="hover:bg-sidebar-hover hover:text-sidebar-text data-[active=true]:bg-sidebar-hover data-[active=true]:text-sidebar-text"
         >
           <a href={item.url}>
-            <item.icon className="text-[var(--sidebar-text-secondary)]" />
-            <span className="text-[var(--sidebar-text-secondary)]">{item.title}</span>
+            <item.icon className="text-sidebar-text-secondary" />
+            <span className="text-sidebar-text-secondary">{item.title}</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>
@@ -91,16 +91,16 @@ export default function SideManager() {
   return (
     <Sidebar 
       collapsible="icon" 
-      className="bg-[var(--sidebar-bg)] border-r border-[var(--sidebar-border)]"
+      className="bg-sidebar-bg border-r border-sidebar-border"
     >
-      <SidebarRail className="hover:after:bg-blue-200" />
+      <SidebarRail className="hover:after:bg-sidebar-hover" />
       <SidebarContent>
         <SidebarGroup>
-          <div className="px-4 py-3 border-b border-blue-200 group-data-[collapsible=icon]:px-1 group-data-[collapsible=icon]:py-2">
-            <h2 className="text-lg font-bold text-[var(--sidebar-text)] group-data-[collapsible=icon]:hidden">
+          <div className="px-4 py-3 border-b border-sidebar-border group-data-[collapsible=icon]:px-1 group-data-[collapsible=icon]:py-2">
+            <h2 className="text-lg font-bold text-sidebar-text group-data-[collapsible=icon]:hidden">
               Manage My Residents
             </h2>
-            <h2 className="hidden text-sm font-bold text-blue-900 dark:text-gray-100 group-data-[collapsible=icon]:block text-center">
+            <h2 className="hidden text-sm font-bold text-sidebar-text group-data-[collapsible=icon]:block text-center">
               MR
             </h2>
           </div>
@@ -114,7 +114,7 @@ export default function SideManager() {
         <SidebarGroup className="mt-auto">
           <SidebarSeparator className="my-2" />
           <div className="px-4 py-2 group-data-[collapsible=icon]:px-1">
-            <h3 className="text-sm font-medium text-[var(--sidebar-text-secondary)] opacity-70 group-data-[collapsible=icon]:hidden">
+            <h3 className="text-sm font-medium text-sidebar-text-secondary opacity-70 group-data-[collapsible=icon]:hidden">
               Settings
             </h3>
           </div>
