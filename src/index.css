@@ -102,6 +102,18 @@ html, body, #root {
     --resident-details-text: var(--light-text-secondary-color);
     --resident-details-section-title: var(--light-text-color);
     --resident-details-section-bg: var(--light-bg-color);
+
+	/* Profile colors */
+    --profile-bg: var(--light-bg-color);
+    --profile-border: var(--light-border-color);
+    --profile-title: var(--light-text-color);
+    --profile-text: var(--light-text-secondary-color);
+
+	/* Dialog colors */
+    --dialog-bg: var(--light-bg-color);
+    --dialog-border: var(--light-border-color);
+    --dialog-title: var(--light-text-color);
+    --dialog-text: var(--light-text-secondary-color);
   }
 
   .dark {
@@ -172,6 +184,18 @@ html, body, #root {
     --resident-details-text: var(--dark-text-secondary-color);
     --resident-details-section-title: var(--dark-text-color);
     --resident-details-section-bg: var(--dark-bg-color);
+
+	/* Profile colors */
+    --profile-bg: var(--dark-bg-color);
+    --profile-border: var(--dark-border-color);
+    --profile-title: var(--dark-text-color);
+    --profile-text: var(--dark-text-secondary-color);
+
+	/* Dialog colors */
+    --dialog-bg: var(--dark-bg-color);
+    --dialog-border: var(--dark-border-color);
+    --dialog-title: var(--dark-text-color);
+    --dialog-text: var(--dark-text-secondary-color);
   }
 }
 

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { CustomButton } from '@/components/Common';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import FormField from './FormField';
+import DialogSectionHeader from './DialogSectionHeader';
 import useSupabase, { Profile } from '@/hooks/useSupabase';
 
 interface EditProfileDialogProps {
@@ -10,25 +10,28 @@ interface EditProfileDialogProps {
   setProfile: (profile: Profile) => void;
 }
 
-// TODO: implement loading state
 const EditProfileDialog = ({ profile, setProfile }: EditProfileDialogProps) => {
-  const currentProfile = profile;
   const { updateProfileData } = useSupabase();
-  // const [loading, setLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [profileForm, setProfileForm] = useState({
+    first_name: profile.first_name || '',
+    last_name: profile.last_name || '',
+    home_name: profile.home_name || '',
+    position: profile.position || ''
+  });
   
-  const handleUpdateProfile = async (event: { preventDefault: () => void; }) => {
-    event.preventDefault();
-    const profile: Profile = {
-      first_name: (document.getElementById('first_name') as HTMLInputElement).value,
-      last_name: (document.getElementById('last_name') as HTMLInputElement).value,
-      home_name: (document.getElementById('home_name') as HTMLSelectElement).value,
-      position: (document.getElementById('position') as HTMLSelectElement).value,
-    };
-    // setLoading(true);
-    await updateProfileData(profile);
-    setProfile(profile);
-    // setLoading(false); // TODO: Add visual loading indicator
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setProfileForm({
+      ...profileForm,
+      [name]: value
+    });
+  };
+
+  const handleUpdateProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await updateProfileData(profileForm);
+    setProfile(profileForm);
     setIsDialogOpen(false);
   };
 
@@ -37,38 +40,69 @@ const EditProfileDialog = ({ profile, setProfile }: EditProfileDialogProps) => {
       <DialogTrigger asChild>
         <CustomButton text="Edit Profile" variant="outline" />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-white p-6 rounded-lg shadow-lg">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-semibold text-blue-700">Edit Profile</DialogTitle>
+      <DialogContent className="sm:max-w-[600px] bg-dialog-bg border-2 border-dialog-border">
+        <DialogHeader className="bg-dialog-bg p-4 rounded-t-lg border-b border-dialog-border">
+          <DialogTitle className="text-dialog-title text-xl font-semibold">
+            Edit Profile
+          </DialogTitle>
+          <DialogDescription className="text-dialog-text">
+            Update your profile information below.
+          </DialogDescription>
         </DialogHeader>
-        <DialogDescription className="text-gray-600 mb-4">Fill in the information below.</DialogDescription>
-        <form onSubmit={handleUpdateProfile} className="grid gap-6">
-          <div>
-            <Label htmlFor="first_name" className="block text-sm font-medium text-gray-700">First Name</Label>
-            <Input id="first_name" type="text" defaultValue={currentProfile.first_name ?? ''} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
+        <form onSubmit={handleUpdateProfile} className="flex flex-col gap-4 p-6 bg-dialog-bg">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <DialogSectionHeader title="Personal Information" />
+              <FormField 
+                name="first_name"
+                label="First Name"
+                type="text"
+                placeholder="Enter First Name"
+                value={profileForm.first_name}
+                onChange={handleChange}
+              />
+              <FormField 
+                name="last_name"
+                label="Last Name"
+                type="text"
+                placeholder="Enter Last Name"
+                value={profileForm.last_name}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="space-y-4">
+              <DialogSectionHeader title="Work Information" />
+              <FormField 
+                name="home_name"
+                label="Personal Care Home"
+                type="text"
+                placeholder="Select Home"
+                value={profileForm.home_name}
+                onChange={handleChange}
+                fieldType="dropdown"
+                options={["home_name_1", "home_name_2", "home_name_3"]}
+              />
+              <FormField 
+                name="position"
+                label="Position"
+                type="text"
+                placeholder="Select Position"
+                value={profileForm.position}
+                onChange={handleChange}
+                fieldType="dropdown"
+                options={["PCA", "Medroom", "Manager"]}
+              />
+            </div>
           </div>
-          <div>
-            <Label htmlFor="last_name" className="block text-sm font-medium text-gray-700">Last Name</Label>
-            <Input id="last_name" type="text" defaultValue={currentProfile.last_name ?? ''} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
-          </div>
-          <div>
-            <Label htmlFor="home_name" className="block text-sm font-medium text-gray-700">Personal Care Home</Label>
-            <select id="home_name" defaultValue={currentProfile.home_name ?? ''} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-              <option value="home_name_1">PCH #1</option>
-              <option value="home_name_2">PCH #2</option>
-              <option value="home_name_3">PCH #3</option>
-            </select>
-          </div>
-          <div>
-            <Label htmlFor="position" className="block text-sm font-medium text-gray-700">Position</Label>
-            <select id="position" defaultValue={currentProfile.position ?? ''} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-              <option value="PCA">PCA</option>
-              <option value="Medroom">Medroom</option>
-              <option value="Manager">Manager</option>
-            </select>
-          </div>
-          <div className="flex justify-end">
-            <CustomButton text="Save" type="submit" />
+          
+          <div className="flex justify-end space-x-4 pt-4 border-t border-dialog-border">
+            <CustomButton 
+              type="submit" 
+              text="Save Changes" 
+              variant="outline"
+              className="bg-button-bg text-button-text border border-button-border hover:bg-button-hover px-6" 
+            />
           </div>
         </form>
       </DialogContent>

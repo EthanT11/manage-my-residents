@@ -3,15 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { CustomButton } from "@/components/Common";
 import FormField from "./FormField";
 import { Resident } from "@/hooks/useSupabase";
-
-function AddSectionHeader({ title }: { title: string }) {
-	return (
-		<h3 className="text-infopanel-text font-semibold border-b border-infopanel-border pb-2">
-			{title}
-		</h3>
-	)
-}
-
+import DialogSectionHeader from "./DialogSectionHeader";
 export default function AddResDialog({ addResident }: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
 	const [resForm, setResForm] = useState({
 		first_name: "",
@@ -57,20 +49,20 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 					className="bg-button-bg text-button-text border border-button-border hover:bg-button-hover" 
 				/>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[600px] bg-infopanel-bg border-2 border-infopanel-border">
-				<DialogHeader className="bg-sidebar-bg p-4 rounded-t-lg border-b border-infopanel-border">
-					<DialogTitle className="text-sidebar-text text-xl font-semibold">
+			<DialogContent className="sm:max-w-[600px] bg-dialog-bg border-2 border-dialog-border">
+				<DialogHeader className="bg-dialog-bg p-4 rounded-t-lg border-b border-dialog-border">
+					<DialogTitle className="text-dialog-title text-xl font-semibold">
 						New Resident Registration
 					</DialogTitle>
-					<DialogDescription className="text-sidebar-text-secondary">
+					<DialogDescription className="text-dialog-text">
 						Please fill in all required information for the new resident.
 					</DialogDescription>
 				</DialogHeader>
-				<form onSubmit={handleSubmit} className="flex flex-col gap-4 p-6 bg-infopanel-bg">
+				<form onSubmit={handleSubmit} className="flex flex-col gap-4 p-6 bg-dialog-bg">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						{/* Personal Information Section */}
 						<div className="space-y-4">
-							<AddSectionHeader title="Personal Information" />
+							<DialogSectionHeader title="Personal Information" />
 							<FormField 
 								name="first_name" 
 								label="First Name" 
@@ -110,7 +102,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 
 						{/* Physical Description Section */}
 						<div className="space-y-4">
-							<AddSectionHeader title="Physical Description" />
+							<DialogSectionHeader title="Physical Description" />
 							<FormField 
 								name="hair" 
 								label="Hair Color" 
@@ -127,7 +119,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 								value={resForm.eye}
 								onChange={handleChange}
 							/>
-							<AddSectionHeader title="Other Information" />
+							<DialogSectionHeader title="Other Information" />
 							<FormField 
 								name="room" 
 								label="Room" 

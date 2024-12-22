@@ -103,6 +103,22 @@ export default {
 				'section-title': 'var(--resident-details-section-title)',
 				'section-bg': 'var(--resident-details-section-bg)',
 			},
+
+			// Profile colors
+			'profile': {
+				'bg': 'var(--profile-bg)',
+				'border': 'var(--profile-border)',
+				'title': 'var(--profile-title)',
+				'text': 'var(--profile-text)',
+			},
+
+			// Dialog colors
+			'dialog': {
+				'bg': 'var(--dialog-bg)',
+				'border': 'var(--dialog-border)',
+				'title': 'var(--dialog-title)',
+				'text': 'var(--dialog-text)',
+			},
   		}
   	}
   },

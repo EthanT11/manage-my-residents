@@ -23,20 +23,20 @@ export default function ProfileCard( { profile, avatarUrl, user, setProfile }: P
 	return (
 		<div className="flex-1 p-6">
 			<div className="max-w-4xl mx-auto">
-				<Card className="bg-resident-details-bg border-resident-details-border">
-					<CardHeader className="border-b border-resident-details-border/20 pb-6">
+				<Card className="bg-profile-bg border-profile-border">
+					<CardHeader className="border-b border-profile-border/20 pb-6">
 						<div className="flex items-center gap-4">
-							<Avatar className="h-16 w-16 ring-2 ring-resident-details-border">
+								<Avatar className="h-16 w-16 ring-2 ring-profile-border">
 								<AvatarImage src={avatarUrl} alt={profile.first_name || ''} />
-								<AvatarFallback className="bg-resident-details-border text-resident-details-text font-medium text-lg">
+								<AvatarFallback className="bg-profile-border text-profile-text font-medium text-lg">
 									{getInitials(profile.first_name, profile.last_name)}
 								</AvatarFallback>
 							</Avatar>
 							<div>
-								<CardTitle className="text-resident-details-title mb-1">
+								<CardTitle className="text-profile-title mb-1">
 									Account Settings
 								</CardTitle>
-								<p className="text-sm text-resident-details-text">
+								<p className="text-sm text-profile-text">
 									Manage your account information and preferences
 								</p>
 							</div>
