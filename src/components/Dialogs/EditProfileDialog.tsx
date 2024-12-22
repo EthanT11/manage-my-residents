@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { CustomButton } from '@/components/Common';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import useSupabase, { Profile } from '@/hooks/useSupabase';
@@ -35,7 +35,7 @@ const EditProfileDialog = ({ profile, setProfile }: EditProfileDialogProps) => {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
+        <CustomButton text="Edit Profile" variant="outline" />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-white p-6 rounded-lg shadow-lg">
         <DialogHeader>
@@ -68,7 +68,7 @@ const EditProfileDialog = ({ profile, setProfile }: EditProfileDialogProps) => {
             </select>
           </div>
           <div className="flex justify-end">
-            <Button type="submit" className="bg-blue-700 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Save</Button>
+            <CustomButton text="Save" type="submit" />
           </div>
         </form>
       </DialogContent>
