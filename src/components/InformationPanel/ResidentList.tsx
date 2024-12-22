@@ -79,9 +79,9 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 						{searchQuery ? `${filteredResidents.length}/${residents.length}` : residents.length}
 					</span>
 				</div>
-				<SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}>
+				{!selectedResident ? <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}>
 					<AddResDialog addResident={handleAddRes}/>
-				</SearchBar>
+				</SearchBar> : ""}
 
 			</CardHeader>
 			{!selectedResident ? (
