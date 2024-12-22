@@ -11,18 +11,25 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar"
 
-import { Calendar, Home, Settings, User, ForkKnife, LogOut } from "lucide-react"
+import { Calendar, Home, Settings, User, ForkKnife, LogOut, Moon } from "lucide-react"
 import useSupabase from "@/hooks/useSupabase"
 import { useTheme } from "@/hooks/useTheme"
 import SelfPlug from "./SelfPlug"
 
 // TODO: Finish Calendar, Meals, and Residents | Out of scope for now
 
+interface SidebarItem {
+  title: string;
+  url?: string;
+  icon: React.ElementType;
+  action?: () => void;
+}
+
 export default function SideManager() {
-  const { toggleTheme } = useTheme()
+  const { toggleTheme, theme } = useTheme()
   const { signOut } = useSupabase()
 
-  const items = [
+  const mainItems: SidebarItem[] = [
     {
       title: "Home",
       url: "/dashboard",
@@ -43,10 +50,18 @@ export default function SideManager() {
       url: "/dashboard",
       icon: User,
     },
+  ]
+
+  const settingsItems = [
     {
-      title: "Settings",
+      title: theme === 'dark' ? 'Light Mode' : 'Dark Mode',
+      icon: Moon,
+      action: () => toggleTheme(),  
+    },
+    {
+      title: "Account",
+      url: "/account",
       icon: Settings,
-      action: () => toggleTheme(),
     },
     {
       title: "Logout",
@@ -56,6 +71,22 @@ export default function SideManager() {
     }
   ]
 
+  const renderMenuItems = (items: SidebarItem[]) => (
+    items.map((item) => (
+      <SidebarMenuItem key={item.title}>
+        <SidebarMenuButton 
+          asChild 
+          onClick={item.action}
+          className="hover:bg-[var(--sidebar-hover)] hover:text-[var(--sidebar-text)] data-[active=true]:bg-[var(--sidebar-hover)] data-[active=true]:text-[var(--sidebar-text)]"
+        >
+          <a href={item.url}>
+            <item.icon className="text-[var(--sidebar-text-secondary)]" />
+            <span className="text-[var(--sidebar-text-secondary)]">{item.title}</span>
+          </a>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    ))
+  )
 
   return (
     <Sidebar 
@@ -75,26 +106,27 @@ export default function SideManager() {
           </div>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton 
-                    asChild 
-                    onClick={item.action}
-                    className="hover:bg-[var(--sidebar-hover)] hover:text-[var(--sidebar-text)] data-[active=true]:bg-[var(--sidebar-hover)] data-[active=true]:text-[var(--sidebar-text)]"
-                  >
-                    <a href={item.url}>
-                      <item.icon className="text-[var(--sidebar-text-secondary)]" />
-                      <span className="text-[var(--sidebar-text-secondary)]">{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {renderMenuItems(mainItems)}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup className="mt-auto">
+          <SidebarSeparator className="my-2" />
+          <div className="px-4 py-2 group-data-[collapsible=icon]:px-1">
+            <h3 className="text-sm font-medium text-[var(--sidebar-text-secondary)] opacity-70 group-data-[collapsible=icon]:hidden">
+              Settings
+            </h3>
+          </div>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {renderMenuItems(settingsItems)}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="mt-auto">
+      <SidebarFooter>
         <SidebarSeparator />
         <SelfPlug />
       </SidebarFooter>
