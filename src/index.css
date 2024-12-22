@@ -29,8 +29,9 @@ html, body, #root {
    --light-hover-color: #dcd9e7;  
    --light-active-color: #ccc8dc;
 
-   --dark-page-bg: #334155;
+   --dark-page-bg: #0f172a;
    --dark-bg-color: #0f172a;
+   --dark-bg-secondary-color: #1e293b;
    --dark-border-color: #334155;
    --dark-text-color: #f1f5f9;
    --dark-text-secondary-color: #cbd5e1;
@@ -130,7 +131,7 @@ html, body, #root {
     --sidebar-hover: var(--dark-hover-color);
 
     /* Header colors */
-    --infoheader-bg: var(--dark-bg-color);
+    --infoheader-bg: var(--dark-bg-secondary-color);
     --infoheader-border: var(--dark-border-color);
     --infoheader-text: var(--dark-text-color);
     --infoheader-text-secondary: var(--dark-text-secondary-color);

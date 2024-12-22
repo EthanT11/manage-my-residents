@@ -1,33 +1,10 @@
 import { Resident, ResidentAdditional } from '@/hooks/useSupabase';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { DetailsSection, DetailsItem } from "@/components/Common/CustomDetails";
 
 interface ResidentDetailsProps {
     selectedResident: (Resident & ResidentAdditional) | null;
-}
-
-function DetailsSection({ title, children }: { title: string, children: React.ReactNode }) {
-    return (
-        <div className="bg-resident-details-section-bg rounded-lg p-4 shadow-sm border border-resident-details-border">
-            <h4 className="font-semibold text-resident-details-section-title mb-3 pb-2 border-b border-resident-details-border">
-                {title}
-            </h4>
-            <div className="space-y-1">
-                {children}
-            </div>
-        </div>
-    );
-}
-
-function DetailsItem({ title, value }: { title: string, value: string | undefined}) {
-    return (
-        <div className="flex items-baseline justify-between py-1 rounded px-2 -mx-2">
-            <span className="text-sm font-medium text-resident-details-text">{title}</span>
-            <span className={`text-sm font-medium text-resident-details-text`}>
-                {value || 'N/A'}
-            </span>
-        </div>
-    );
 }
 
 function dobToAge(dob: string) {
@@ -40,7 +17,9 @@ function dobToAge(dob: string) {
 export default function ResidentDetails({ selectedResident }: ResidentDetailsProps) {
     if (!selectedResident) {
         return (
-            <Card className="lg:col-span-2 bg-resident-details-bg border-resident-details-border shadow-md">
+            <Card className={`lg:col-span-2 bg-resident-details-bg border-resident-details-border shadow-md
+                             transition-all duration-500 ease-in-out
+                             ${!selectedResident ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-resident-details-title flex items-center gap-2">
   
@@ -55,7 +34,9 @@ export default function ResidentDetails({ selectedResident }: ResidentDetailsPro
     const selectedResidentName = selectedResident.first_name + " " + selectedResident.last_name;
 
     return (
-        <Card className="lg:col-span-2 bg-resident-details-bg border-resident-details-border">
+        <Card className={`lg:col-span-2 bg-resident-details-bg border-resident-details-border
+                         transition-all duration-500 ease-in-out delay-200
+                         ${selectedResident ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
 			{/* Note: Not sure if I like the thick line seperating the header and content */}
             <CardHeader className="border-b border-resident-details-border/20 pb-6">
                 <div className="flex items-center gap-4">

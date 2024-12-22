@@ -94,7 +94,7 @@ export default function InformationPanel() {
 					}
 					</div>
 
-					<div>
+					<div className="transition-all duration-200 ease-in-out">
 						<ResidentList 
 							residents={residents || ([] as (Resident & ResidentAdditional)[])} 
 							setSelectedResident={setSelectedResident} 
