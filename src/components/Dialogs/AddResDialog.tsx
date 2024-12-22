@@ -45,7 +45,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 			<DialogTrigger asChild>
 				<CustomButton 
 					text="Add Resident" 
-					variant="secondary"
+					variant="outline"
 					className="bg-button-bg text-button-text border border-button-border hover:bg-button-hover" 
 				/>
 			</DialogTrigger>

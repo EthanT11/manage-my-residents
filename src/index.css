@@ -20,13 +20,13 @@ html, body, #root {
 
 	/* Light Theme */
 	/* Base colors */
-   --light-page-bg: #e9eef2; 
-   --light-bg-color: #f3f6f9;  
-   --light-border-color: #ccd6e0;  
-   --light-text-color: #1c2838;  
-   --light-text-secondary-color: #4a5d77;  
-   --light-hover-color: #dde5ed; 
-   --light-active-color: #ccd6e0;  
+   --light-page-bg: #e8e6ee; 
+   --light-bg-color: #f0eef5;  
+   --light-border-color: #c4c1d3;  
+   --light-text-color: #322d4d;  
+   --light-text-secondary-color: #5d5683;  
+   --light-hover-color: #dcd9e7;  
+   --light-active-color: #ccc8dc;  
 
    --dark-page-bg: #334155;
    --dark-bg-color: #0f172a;
