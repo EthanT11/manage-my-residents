@@ -20,13 +20,14 @@ html, body, #root {
 
 	/* Light Theme */
 	/* Base colors */
-   --light-page-bg: #e8e6ee; 
+   --light-page-bg: #f0eef5; 
    --light-bg-color: #f0eef5;  
+   --light-bg-secondary-color: #e8e6ee;
    --light-border-color: #c4c1d3;  
    --light-text-color: #322d4d;  
    --light-text-secondary-color: #5d5683;  
    --light-hover-color: #dcd9e7;  
-   --light-active-color: #ccc8dc;  
+   --light-active-color: #ccc8dc;
 
    --dark-page-bg: #334155;
    --dark-bg-color: #0f172a;
@@ -46,11 +47,11 @@ html, body, #root {
     --sidebar-text-secondary: var(--light-text-secondary-color);
     --sidebar-hover: var(--light-hover-color);
 
-    /* Header colors */
-    --infoheader-bg: var(--bg-color);
-    --infoheader-border: var(--border-color);
-    --infoheader-text: var(--text-color);
-    --infoheader-text-secondary: var(--text-secondary-color);
+    /* Information Panel Header colors */
+    --infoheader-bg: var(--light-bg-secondary-color);
+    --infoheader-border: var(--light-border-color);
+    --infoheader-text: var(--light-text-color);
+    --infoheader-text-secondary: var(--light-text-secondary-color);
 
     /* Information Panel colors */
     --infopanel-bg: var(--light-bg-color);
