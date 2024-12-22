@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from '@supabase/supabase-js';
 import useSupabase, { Profile } from "@/hooks/useSupabase";
-import { TopNavBar } from "../Common";
 import { EditProfileDialog } from "../Profile";
+import { SideManager } from "../SideManager";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 // TODO: use id not user_id *****
 
@@ -76,37 +77,43 @@ export default function Account() {
     }
 
 	return (
-        <div className="min-h-screen bg-gray-100">
-        <TopNavBar />
-        {user ? (
-            <div className="container mx-auto p-4">
-                <h1 className="text-2xl font-bold mb-4">Account Page</h1>
-                <div className="bg-white p-4 rounded-md shadow-md flex justify-between items-center">
-                    <div className="flex-1">
-                        <h2 className="text-lg font-bold mb-4">User Information</h2>
-                        <p><strong>Email:</strong> {user?.email}</p>
-                        <p><strong>Home Name:</strong> {profile?.home_name}</p>
-                        <p><strong>Role:</strong> {profile?.position}</p>
-                        <h2 className="text-lg font-bold mt-4 mb-4">Profile Information</h2>
-                        <p><strong>First Name:</strong> {profile?.first_name}</p>
-                        <p><strong>Last Name:</strong> {profile?.last_name}</p>
-                    </div>
-                    <div className="flex flex-col items-center ml-auto space-y-2">
-                        {avatarUrl && <img src={avatarUrl} alt="Profile Avatar" className="w-24 h-24 rounded-full " />}
-                        <button onClick={handleUploadClick} className="border text-black py-2 px-4 rounded-md text-center">Upload Photo</button>
-                        {profile && <EditProfileDialog profile={profile} setProfile={setProfile} />}   
-                    </div>
-                </div>
-                <input
-                    type="file"
-                    id="fileInput"
-                    style={{ display: 'none' }}
-                    onChange={handleFileChange}
-                />
-            </div>
-        ) : (
-            <div>Loading...</div>
-        )}
-    </div>
+        <>
+            <SidebarProvider>
+                <SideManager />
+                <main className="flex flex-col font-roboto h-screen w-screen overflow-auto">
+                    {user ? (
+                        <div className="flex-1 p-4">
+                            <div className="max-w-7xl mx-auto">
+                                <h1 className="text-2xl font-bold mb-4">Account Page</h1>
+                                <div className="bg-white p-4 rounded-md shadow-md flex justify-between items-center">
+                                    <div className="flex-1">
+                                        <h2 className="text-lg font-bold mb-4">User Information</h2>
+                                        <p><strong>Email:</strong> {user?.email}</p>
+                                        <p><strong>Home Name:</strong> {profile?.home_name}</p>
+                                        <p><strong>Role:</strong> {profile?.position}</p>
+                                        <h2 className="text-lg font-bold mt-4 mb-4">Profile Information</h2>
+                                        <p><strong>First Name:</strong> {profile?.first_name}</p>
+                                        <p><strong>Last Name:</strong> {profile?.last_name}</p>
+                                    </div>
+                                    <div className="flex flex-col items-center ml-auto space-y-2">
+                                        {avatarUrl && <img src={avatarUrl} alt="Profile Avatar" className="w-24 h-24 rounded-full " />}
+                                        <button onClick={handleUploadClick} className="border text-black py-2 px-4 rounded-md text-center">Upload Photo</button>
+                                        {profile && <EditProfileDialog profile={profile} setProfile={setProfile} />}   
+                                    </div>
+                                </div>
+                                <input
+                                    type="file"
+                                    id="fileInput"
+                                    style={{ display: 'none' }}
+                                    onChange={handleFileChange}
+                                />
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="flex items-center justify-center h-full">Loading...</div>
+                    )}
+                </main>
+            </SidebarProvider>
+        </>
 	);
 }

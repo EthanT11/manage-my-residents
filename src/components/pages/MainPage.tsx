@@ -29,7 +29,7 @@ export default function MainPage() {
               <InformationPanel />
             </div>         
           </main>
-        </SidebarProvider>
+      </SidebarProvider>
     </>
   );
 };
