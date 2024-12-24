@@ -91,7 +91,7 @@ export default function SideManager() {
   return (
     <Sidebar 
       collapsible="icon" 
-      className="bg-sidebar-bg border-r border-sidebar-border"
+      className="bg-sidebar-bg border-r border-sidebar-border theme-transition z-20"
     >
       <SidebarRail className="hover:after:bg-sidebar-hover" />
       <SidebarContent>

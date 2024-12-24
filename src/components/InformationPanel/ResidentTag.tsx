@@ -25,7 +25,8 @@ export default function ResidentTag( {resident, setSelectedResident}: ResidentTa
 			key={resident.id} 
 			className="cursor-pointer w-72
 					 hover:bg-resident-tag-hover 
-					 border border-resident-tag-border bg-resident-tag-bg"
+					 border border-resident-tag-border bg-resident-tag-bg
+					 theme-transition"
 			onClick={handleSetResident}
 		>
 			<CardContent className="flex items-center p-4 space-x-4">

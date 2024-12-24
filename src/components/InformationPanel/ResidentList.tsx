@@ -20,7 +20,7 @@ function handleAddRes( newResident: Omit<Resident, 'id'> ) {
 
 function SearchBar( {searchQuery, setSearchQuery, children}: {searchQuery: string, setSearchQuery: Dispatch<SetStateAction<string>>, children: ReactNode} ) {
 	return (
-		<div className="flex items-center space-x-2">
+		<div className="flex items-center space-x-2 theme-transition">
 			<div className="relative">
 				<input
 					type="text"
@@ -30,7 +30,8 @@ function SearchBar( {searchQuery, setSearchQuery, children}: {searchQuery: strin
 					className="pl-9 pr-4 py-2 border border-search-border rounded-lg text-sm 
 							 focus:outline-none focus:ring-2 focus:ring-search-ring 
 							 bg-search-bg text-search-text w-64
-							 placeholder:text-search-placeholder"
+							 placeholder:text-search-placeholder
+							 theme-transition"
 				/>
 				<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-search-icon" />
 				{searchQuery && (
@@ -75,7 +76,7 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 
 	return (
 		<Card className={`mt-6 border-resident-list-border bg-resident-list-bg
-						 transition-all duration-500 ease-in-out
+						 resident-list-transition
 						 ${selectedResident ? 'max-h-[64px]' : 'max-h-[800px]'}`}>
 			<CardHeader className="flex flex-row items-center justify-between pb-2 
 								border-b border-resident-list-border">
@@ -84,13 +85,13 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 					onClick={toggleExpanded}
 				>
 					<ChevronDown 
-						className={`h-5 w-5 text-resident-tag-text transition-transform duration-200 
+						className={`h-5 w-5 text-resident-tag-text theme-transition 
 								${!isExpanded || selectedResident ? '-rotate-90' : ''} 
 								group-hover:text-resident-tag-hover`}
 					/>
 					<CardTitle 
 						className={`text-resident-tag-text group-hover:text-resident-tag-hover 
-								transition-colors`}
+								theme-transition`}
 					>
 						Resident List
 					</CardTitle>
@@ -105,7 +106,7 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 					</SearchBar> 
 				: null}
 			</CardHeader>
-			<div className={`transition-all duration-500 ease-in-out overflow-hidden
+			<div className={`resident-list-transition overflow-hidden
 							${isExpanded && !selectedResident ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
 				{!selectedResident && (
 					<CardContent className="pt-4">
@@ -119,7 +120,7 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 							))}
 						</div>
 						{filteredResidents.length === 0 && (
-							<div className="text-center py-8 text-resident-tag-text/50">
+							<div className="text-center py-8 text-resident-tag-text">
 								No residents found matching "{searchQuery}"
 							</div>
 						)}

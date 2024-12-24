@@ -4,11 +4,7 @@ import PanelCard from './PanelCard';
 import ResidentList from './ResidentList';
 import ResidentDetails from './ResidentDetails';
 
-
-// TODO: Add transition for the different types of opens and closes for the dash board, eg: select/deselect resident and move panels up and down
-// TODO: Maybe have a minimize button for the resident list
 // TODO: Remove default scrollbar for the resident list
-// TODO: Add a loading state for the resident list
 export default function InformationPanel() {
     const [residents, setResidents] = useState<Resident[] | null>(null);
 	const [selectedResident, setSelectedResident] = useState<Resident & ResidentAdditional | null>(null);
@@ -67,7 +63,7 @@ export default function InformationPanel() {
         return diffDays;
     };
     return (
-        <div className="flex-1 overflow-auto no-scrollbar bg-infopanel-bg border-l border-infopanel-border">
+        <div className="flex-1 overflow-auto no-scrollbar bg-infopanel-bg border-l border-infopanel-border theme-transition">
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 
 					<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'> {/* Container for the panel cards */}
@@ -94,7 +90,7 @@ export default function InformationPanel() {
 					}
 					</div>
 
-					<div className="transition-all duration-200 ease-in-out">
+					<div>
 						<ResidentList 
 							residents={residents || ([] as (Resident & ResidentAdditional)[])} 
 							setSelectedResident={setSelectedResident} 

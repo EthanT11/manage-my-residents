@@ -18,11 +18,10 @@ export default function ResidentDetails({ selectedResident }: ResidentDetailsPro
     if (!selectedResident) {
         return (
             <Card className={`lg:col-span-2 bg-resident-details-bg border-resident-details-border shadow-md
-                             transition-all duration-500 ease-in-out
-                             ${!selectedResident ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                             resident-details-transition
+                             opacity-0 translate-y-4`}>
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-resident-details-title flex items-center gap-2">
-  
                         Resident Details
                     </CardTitle>
                     <p className="text-sm text-resident-details-text">Select a resident to view their details</p>
@@ -35,8 +34,8 @@ export default function ResidentDetails({ selectedResident }: ResidentDetailsPro
 
     return (
         <Card className={`lg:col-span-2 bg-resident-details-bg border-resident-details-border
-                         transition-all duration-500 ease-in-out delay-200
-                         ${selectedResident ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                         resident-details-transition
+                         opacity-100 translate-y-0`}>
 			{/* Note: Not sure if I like the thick line seperating the header and content */}
             <CardHeader className="border-b border-resident-details-border/20 pb-6">
                 <div className="flex items-center gap-4">

@@ -24,7 +24,7 @@ const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
 					`
 						bg-button-bg text-button-text border border-button-border
 						hover:bg-button-hover active:bg-button-active
-						transition-colors ${variant}
+						theme-transition ${variant}
 					`
 				)}
 				onClick={onClick}

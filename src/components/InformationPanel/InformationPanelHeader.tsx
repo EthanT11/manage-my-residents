@@ -25,8 +25,9 @@ export default function InformationPanelHeader({ isVisible = true }: Information
 	return (
 		<header 
 			className={`
-				sticky top-0 z-10 bg-infoheader-bg border-b border-infoheader-border
-				transition-transform duration-300
+				sticky top-0 z-10 
+				bg-infoheader-bg border-b border-infoheader-border
+				theme-transition header-transition
 				${isVisible ? 'translate-y-0' : '-translate-y-full'}
 			`}
 		>
