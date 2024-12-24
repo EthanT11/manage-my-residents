@@ -80,8 +80,7 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 						 ${selectedResident ? 'max-h-[64px]' : 'max-h-[800px]'}`}>
 			<CardHeader className="flex flex-row items-center justify-between pb-2 
 								border-b border-resident-list-border">
-				<div 
-					className="flex items-center space-x-2 cursor-pointer group"
+				<div className="flex items-center space-x-2 cursor-pointer group"
 					onClick={toggleExpanded}
 				>
 					<ChevronDown 
@@ -96,14 +95,19 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 						Resident List
 					</CardTitle>
 					<span className="px-2 py-1 text-sm font-medium text-resident-tag-text 
-								bg-resident-tag-hover rounded-full">
+								bg-resident-tag-hover rounded-full theme-transition">
 						{searchQuery ? `${filteredResidents.length}/${residents.length}` : residents.length}
 					</span>
 				</div>
-				{!selectedResident && isExpanded ? 
-					<SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}>
-						<AddResDialog addResident={handleAddRes}/>
-					</SearchBar> 
+				{!selectedResident ?
+					<> 	
+						<p className="flex-1 text-center text-infopanel-text-secondary text-sm font-medium theme-transition">
+							Select a resident to view their details
+						</p>
+						<SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}>
+							<AddResDialog addResident={handleAddRes}/>
+						</SearchBar> 
+					</>
 				: null}
 			</CardHeader>
 			<div className={`resident-list-transition overflow-hidden

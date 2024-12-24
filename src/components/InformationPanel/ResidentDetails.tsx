@@ -15,21 +15,20 @@ function dobToAge(dob: string) {
 }
 
 export default function ResidentDetails({ selectedResident }: ResidentDetailsProps) {
-    if (!selectedResident) {
-        return (
-            <Card className={`lg:col-span-2 bg-resident-details-bg border-resident-details-border shadow-md
-                             resident-details-transition
-                             opacity-0 translate-y-4`}>
-                <CardHeader className="space-y-1">
-                    <CardTitle className="text-resident-details-title flex items-center gap-2">
-                        Resident Details
-                    </CardTitle>
-                    <p className="text-sm text-resident-details-text">Select a resident to view their details</p>
-                </CardHeader>
-            </Card>
-        );
-    }
-
+	if (!selectedResident) {
+		return (
+			<Card className="lg:col-span-2 bg-resident-details-bg border-resident-details-border shadow-md
+								opacity-0 translate-y-4">
+				<CardHeader className="space-y-1">
+					<CardTitle className="text-resident-details-title flex items-center gap-2">
+						Resident Details
+					</CardTitle>
+					<p className="text-sm text-resident-details-text">Select a resident to view their details</p>
+				</CardHeader>
+			</Card>
+		)
+	}
+	
     const selectedResidentName = selectedResident.first_name + " " + selectedResident.last_name;
 
     return (
