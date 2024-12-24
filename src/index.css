@@ -40,6 +40,11 @@ html, body, #root {
 
    	/* Page colors */
    	--page-bg: var(--light-page-bg);
+
+	/* Error Page colors */
+	--error-page-bg: var(--light-page-bg);
+	--error-page-text: var(--light-text-color);
+	--error-page-text-secondary: var(--light-text-secondary-color);
    
     /* Sidebar colors */
     --sidebar-bg: var(--light-bg-color);
@@ -122,6 +127,10 @@ html, body, #root {
 
 	/* Page colors */
     --page-bg: var(--dark-page-bg);
+
+	/* Error Page colors */
+	--error-page-bg: var(--dark-page-bg);
+	--error-page-text: var(--dark-text-secondary-color);
 
     /* Sidebar colors */
     --sidebar-bg: var(--dark-bg-color);

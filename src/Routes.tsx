@@ -1,24 +1,42 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter, RouteObject } from "react-router-dom";
 import { MainPage, Auth, Account } from "./components/pages";
-// TODO: create a route and page for handing route not found | errorElement: <ErrorPage />
-// TODO: implement maybe something like an authguard when redoing supabase auth
+import ErrorPage from "./components/pages/ErrorPage";
+import AuthGuard from "./components/guards/AuthGuard";
 
-const router = createBrowserRouter([
+// Protected routes that require authentication
+const protectedRoutes: RouteObject[] = [
 	{
-		path: "/",
-		element: <Navigate to="/sign-in" replace />
+		path: "/dashboard",
+		element: (
+			<AuthGuard>
+				<MainPage />
+			</AuthGuard>
+		),
 	},
+	{
+		path: "/account",
+		element: (
+			<AuthGuard>
+				<Account />
+			</AuthGuard>
+		),
+	},
+];
+
+// Public routes that don't require authentication
+const publicRoutes: RouteObject[] = [
 	{
 		path: "/sign-in",
 		element: <Auth />,
 	},
+];
+
+const router = createBrowserRouter([
+	...publicRoutes,
+	...protectedRoutes,
 	{
-		path: "/dashboard",
-		element: <MainPage />,
-	},
-	{
-		path: "/account",
-		element: <Account />,
+		path: "*",
+		element: <ErrorPage />,
 	},
 ]);
 

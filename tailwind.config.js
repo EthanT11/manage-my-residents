@@ -21,6 +21,11 @@ export default {
 				'dark': 'hsl(var(--dark-page-bg))'
 			},
 
+			'error-page': {
+				'bg': 'hsl(var(--error-page-bg))',
+				'text': 'hsl(var(--error-page-text))'
+			},
+
   			'sidebar': {
   				'bg': 'var(--sidebar-bg)',
   				'border': 'var(--sidebar-border)',
