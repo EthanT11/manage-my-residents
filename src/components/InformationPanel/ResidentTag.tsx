@@ -30,21 +30,21 @@ export default function ResidentTag( {resident, setSelectedResident}: ResidentTa
 			onClick={handleSetResident}
 		>
 			<CardContent className="flex items-center p-4 space-x-4">
-				<Avatar className="h-14 w-14 ring-2 ring-resident-tag-border">
+				<Avatar className="h-14 w-14 ring-2 ring-resident-tag-border theme-transition">
 					<AvatarImage src={resident.profile_picture_url} alt={residentName[0] + " " + residentName[1]} />
-					<AvatarFallback className="bg-resident-tag-hover text-resident-tag-text font-medium">
+					<AvatarFallback className="bg-resident-tag-hover text-resident-tag-text font-medium theme-transition">
 						{getInitials([resident.first_name, resident.last_name])}
 					</AvatarFallback>
 				</Avatar>
 				<div className="flex-1 min-w-0">
-					<h3 className="font-semibold text-resident-tag-text truncate">
+					<h3 className="font-semibold text-resident-tag-text truncate theme-transition">
 						{resident.first_name + " " + resident.last_name}
 					</h3>
-					<div className="flex items-center mt-1 space-x-2">
-						<span className="px-2 py-1 text-xs font-medium text-resident-tag-text bg-resident-tag-hover rounded-full">
+					<div className="flex items-center mt-1 space-x-2 theme-transition">
+						<span className="px-2 py-1 text-xs font-medium text-resident-tag-text bg-resident-tag-hover rounded-full theme-transition">
 							Room {resident.room}
 						</span>
-						<span className="px-2 py-1 text-xs font-medium text-resident-tag-text bg-resident-tag-hover rounded-full">
+						<span className="px-2 py-1 text-xs font-medium text-resident-tag-text bg-resident-tag-hover rounded-full theme-transition">
 							{resident.wing} Wing
 						</span>
 					</div>
