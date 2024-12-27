@@ -1,24 +1,19 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Dispatch, SetStateAction } from "react"
 import { Resident, ResidentAdditional } from "@/hooks/useSupabase"
+import { useResidents } from "@/contexts/ResidentContext"
 
-// TODO: Add a hover effect to the resident tag | Enlarge card on hover
 interface ResidentTagProps {
-	resident: Resident & ResidentAdditional
-	setSelectedResident: Dispatch<SetStateAction<(Resident & ResidentAdditional) | null>>
+	resident: Resident & ResidentAdditional;
 }
 
 function getInitials(name: [string, string]) {
 	return name.map(n => n[0]).join('');
 }
 
-export default function ResidentTag( {resident, setSelectedResident}: ResidentTagProps ) {
+export default function ResidentTag({ resident }: ResidentTagProps) {
+	const { setSelectedResident } = useResidents();
 	const residentName = [resident.first_name, resident.last_name];
-
-	const handleSetResident = () => {
-		setSelectedResident(resident as Resident & ResidentAdditional);
-	}
 
 	return (
 		<Card 
@@ -27,7 +22,7 @@ export default function ResidentTag( {resident, setSelectedResident}: ResidentTa
 					 hover:bg-resident-tag-hover 
 					 border border-resident-tag-border bg-resident-tag-bg
 					 theme-transition"
-			onClick={handleSetResident}
+			onClick={() => setSelectedResident(resident)}
 		>
 			<CardContent className="flex items-center p-4 space-x-4">
 				<Avatar className="h-14 w-14 ring-2 ring-resident-tag-border theme-transition">

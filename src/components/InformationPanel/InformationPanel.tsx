@@ -1,43 +1,27 @@
-import { useState, useEffect } from 'react';
-import useSupabase, { Resident, ResidentAdditional } from '@/hooks/useSupabase';
+import { useResidents } from '@/contexts/ResidentContext';
 import PanelCard from './PanelCard';
 import ResidentList from './ResidentList';
 import ResidentDetails from './ResidentDetails';
 
 // TODO: Remove default scrollbar for the resident list
 export default function InformationPanel() {
-    const [residents, setResidents] = useState<Resident[] | null>(null);
-	const [selectedResident, setSelectedResident] = useState<Resident & ResidentAdditional | null>(null);
-	
-    const { getResidents } = useSupabase();
-	
-    useEffect(() => {
-		async function fetchResidents() {
-			const residentsData = await getResidents();
-            setResidents(residentsData || null);
-        }
-        fetchResidents();
-    }, []);
-	
-	function clearSelectedResident() {
-		setSelectedResident(null);
-	}
+    const { residents, selectedResident, isLoading } = useResidents();
 
-	// conditions for the panel cards
-	const totalResidents = residents ? residents.length : 0;
-	const averageAge = residents ? Math.round(
-		residents.reduce((sum, resident) => {
-			const birthDate = new Date(resident.dob);
-			const today = new Date();
-			let age = today.getFullYear() - birthDate.getFullYear();
-			const monthDiff = today.getMonth() - birthDate.getMonth();
-			
-			if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-				age--;
-			}
-			return sum + age;
-		}, 0) / residents.length
-	) : 0;
+    // conditions for the panel cards
+    const totalResidents = residents.length;
+    const averageAge = residents.length > 0 ? Math.round(
+        residents.reduce((sum, resident) => {
+            const birthDate = new Date(resident.dob);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return sum + age;
+        }, 0) / residents.length
+    ) : 0;
 
     // Calculate days until next birthday
     const calculateDaysUntilBirthday = (dob: string) => {
@@ -62,43 +46,55 @@ export default function InformationPanel() {
         
         return diffDays;
     };
+
+    if (isLoading) {
+        return (
+			// TODO: Add a loading spinner here
+            <div className="flex-1 flex items-center justify-center bg-infopanel-bg border-l border-infopanel-border">
+                Loading...
+            </div>
+        );
+    }
+
     return (
         <div className="flex-1 overflow-hidden bg-infopanel-bg no-scrollbar border-l border-infopanel-border theme-transition">
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 h-full overflow-y-auto">
+                <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'> {/* Container for the panel cards */}
+                    {!selectedResident ? (
+                        <>
+                            <PanelCard 
+                                title="Home Overview" 
+                                condition={totalResidents} 
+                                subTitle='Total Residents'
+                            />
+                            <PanelCard 
+                                title="Average Age" 
+                                condition={averageAge} 
+                                subTitle='Years'
+                            />
+                        </>
+                    ) : (
+                        <>
+							{/* TODO: Add dynamic information from database */}
+                            <PanelCard 
+                                title={`Important Information`} 
+                                condition={"Allergies: Peanuts"} 
+                                subTitle='EpiPen stored in - Medicine Cabinet'
+                            />
+                            <PanelCard 
+                                title="Birthday Countdown" 
+                                condition={calculateDaysUntilBirthday(selectedResident.dob)} 
+                                subTitle='Days'
+                            />
+                        </>
+                    )}
+                </div>
 
-					<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'> {/* Container for the panel cards */}
-						{!selectedResident ? (
-							<>
-								<PanelCard title="Home Overview" condition={totalResidents} subTitle='Total Residents'/>
-								<PanelCard title="Average Age" condition={averageAge} subTitle='Years'/>
-							</>
-						) : (
-							<>
-							{/* Hardcoded information for now | TODO: Add dynamic information from database */}
-								<PanelCard 
-									title={`Important Information`} 
-									condition={"Allergies: Peanuts"} 
-									subTitle='EpiPen stored in - Medicine Cabinet'
-								/>
-								<PanelCard 
-									title="Birthday Countdown" 
-									condition={calculateDaysUntilBirthday(selectedResident.dob)} 
-										subTitle='Days'
-								/>
-							</>
-						)
-					}
-					</div>
-
-					<div>
-						<ResidentList 
-							residents={residents || ([] as (Resident & ResidentAdditional)[])} 
-							setSelectedResident={setSelectedResident} 
-							selectedResident={selectedResident} 
-							clearSelectedResident={clearSelectedResident}
-						/>
-					</div>
-				<ResidentDetails selectedResident={selectedResident} />
+                <div>
+					{/* NOTE: Resident list now uses the context to fetch and display residents */}
+                    <ResidentList />
+                </div>
+				<ResidentDetails />
             </div>
         </div>
     );

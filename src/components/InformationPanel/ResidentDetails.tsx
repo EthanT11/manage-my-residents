@@ -1,11 +1,7 @@
-import { Resident, ResidentAdditional } from '@/hooks/useSupabase';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DetailsSection, DetailsItem } from "@/components/Common/CustomDetails";
-
-interface ResidentDetailsProps {
-    selectedResident: (Resident & ResidentAdditional) | null;
-}
+import { useResidents } from "@/contexts/ResidentContext";
 
 function dobToAge(dob: string) {
     const today = new Date();
@@ -14,28 +10,31 @@ function dobToAge(dob: string) {
     return age;
 }
 
-export default function ResidentDetails({ selectedResident }: ResidentDetailsProps) {
-	if (!selectedResident) {
-		return (
-			<Card className="lg:col-span-2 bg-resident-details-bg border-resident-details-border shadow-md
-								opacity-0 translate-y-4">
-				<CardHeader className="space-y-1">
-					<CardTitle className="text-resident-details-title flex items-center gap-2">
-						Resident Details
-					</CardTitle>
-					<p className="text-sm text-resident-details-text">Select a resident to view their details</p>
-				</CardHeader>
-			</Card>
-		)
-	}
-	
+export default function ResidentDetails() {
+    // Pull the selected resident from the context
+    const { selectedResident } = useResidents();
+
+    // If no resident is selected, return a placeholder card | Should never happen but just in case
+    if (!selectedResident) {
+        return (
+            <Card className="lg:col-span-2 bg-resident-details-bg border-resident-details-border shadow-md
+                            opacity-0 translate-y-4">
+                <CardHeader className="space-y-1">
+                    <CardTitle className="text-resident-details-title flex items-center gap-2">
+                        Resident Details
+                    </CardTitle>
+                    <p className="text-sm text-resident-details-text">Select a resident to view their details</p>
+                </CardHeader>
+            </Card>
+        )
+    }
+
     const selectedResidentName = selectedResident.first_name + " " + selectedResident.last_name;
 
     return (
         <Card className={`lg:col-span-2 bg-resident-details-bg border-resident-details-border
-                         resident-details-transition
-                         opacity-100 translate-y-0`}>
-			{/* Note: Not sure if I like the thick line seperating the header and content */}
+                       resident-details-transition
+                       opacity-100 translate-y-0`}>
             <CardHeader className="border-b border-resident-details-border/20 pb-6">
                 <div className="flex items-center gap-4">
                     <Avatar className="h-16 w-16 ring-2 ring-resident-details-border">
@@ -59,13 +58,13 @@ export default function ResidentDetails({ selectedResident }: ResidentDetailsPro
                             <DetailsItem title="Date of Birth" value={selectedResident.dob} />
                             <DetailsItem title="Age" value={dobToAge(selectedResident.dob).toString()} />
                             <DetailsItem title="Gender" value={selectedResident.gender} />
-                            <DetailsItem title="Marital Status" value={selectedResident.marital_status} />
-                            <DetailsItem title="Religion" value={selectedResident.religion} />
+                            <DetailsItem title="Marital Status" value={selectedResident.marital_status || 'N/A'} />
+                            <DetailsItem title="Religion" value={selectedResident.religion || 'N/A'} />
                         </DetailsSection>
 
                         <DetailsSection title="Physical Information">
-                            <DetailsItem title="Weight" value={selectedResident.weight} />
-                            <DetailsItem title="Height" value={selectedResident.height} />
+                            <DetailsItem title="Weight" value={selectedResident.weight || 'N/A'} />
+                            <DetailsItem title="Height" value={selectedResident.height || 'N/A'} />
                             <DetailsItem title="Hair Color" value={selectedResident.hair} />
                             <DetailsItem title="Eye Color" value={selectedResident.eye} />
                         </DetailsSection>
@@ -73,19 +72,19 @@ export default function ResidentDetails({ selectedResident }: ResidentDetailsPro
 
                     <div className="space-y-6">
                         <DetailsSection title="Medical Information">
-                            <DetailsItem title="Level of Care" value={selectedResident.level_of_care} />
-                            <DetailsItem title="Blood Type" value={selectedResident.blood_type} />
+                            <DetailsItem title="Level of Care" value={selectedResident.level_of_care || 'N/A'} />
+                            <DetailsItem title="Blood Type" value={selectedResident.blood_type || 'N/A'} />
                             <DetailsItem title="DNR Status" value={selectedResident.dnr ? 'Yes' : 'No'} />
                             <DetailsItem title="Allergies" value={selectedResident.allergies || 'None'} />
-                            <DetailsItem title="Mobility" value={selectedResident.mobility} />
-                            <DetailsItem title="Diet" value={selectedResident.diet} />
+                            <DetailsItem title="Mobility" value={selectedResident.mobility || 'N/A'} />
+                            <DetailsItem title="Diet" value={selectedResident.diet || 'N/A'} />
                             <DetailsItem title="Medications" value={selectedResident.medications || 'None'} />
                         </DetailsSection>
 
                         <DetailsSection title="Emergency Contact">
-                            <DetailsItem title="Name" value={selectedResident.emergency_contact_name} />
-                            <DetailsItem title="Phone" value={selectedResident.emergency_contact_phone} />
-                            <DetailsItem title="Relationship" value={selectedResident.emergency_contact_relationship} />
+                            <DetailsItem title="Name" value={selectedResident.emergency_contact_name || 'N/A'} />
+                            <DetailsItem title="Phone" value={selectedResident.emergency_contact_phone || 'N/A'} />
+                            <DetailsItem title="Relationship" value={selectedResident.emergency_contact_relationship || 'N/A'} />
                         </DetailsSection>
 
                         <DetailsSection title="Additional Notes">

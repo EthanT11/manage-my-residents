@@ -1,24 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import useSupabase, { Resident, ResidentAdditional } from '@/hooks/useSupabase';
 import { AddResDialog } from "../Dialogs";
-import { Dispatch, SetStateAction, useState, useMemo, ReactNode } from "react";
+import { useState, useMemo } from "react";
 import { Search, ChevronDown } from "lucide-react";
 import ResidentTag from "./ResidentTag";
+import { useResidents } from "@/contexts/ResidentContext";
 
-interface ResidentListProps {
-	residents: (Resident & ResidentAdditional)[],
-	selectedResident?: (Resident & ResidentAdditional) | null
-	setSelectedResident: Dispatch<SetStateAction<(Resident & ResidentAdditional) | null>>
-	clearSelectedResident?: () => void
-}
-
-function handleAddRes( newResident: Omit<Resident, 'id'> ) {
-	const { addResident } = useSupabase();
-	console.log(`Adding Resident: ${newResident.first_name} ${newResident.last_name}`);
-	addResident(newResident);
-}
-
-function SearchBar( {searchQuery, setSearchQuery, children}: {searchQuery: string, setSearchQuery: Dispatch<SetStateAction<string>>, children: ReactNode} ) {
+function SearchBar({ searchQuery, setSearchQuery, children }: { 
+	searchQuery: string, 
+	setSearchQuery: (query: string) => void, 
+	children: React.ReactNode 
+}) {
 	return (
 		<div className="flex items-center space-x-2 theme-transition">
 			<div className="relative">
@@ -49,7 +40,8 @@ function SearchBar( {searchQuery, setSearchQuery, children}: {searchQuery: strin
 	);
 }
 
-export default function ResidentList( {residents, setSelectedResident, selectedResident, clearSelectedResident}: ResidentListProps ) {
+export default function ResidentList() {
+	const { residents, selectedResident, setSelectedResident, addResident } = useResidents();
 	const [searchQuery, setSearchQuery] = useState("");
 	const [isExpanded, setIsExpanded] = useState(true);
 
@@ -67,7 +59,7 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 
 	const toggleExpanded = () => {
 		if (selectedResident) {
-			clearSelectedResident?.();
+			setSelectedResident(null);
 			setIsExpanded(true);
 		} else {
 			setIsExpanded(!isExpanded);
@@ -99,16 +91,16 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 						{searchQuery ? `${filteredResidents.length}/${residents.length}` : residents.length}
 					</span>
 				</div>
-				{!selectedResident ?
+				{!selectedResident && (
 					<> 	
 						<p className="flex-1 text-center text-infopanel-text-secondary text-sm font-medium theme-transition">
 							Select a resident to view their details
 						</p>
 						<SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}>
-							<AddResDialog addResident={handleAddRes}/>
+							<AddResDialog addResident={addResident}/>
 						</SearchBar> 
 					</>
-				: null}
+				)}
 			</CardHeader>
 			<div className={`resident-list-transition overflow-y-auto
 							${isExpanded && !selectedResident ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
@@ -119,7 +111,6 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 								<ResidentTag 
 									key={index} 
 									resident={resident} 
-									setSelectedResident={setSelectedResident} 
 								/>
 							))}
 						</div>
@@ -132,5 +123,5 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 				)}
 			</div>
 		</Card>
-	)
+	);
 }
