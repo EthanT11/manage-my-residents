@@ -63,8 +63,8 @@ export default function InformationPanel() {
         return diffDays;
     };
     return (
-        <div className="flex-1 overflow-auto no-scrollbar bg-infopanel-bg border-l border-infopanel-border theme-transition">
-            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="flex-1 overflow-hidden bg-infopanel-bg no-scrollbar border-l border-infopanel-border theme-transition">
+            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 h-full overflow-y-auto">
 
 					<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'> {/* Container for the panel cards */}
 						{!selectedResident ? (

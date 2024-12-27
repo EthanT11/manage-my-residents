@@ -23,7 +23,7 @@ export default function ProfileCard( { profile, avatarUrl, user, setProfile }: P
 	return (
 		<div className="flex-1 p-6">
 			<div className="max-w-4xl mx-auto">
-				<Card className="bg-profile-bg border-profile-border">
+				<Card className="bg-profile-bg border-profile-border theme-transition">
 					<CardHeader className="border-b border-profile-border/20 pb-6">
 						<div className="flex items-center gap-4">
 								<Avatar className="h-16 w-16 ring-2 ring-profile-border">

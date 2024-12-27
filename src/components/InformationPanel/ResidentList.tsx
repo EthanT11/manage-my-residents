@@ -110,7 +110,7 @@ export default function ResidentList( {residents, setSelectedResident, selectedR
 					</>
 				: null}
 			</CardHeader>
-			<div className={`resident-list-transition overflow-hidden
+			<div className={`resident-list-transition overflow-y-auto
 							${isExpanded && !selectedResident ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
 				{!selectedResident && (
 					<CardContent className="pt-4">

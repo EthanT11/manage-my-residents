@@ -25,7 +25,7 @@ export default function Account() {
 	return (
 		<SidebarProvider>
 			<SideManager />
-			<main className="flex flex-col font-roboto h-screen w-screen overflow-auto bg-resident-details-bg">
+			<main className="flex flex-col font-roboto h-screen w-screen overflow-auto bg-resident-details-bg theme-transition">
 				{isLoading ? (
 					// TODO: Add a loading spinner here
 					<div className="flex items-center justify-center h-full">Loading...</div>
