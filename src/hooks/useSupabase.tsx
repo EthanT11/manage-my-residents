@@ -267,25 +267,35 @@ const useSupabase = () => {
 
 	// Profile Avatar
 	const uploadAvatar = async (user_id: string, file: File) => {
-		const fileName = `${user_id}/avatar.jpg`;
-		const { data, error } = await supabase
-			.storage
-			.from('profile-avatars')
-			.upload(fileName, file);
-		if (error) {
-			console.error('Error uploading avatar:', error.message);
-		} else {
-			console.log('Avatar uploaded successfully:', data);
+		try {
+			const fileName = `${user_id}/avatar.jpg`;
+			
+			// Remove existing avatar
+			await supabase.storage
+				.from('profile-avatars')
+				.remove([fileName]);
+
+			// Upload new avatar
+			const { data, error } = await supabase.storage
+				.from('profile-avatars')
+				.upload(fileName, file);
+
+			if (error) throw error;
+			return data;
+		} catch (error) {
+			console.error('Error uploading avatar:', (error as Error).message);
+			return null;
 		}
-	}
+	};
 
 	const getPublicUrl = (path: string) => {
 		const { data } = supabase
 			.storage
 			.from('profile-avatars')
 			.getPublicUrl(path);
-			return data?. publicUrl
-	}
+		// check if the url is already cached if not add timestamp to force browser to reload the image
+		return data?.publicUrl ? `${data.publicUrl}?t=${Date.now()}` : "";
+	};
 
 	const getAvatarUrl = async (user_id: string) => {
 		const path = `${user_id}/avatar.jpg`;
