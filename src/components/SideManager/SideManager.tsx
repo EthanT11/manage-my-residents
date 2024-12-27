@@ -15,6 +15,7 @@ import { Calendar, Home, Settings, User, ForkKnife, LogOut, Moon, Sun } from "lu
 import { useTheme } from "@/hooks/useTheme"
 import { useAuth } from "@/contexts/AuthContext"
 import SelfPlug from "./SelfPlug"
+import { useNavigate } from 'react-router-dom';
 
 // TODO: Finish Calendar, Meals, and Residents | Out of scope for now
 
@@ -28,6 +29,14 @@ interface SidebarItem {
 export default function SideManager() {
   const { toggleTheme, theme } = useTheme()
   const { signOut } = useAuth()
+  const navigate = useNavigate()
+
+  const handleSignOut = async () => {
+    const success = await signOut()
+    if (success) {
+      navigate('/sign-in', { replace: true })
+    }
+  }
 
   const mainItems: SidebarItem[] = [
     {
@@ -65,9 +74,8 @@ export default function SideManager() {
     },
     {
       title: "Logout",
-      url: "/sign-in",
       icon: LogOut,
-      action: signOut,
+      action: handleSignOut,
     }
   ]
 

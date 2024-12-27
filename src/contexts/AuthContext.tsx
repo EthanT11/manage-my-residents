@@ -42,11 +42,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
 
     const signOut = async () => {
-        const result = await supabaseSignOut();
-        if (result) {
-            setUser(null);
+        setIsLoading(true);
+        try {
+            const result = await supabaseSignOut();
+            if (result) {
+                setUser(null);
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error('Sign out error:', error);
+            return false;
+        } finally {
+            setIsLoading(false);
         }
-        return result;
     };
 
     const signUp = async (email: string, password: string) => {

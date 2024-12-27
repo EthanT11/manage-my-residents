@@ -77,16 +77,20 @@ const useSupabase = () => {
 	};
 
 	const signOut = async () => {
-		const { error } = await supabase.auth.signOut();
-		if (error) {
-			console.error('Error signing out:', error.message);
-			return false;
-		} else {
-			console.log('Signed out successfully');
-			sessionStorage.removeItem('supabase.auth.token'); // Remove token from session storage
+		try {
+			const { error } = await supabase.auth.signOut();
+			if (error) throw error;
+
+			// Clear any stored auth data
+			sessionStorage.removeItem('supabase.auth.token');
+			localStorage.removeItem('supabase.auth.token');
+			
 			return true;
+		} catch (error) {
+			console.error('Error signing out:', error);
+			return false;
 		}
-	}
+	};
 
 	const signIn = async (email: string, password: string) => {
 		const { error } = await supabase.auth.signInWithPassword({ email, password})
