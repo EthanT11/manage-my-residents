@@ -196,60 +196,70 @@ const useSupabase = () => {
 
 	// Resident Data
 	const getResidents = async () => {
-		const home_id = await getHomeId().then((data) => data?.id);
-		if (!home_id) {
-			console.error('Home not found');
-			return;
-		}
-		const { data, error } = await supabase
-			.from('residents')
-			.select('*')
-			.eq('home_id', home_id);
-		if (error) {
-			console.error('Error fetching residents:', error.message);
-			return null;
-		} else {
-			// console.log('Residents found:', data);
+		try {
+			const home_id = await getHomeId().then((data) => data?.id);
+			if (!home_id) {
+				throw new Error('Home not found');
+			}
+
+			const { data, error } = await supabase
+				.from('residents')
+				.select(`
+					*,
+					profile_picture_url
+				`)
+				.eq('home_id', home_id);
+
+			if (error) throw error;
 			return data;
+		} catch (error) {
+			console.error('Error fetching residents:', (error as Error).message);
+			return [];
 		}
-	}
+	};
 
-	const addResident = async (resident: Resident) => {
-		// If true, the AI will generate the profile picture
-		
-		const home_id = await getHomeId().then((home) => home?.id);
-		let profile_picture_url = "";
+	const addResident = async (resident: Omit<Resident, 'id'>) => {
+		try {
+			const home_id = await getHomeId().then((home) => home?.id);
+			if (!home_id) {
+				throw new Error('Home not found');
+			}
 
-		if (!home_id) {
-			console.error('Home not found');
-			return;
+			let profile_picture_url = "";
+			// generate image if aiGen is true
+			if (aiGen) {
+				profile_picture_url = await generateResidentImage(resident).then((url) => url ?? '');
+			}
+
+			const { data, error } = await supabase
+				.from('residents')
+				.insert([{ ...resident, home_id, profile_picture_url }])
+				.select()
+				.single();
+
+			if (error) throw error;
+			return data;
+		} catch (error) {
+			console.error('Error adding resident:', (error as Error).message);
+			return null;
 		}
+	};
 
-		if (aiGen) {
-			profile_picture_url = await generateResidentImage(resident).then((url) => url ?? '');
-		}
+	// TODO: Reimplement removeResident | Probably add to resident details
+	// const removeResident = async (resident_id: string) => {
+	// 	try {
+	// 		const { error } = await supabase
+	// 			.from('residents')
+	// 			.delete()
+	// 			.eq('id', resident_id);
 
-		const { data, error } = await supabase
-			.from('residents')
-			.insert([{ ...resident, home_id, profile_picture_url }]);
-		if (error) {
-			console.error('Error adding resident:', error.message);
-		} else {
-			console.log('Resident added successfully:', data);
-		}
-	}
-
-	const removeResident = async (resident_id: string) => { // TODO: when doing RLS this will need to be checked against policies
-		const { error } = await supabase
-			.from('residents')
-			.delete()
-			.eq('id', resident_id);
-		if (error) {
-			console.error('Error removing resident:', error.message);
-		} else {
-			console.log('Resident removed successfully');
-		}
-	}
+	// 		if (error) throw error;
+	// 		return true;
+	// 	} catch (error) {
+	// 		console.error('Error removing resident:', (error as Error).message);
+	// 		return false;
+	// 	}
+	// };
 
 	// TODO: Implement editResident
 	// const editResident = async (resident: Resident) => {
@@ -313,7 +323,7 @@ const useSupabase = () => {
 		getAvatarUrl,
 		getResidents,
 		addResident,
-		removeResident,
+		// removeResident,
 	};
 }
 
