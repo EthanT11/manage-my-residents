@@ -123,63 +123,76 @@ const useSupabase = () => {
 	// Profile Data
 	const fetchProfileData = async (user_id: string) => {
 		if (!user_id) {
-			console.error('User not found');
-			return;
+			throw new Error('No user ID provided');
 		}
 
-		const { data, error, count } = await supabase
-			.from('profiles') // from profiles table
-			.select('*', { count: 'exact' }) // select all columns and count
-			.eq('user_id', user_id) // where "user_id" is equal to the user's id
-			.single() // get the first result
-		if (error) {
-			console.error('Error fetching profile data:', error.message);
-		} else if (count !== 1) { // If there is no profile for the user
-			console.error('Profile not found');
-		} else {
-			// console.log('Profile data found:', data);
+		try {
+			const { data, error, count } = await supabase
+				.from('profiles')
+				.select('*', { count: 'exact' })
+				.eq('user_id', user_id)
+				.single();
+
+			if (error) throw error;
+			
+			if (count !== 1) {
+				throw new Error('Profile not found');
+			}
+
 			return data;
+		} catch (error) {
+			console.error('Error fetching profile data:', (error as Error).message);
+			return null;
 		}
-		return null;
 	};
 
 	const updateProfileData = async (profile: Profile) => {
-		const user_id = await fetchUser().then((data) => data.user?.id);
-		if (!user_id) {
-			console.error('User not found');
-			return;
-		} else {
+		try {
+			const { user } = await fetchUser();
+			if (!user?.id) {
+				throw new Error('User not found');
+			}
+
 			const { data, error } = await supabase
 				.from('profiles')
 				.update(profile)
-				.eq('user_id', user_id)
+				.eq('user_id', user.id)
+				.select()
+				.single();
+
 			if (error) throw error;
 			return data;
+		} catch (error) {
+			console.error('Error updating profile:', (error as Error).message);
+			return null;
 		}
-	}
-	
+	};
+
 	const getHomeId = async () => {
-		const { user } = await fetchUser();
-		if (!user) {
-			console.error('User not found');
-			return;
-		}
-		const profileData = await fetchProfileData(user.id);
-		
-		if (profileData) {
+		try {
+			const { user } = await fetchUser();
+			if (!user) {
+				throw new Error('User not found');
+			}
+
+			const profileData = await fetchProfileData(user.id);
+			if (!profileData?.home_name) {
+				throw new Error('Home not found in profile');
+			}
+
 			const { data, error } = await supabase
 				.from('personal_care_homes')
-				.select('*')
+				.select('id, home_name')
 				.eq('home_name', profileData.home_name)
 				.single();
-			if (error) {
-				console.error('Error fetching home id:', error.message);
-			} else {
-				// console.log('Home id found:', data);
-				return data;
-			}
+
+			if (error) throw error;
+			return data;
+		} catch (error) {
+			console.error('Error fetching home:', (error as Error).message);
+			return null;
 		}
-	}
+	};
 
 	// Resident Data
 	const getResidents = async () => {

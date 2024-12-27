@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate, RouteObject } from "react-router-dom";
-import { MainPage, Auth, Account } from "./components/pages";
+import { Dashboard, Auth, Account } from "./components/pages";
 import ErrorPage from "./components/pages/ErrorPage";
 import AuthGuard from "./components/guards/AuthGuard";
 
@@ -9,7 +9,7 @@ const protectedRoutes: RouteObject[] = [
 		path: "/dashboard",
 		element: (
 			<AuthGuard>
-				<MainPage />
+				<Dashboard />
 			</AuthGuard>
 		),
 	},

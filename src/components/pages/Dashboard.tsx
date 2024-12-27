@@ -6,7 +6,7 @@ import useSupabase from '@/hooks/useSupabase';
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { InformationPanelHeader } from '../InformationPanel';
 
-export default function MainPage() {
+export default function Dashboard() {
   const { fetchUser } = useSupabase();
   const navigate = useNavigate();
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
