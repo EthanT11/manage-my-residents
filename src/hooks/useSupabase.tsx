@@ -62,16 +62,9 @@ const useSupabase = () => {
 		try {
 			const { data, error } = await supabase.auth.getUser();
 			if (error) throw error;
-			if (!data?.user) {
-				// TODO: Redirect to sign in page
-				return { user: null };
-			}
-			return { user: data.user };
+			return { user: data?.user || null };
 		} catch (error) {
-			if ((error as Error).message === 'Auth session missing!') { // User is not logged in
-			} else {
-				console.warn('Error fetching user:', (error as Error).message);
-			}
+			console.error('Error fetching user:', (error as Error).message);
 			return { user: null };
 		}
 	};
@@ -93,27 +86,39 @@ const useSupabase = () => {
 	};
 
 	const signIn = async (email: string, password: string) => {
-		const { error } = await supabase.auth.signInWithPassword({ email, password})
-
-		if (error) {
-			console.error('Error signing in:', error.message);
-			return false;
-		} else {
-			console.log('Signed in successfully');
-			return true;
+		try {
+			const { data, error } = await supabase.auth.signInWithPassword({ 
+				email, 
+				password 
+			});
+			
+			if (error) throw error;
+			return { success: true, user: data.user };
+		} catch (error) {
+			console.error('Error signing in:', (error as Error).message);
+			return { success: false, user: null };
 		}
-	}
+	};
 
+	// NOTE: It's implemented but Supabase right now doesn't send a confirmation email to prevent spam
+	// Out of scope for now but will set up an SMTP server to send emails.
 	const signUp = async (email: string, password: string) => {
-		const { error } = await supabase.auth.signUp({ email, password });
-		if (error) {
-			console.error('Error signing up:', error.message);
-			return { success: false, message: error.message };
-		} else {
-			console.log('Signed up successfully');
-			return { success: true, message: 'Signed up successfully' };
+		try {
+			const { data, error } = await supabase.auth.signUp({ 
+				email, 
+				password 
+			});
+			
+			if (error) throw error;
+			return { 
+				success: true, 
+				user: data.user,
+				message: 'Signed up successfully' 
+			};
+		} catch (error) {
+			return { success: false, user: null, message: (error as Error).message };
 		}
-	}
+	};
 
 	// Profile Data
 	const fetchProfileData = async (user_id: string) => {

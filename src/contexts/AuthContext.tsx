@@ -34,11 +34,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const signIn = async (email: string, password: string) => {
-        const result = await supabaseSignIn(email, password);
-        if (result) {
-            await checkUser(); // updates user state after sign in
+        const { success, user } = await supabaseSignIn(email, password);
+        if (success && user) {
+            setUser(user);
+            return true;
         }
-        return result;
+        return false; // we return false if the user is not found or the password is incorrect
     };
 
     const signOut = async () => {
@@ -59,7 +60,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
 
     const signUp = async (email: string, password: string) => {
-        return await supabaseSignUp(email, password);
+        const result = await supabaseSignUp(email, password);
+        if (result.success && result.user) {
+            setUser(result.user);
+        }
+        return result;
     };
 
     const value = {
