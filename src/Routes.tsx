@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouteObject } from "react-router-dom";
 import { MainPage, Auth, Account } from "./components/pages";
 import ErrorPage from "./components/pages/ErrorPage";
 import AuthGuard from "./components/guards/AuthGuard";
@@ -25,6 +25,10 @@ const protectedRoutes: RouteObject[] = [
 
 // Public routes that don't require authentication
 const publicRoutes: RouteObject[] = [
+	{
+		path: "/",
+		element: <Navigate to="/sign-in" replace />,
+	},
 	{
 		path: "/sign-in",
 		element: <Auth />,
