@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/sidebar"
 
 import { Calendar, Home, Settings, User, ForkKnife, LogOut, Moon, Sun } from "lucide-react"
-import useSupabase from "@/hooks/useSupabase"
 import { useTheme } from "@/hooks/useTheme"
+import { useAuth } from "@/contexts/AuthContext"
 import SelfPlug from "./SelfPlug"
 
 // TODO: Finish Calendar, Meals, and Residents | Out of scope for now
@@ -27,7 +27,7 @@ interface SidebarItem {
 
 export default function SideManager() {
   const { toggleTheme, theme } = useTheme()
-  const { signOut } = useSupabase()
+  const { signOut } = useAuth()
 
   const mainItems: SidebarItem[] = [
     {
@@ -67,7 +67,7 @@ export default function SideManager() {
       title: "Logout",
       url: "/sign-in",
       icon: LogOut,
-      action: async () => await signOut(),
+      action: signOut,
     }
   ]
 

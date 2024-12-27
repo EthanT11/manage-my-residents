@@ -1,35 +1,32 @@
 import { useEffect, useState } from 'react';
 import { SignUpDialog } from '../Profile';
 import { useNavigate } from 'react-router-dom';
-import useSupabase from '@/hooks/useSupabase';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { fetchUser, signIn } = useSupabase();
+  const { user, signIn } = useAuth();
 
   useEffect(() => {
-    fetchUser().then(({ user }) => {
-      if (user) {
-        console.log('User found');
-        navigate('/dashboard');
-      }
-    });
-  }, []);
+    // checks user from context and navigates to dashboard
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, [user, navigate]);
 
   const handlePasswordLogin = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-
     setLoading(true);
-    const signedIn = await signIn(email, password);
-    if (signedIn) {
+    const success = await signIn(email, password);
+    if (success) {
       navigate('/dashboard');
     }
     setLoading(false);
   }
-
+  // TODO: Style this page forgot during the great refactor
   return (
     <div>
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
