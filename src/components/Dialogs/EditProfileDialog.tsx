@@ -38,7 +38,10 @@ const EditProfileDialog = ({ profile, setProfile }: EditProfileDialogProps) => {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <CustomButton text="Edit Profile" variant="outline" />
+        <CustomButton 
+          text="Edit Profile" 
+          variant="default"
+        />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px] bg-dialog-bg border-2 border-dialog-border">
         <DialogHeader className="bg-dialog-bg p-4 rounded-t-lg border-b border-dialog-border">
@@ -100,8 +103,7 @@ const EditProfileDialog = ({ profile, setProfile }: EditProfileDialogProps) => {
             <CustomButton 
               type="submit" 
               text="Save Changes" 
-              variant="outline"
-              className="bg-button-bg text-button-text border border-button-border hover:bg-button-hover px-6" 
+              variant="submit"
             />
           </div>
         </form>

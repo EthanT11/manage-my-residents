@@ -245,21 +245,20 @@ const useSupabase = () => {
 		}
 	};
 
-	// TODO: Reimplement removeResident | Probably add to resident details
-	// const removeResident = async (resident_id: string) => {
-	// 	try {
-	// 		const { error } = await supabase
-	// 			.from('residents')
-	// 			.delete()
-	// 			.eq('id', resident_id);
+	const removeResident = async (resident_id: string) => {
+		try {
+			const { error } = await supabase
+				.from('residents')
+				.delete()
+				.eq('id', resident_id);
 
-	// 		if (error) throw error;
-	// 		return true;
-	// 	} catch (error) {
-	// 		console.error('Error removing resident:', (error as Error).message);
-	// 		return false;
-	// 	}
-	// };
+			if (error) throw error;
+			return true;
+		} catch (error) {
+			console.error('Error removing resident:', (error as Error).message);
+			return false;
+		}
+	};
 
 	// TODO: Implement editResident
 	// const editResident = async (resident: Resident) => {
@@ -323,7 +322,7 @@ const useSupabase = () => {
 		getAvatarUrl,
 		getResidents,
 		addResident,
-		// removeResident,
+		removeResident,
 	};
 }
 

@@ -29,6 +29,7 @@ html, body, #root {
    --light-hover-color: #dcd9e7;  
    --light-active-color: #ccc8dc;
 
+   
    --dark-page-bg: #0f172a;
    --dark-bg-color: #0f172a;
    --dark-bg-secondary-color: #1e293b;
@@ -37,8 +38,34 @@ html, body, #root {
    --dark-text-secondary-color: #cbd5e1;
    --dark-hover-color: #334155;
    --dark-active-color: #1e293b;
+   
+   /* Destructive colors */
+   --light-destructive-bg: #ef4444;
+   --light-destructive-border: #dc2626;
+   --light-destructive-text: #ffffff;
+   --light-destructive-hover: #dc2626;
+   --light-destructive-active: #b91c1c;
 
-   	/* Page colors */
+   --dark-destructive-bg: #ef4444;
+   --dark-destructive-border: #dc2626;
+   --dark-destructive-text: #ffffff;
+   --dark-destructive-hover: #dc2626;
+   --dark-destructive-active: #b91c1c;
+
+   /* Submit colors */
+   --light-submit-bg: #34d399;
+   --light-submit-border: #10b981;
+   --light-submit-text: #ffffff;
+   --light-submit-hover: #10b981;
+   --light-submit-active: #059669; 
+
+   --dark-submit-bg: #059669;
+   --dark-submit-border: #047857;
+   --dark-submit-text: #ffffff;
+   --dark-submit-hover: #047857;
+   --dark-submit-active: #065f46;
+
+   /* Page colors */
    	--page-bg: var(--light-page-bg);
 
 	/* Error Page colors */
@@ -101,6 +128,20 @@ html, body, #root {
     --button-text: var(--light-text-color);
     --button-hover: var(--light-hover-color);
     --button-active: var(--light-active-color);
+
+    /* Custom Button Destructive colors */
+    --button-destructive-bg: var(--light-destructive-bg);
+    --button-destructive-border: var(--light-destructive-border);
+    --button-destructive-text: var(--light-destructive-text);
+    --button-destructive-hover: var(--light-destructive-hover);
+    --button-destructive-active: var(--light-destructive-active);
+
+    /* Custom Button Submit colors */
+    --button-submit-bg: var(--light-submit-bg);
+    --button-submit-border: var(--light-submit-border);
+    --button-submit-text: var(--light-submit-text);
+    --button-submit-hover: var(--light-submit-hover);
+    --button-submit-active: var(--light-submit-active);
 
     /* Resident Details Card colors */
     --resident-details-bg: var(--light-bg-color);
@@ -187,6 +228,20 @@ html, body, #root {
     --button-text: var(--dark-text-color);
     --button-hover: var(--dark-hover-color);
     --button-active: var(--dark-active-color);
+
+    /* Custom Button Destructive colors */
+    --button-destructive-bg: var(--dark-destructive-bg);
+    --button-destructive-border: var(--dark-destructive-border);
+    --button-destructive-text: var(--dark-destructive-text);
+    --button-destructive-hover: var(--dark-destructive-hover);
+    --button-destructive-active: var(--dark-destructive-active);
+
+    /* Custom Button Submit colors */
+    --button-submit-bg: var(--dark-submit-bg);
+    --button-submit-border: var(--dark-submit-border);
+    --button-submit-text: var(--dark-submit-text);
+    --button-submit-hover: var(--dark-submit-hover);
+    --button-submit-active: var(--dark-submit-active);
 
     /* Resident Details Card colors */
     --resident-details-bg: var(--dark-bg-color);

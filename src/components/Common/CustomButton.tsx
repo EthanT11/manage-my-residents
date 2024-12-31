@@ -1,31 +1,34 @@
 import { Button } from "../ui/button";
 import React from "react";
-import { cn } from "../../lib/utils"; // Helps to combine classNames
+import { cn } from "@/lib/utils";
 
 interface CustomButtonProps {
 	text: string;
 	type?: 'submit' | 'button' | 'reset'; 
 	onClick?: () => void; 
-	variant?: 'secondary' | 'outline'
+	variant?: 'default' | 'destructive' | 'submit';
 	className?: string;
 }
 
 const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
-	({ text, onClick, variant, type, className }, ref) => {		 									
+	({ text, onClick, variant, type, className }, ref) => {
+		const baseStyles = "rounded-lg px-4 py-2 theme-transition";
+		
+		const variantStyles = {
+			default: "bg-button-bg text-button-text border border-button-border hover:bg-button-hover active:bg-button-active",
+			destructive: `bg-button-destructive-bg text-button-destructive-text border border-button-destructive-border 
+						  hover:bg-button-destructive-hover active:bg-button-destructive-active`,
+			submit: `bg-button-submit-bg text-button-submit-text border border-button-submit-border 
+					 hover:bg-button-submit-hover active:bg-button-submit-active`,
+		};
+
 		return (
 			<Button 
 				ref={ref}
 				className={cn(
-					// Base style
-					`rounded-lg px-4 py-2`,
-					// Custom class goes here to override base style if needed
-					className,
-					// Theming goes after so it can override base style maybe change this?
-					`
-						bg-button-bg text-button-text border border-button-border
-						hover:bg-button-hover active:bg-button-active
-						theme-transition ${variant}
-					`
+					baseStyles,
+					variantStyles[variant || 'default'],
+					className
 				)}
 				onClick={onClick}
 				type={type}

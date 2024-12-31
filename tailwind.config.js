@@ -86,6 +86,20 @@ export default {
   				'text': 'var(--button-text)',
   				'hover': 'var(--button-hover)',
   				'active': 'var(--button-active)',
+				'destructive': {
+					'bg': 'var(--button-destructive-bg)',
+					'border': 'var(--button-destructive-border)',
+					'text': 'var(--button-destructive-text)',
+					'hover': 'var(--button-destructive-hover)',
+					'active': 'var(--button-destructive-active)',
+				},
+				'submit': {
+					'bg': 'var(--button-submit-bg)',
+					'border': 'var(--button-submit-border)',
+					'text': 'var(--button-submit-text)',
+					'hover': 'var(--button-submit-hover)',
+					'active': 'var(--button-submit-active)',
+				}
   			},
 
   			// Dropdown colors

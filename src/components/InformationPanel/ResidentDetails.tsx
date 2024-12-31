@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DetailsSection, DetailsItem } from "@/components/Common/CustomDetails";
 import { useResidents } from "@/contexts/ResidentContext";
+import { CustomButton } from "@/components/Common";
 
 function dobToAge(dob: string) {
     const today = new Date();
@@ -12,7 +13,7 @@ function dobToAge(dob: string) {
 
 export default function ResidentDetails() {
     // Pull the selected resident from the context
-    const { selectedResident } = useResidents();
+    const { selectedResident, setSelectedResident, removeResident } = useResidents();
 
     // If no resident is selected, return a placeholder card | Should never happen but just in case
     if (!selectedResident) {
@@ -31,24 +32,41 @@ export default function ResidentDetails() {
 
     const selectedResidentName = selectedResident.first_name + " " + selectedResident.last_name;
 
+    const handleDelete = async () => {
+        if (!selectedResident?.id) return; // Should never happen but just in case
+        
+        // TODO: Add confirmation dialog before deleting
+        // TODO: Check if User is able to delete resident (Add Role Check)
+        await removeResident(selectedResident.id);
+        setSelectedResident(null);
+    };
+
     return (
         <Card className={`lg:col-span-2 bg-resident-details-bg border-resident-details-border
                        resident-details-transition
                        opacity-100 translate-y-0`}>
             <CardHeader className="border-b border-resident-details-border/20 pb-6">
-                <div className="flex items-center gap-4">
-                    <Avatar className="h-16 w-16 ring-2 ring-resident-details-border">
-                        <AvatarImage src={selectedResident.profile_picture_url} alt={selectedResident.first_name} />
-                        <AvatarFallback className="bg-resident-details-border text-resident-details-text font-medium text-lg">
-                            {selectedResident.first_name[0]}{selectedResident.last_name[0]}
-                        </AvatarFallback>
-                    </Avatar>
-                    <div>
-                        <CardTitle className="text-resident-details-title mb-1">{selectedResidentName}</CardTitle>
-                        <p className="text-sm text-resident-details-text">
-                            Room {selectedResident.room} • {selectedResident.wing} Wing
-                        </p>
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                        <Avatar className="h-16 w-16 ring-2 ring-resident-details-border">
+                            <AvatarImage src={selectedResident.profile_picture_url} alt={selectedResident.first_name} />
+                            <AvatarFallback className="bg-resident-details-border text-resident-details-text font-medium text-lg">
+                                {selectedResident.first_name[0]}{selectedResident.last_name[0]}
+                            </AvatarFallback>
+                        </Avatar>
+                        <div>
+                            <CardTitle className="text-resident-details-title mb-1">{selectedResidentName}</CardTitle>
+                            <p className="text-sm text-resident-details-text">
+                                Room {selectedResident.room} • {selectedResident.wing} Wing
+                            </p>
+                        </div>
                     </div>
+                    <CustomButton 
+                        text="Delete Resident" 
+                        onClick={handleDelete}
+                        variant="destructive"
+                    />
+                    
                 </div>
             </CardHeader>
             <CardContent className="p-6">

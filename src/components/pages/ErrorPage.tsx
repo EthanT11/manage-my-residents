@@ -22,7 +22,7 @@ export default function ErrorPage() {
 			<CustomButton 
 				text="Go Back"
 				onClick={() => navigate(-1)}
-				variant="outline"
+				variant="default"
 			/>
 		</div>
 	);

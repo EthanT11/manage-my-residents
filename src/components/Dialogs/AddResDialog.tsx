@@ -43,11 +43,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<CustomButton 
-					text="Add Resident" 
-					variant="outline"
-					className="bg-button-bg text-button-text border border-button-border hover:bg-button-hover" 
-				/>
+				<CustomButton text="Add Resident" variant="default" />
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[600px] bg-dialog-bg border-2 border-dialog-border">
 				<DialogHeader className="bg-dialog-bg p-4 rounded-t-lg border-b border-dialog-border">
@@ -143,8 +139,8 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 						<CustomButton 
 							type="submit" 
 							text="Register Resident" 
-							variant="outline"
-							className="bg-button-bg text-button-text border border-button-border hover:bg-button-hover px-6" 
+							variant="submit"
+							
 						/> 
 					</div>
 				</form>
