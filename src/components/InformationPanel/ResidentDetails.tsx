@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DetailsSection, DetailsItem } from "@/components/Common/CustomDetails";
 import { useResidents } from "@/contexts/ResidentContext";
-import { CustomButton } from "@/components/Common";
+import { CustomButton, LoadingSpinner } from "@/components/Common";
 
 function dobToAge(dob: string) {
     const today = new Date();
@@ -13,7 +13,7 @@ function dobToAge(dob: string) {
 
 export default function ResidentDetails() {
     // Pull the selected resident from the context
-    const { selectedResident, setSelectedResident, removeResident } = useResidents();
+    const { selectedResident, setSelectedResident, removeResident, isLoading } = useResidents();
 
     // If no resident is selected, return a placeholder card | Should never happen but just in case
     if (!selectedResident) {
@@ -66,13 +66,13 @@ export default function ResidentDetails() {
                         onClick={handleDelete}
                         variant="destructive"
                     />
-                    
+
                 </div>
             </CardHeader>
             <CardContent className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-6">
-                        <DetailsSection title="Personal Information">
+                        <DetailsSection title="Personal Information" isLoading={isLoading}>
                             <DetailsItem title="Date of Birth" value={selectedResident.dob} />
                             <DetailsItem title="Age" value={dobToAge(selectedResident.dob).toString()} />
                             <DetailsItem title="Gender" value={selectedResident.gender} />
@@ -80,7 +80,7 @@ export default function ResidentDetails() {
                             <DetailsItem title="Religion" value={selectedResident.religion || 'N/A'} />
                         </DetailsSection>
 
-                        <DetailsSection title="Physical Information">
+                        <DetailsSection title="Physical Information" isLoading={isLoading}>
                             <DetailsItem title="Weight" value={selectedResident.weight || 'N/A'} />
                             <DetailsItem title="Height" value={selectedResident.height || 'N/A'} />
                             <DetailsItem title="Hair Color" value={selectedResident.hair} />
@@ -89,7 +89,7 @@ export default function ResidentDetails() {
                     </div>
 
                     <div className="space-y-6">
-                        <DetailsSection title="Medical Information">
+                        <DetailsSection title="Medical Information" isLoading={isLoading}>
                             <DetailsItem title="Level of Care" value={selectedResident.level_of_care || 'N/A'} />
                             <DetailsItem title="Blood Type" value={selectedResident.blood_type || 'N/A'} />
                             <DetailsItem title="DNR Status" value={selectedResident.dnr ? 'Yes' : 'No'} />
@@ -99,13 +99,13 @@ export default function ResidentDetails() {
                             <DetailsItem title="Medications" value={selectedResident.medications || 'None'} />
                         </DetailsSection>
 
-                        <DetailsSection title="Emergency Contact">
+                        <DetailsSection title="Emergency Contact" isLoading={isLoading}>
                             <DetailsItem title="Name" value={selectedResident.emergency_contact_name || 'N/A'} />
                             <DetailsItem title="Phone" value={selectedResident.emergency_contact_phone || 'N/A'} />
                             <DetailsItem title="Relationship" value={selectedResident.emergency_contact_relationship || 'N/A'} />
                         </DetailsSection>
 
-                        <DetailsSection title="Additional Notes">
+                        <DetailsSection title="Additional Notes" isLoading={isLoading}>
                             <p className="text-sm text-resident-details-text whitespace-pre-wrap">
                                 {selectedResident.notes || 'No additional notes'}
                             </p>

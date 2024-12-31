@@ -2,7 +2,6 @@ import { useResidents } from '@/contexts/ResidentContext';
 import PanelCard from './PanelCard';
 import ResidentList from './ResidentList';
 import ResidentDetails from './ResidentDetails';
-import LoadingSpinner from '../Common/LoadingSpinner';
 
 // TODO: Remove default scrollbar for the resident list
 export default function InformationPanel() {
@@ -48,14 +47,6 @@ export default function InformationPanel() {
         return diffDays;
     };
 
-    if (isLoading) {
-        return (
-            <div className="flex-1 flex items-center justify-center bg-infopanel-bg border-l border-infopanel-border">
-                <LoadingSpinner />
-            </div>
-        );
-    }
-
     return (
         <div className="flex-1 overflow-hidden bg-infopanel-bg no-scrollbar border-l border-infopanel-border theme-transition">
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 h-full overflow-y-auto">
@@ -66,11 +57,13 @@ export default function InformationPanel() {
                                 title="Home Overview" 
                                 condition={totalResidents} 
                                 subTitle='Total Residents'
+                                isLoading={isLoading}
                             />
                             <PanelCard 
                                 title="Average Age" 
                                 condition={averageAge} 
                                 subTitle='Years'
+                                isLoading={isLoading}
                             />
                         </>
                     ) : (
@@ -80,11 +73,13 @@ export default function InformationPanel() {
                                 title={`Important Information`} 
                                 condition={"Allergies: Peanuts"} 
                                 subTitle='EpiPen stored in - Medicine Cabinet'
+                                isLoading={isLoading}
                             />
                             <PanelCard 
                                 title="Birthday Countdown" 
                                 condition={calculateDaysUntilBirthday(selectedResident.dob)} 
                                 subTitle='Days'
+                                isLoading={isLoading}
                             />
                         </>
                     )}

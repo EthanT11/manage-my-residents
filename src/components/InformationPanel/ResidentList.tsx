@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { Search, ChevronDown } from "lucide-react";
 import ResidentTag from "./ResidentTag";
 import { useResidents } from "@/contexts/ResidentContext";
+import LoadingSpinner from "../Common/LoadingSpinner";
 
 function SearchBar({ searchQuery, setSearchQuery, children }: { 
 	searchQuery: string, 
@@ -41,7 +42,7 @@ function SearchBar({ searchQuery, setSearchQuery, children }: {
 }
 
 export default function ResidentList() {
-	const { residents, selectedResident, setSelectedResident, addResident } = useResidents();
+	const { residents, selectedResident, setSelectedResident, addResident, isLoading } = useResidents();
 	const [searchQuery, setSearchQuery] = useState("");
 	const [isExpanded, setIsExpanded] = useState(true);
 
@@ -117,6 +118,11 @@ export default function ResidentList() {
 						{filteredResidents.length === 0 && (
 							<div className="text-center py-8 text-resident-tag-text">
 								No residents found matching "{searchQuery}"
+							</div>
+						)}
+						{isLoading && (
+							<div className="text-center py-8 text-resident-tag-text">
+								<LoadingSpinner size="lg" />
 							</div>
 						)}
 					</CardContent>
