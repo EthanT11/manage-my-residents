@@ -2,6 +2,7 @@ import { useResidents } from '@/contexts/ResidentContext';
 import PanelCard from './PanelCard';
 import ResidentList from './ResidentList';
 import ResidentDetails from './ResidentDetails';
+import LoadingSpinner from '../Common/LoadingSpinner';
 
 // TODO: Remove default scrollbar for the resident list
 export default function InformationPanel() {
@@ -49,9 +50,8 @@ export default function InformationPanel() {
 
     if (isLoading) {
         return (
-			// TODO: Add a loading spinner here
             <div className="flex-1 flex items-center justify-center bg-infopanel-bg border-l border-infopanel-border">
-                Loading...
+                <LoadingSpinner />
             </div>
         );
     }
