@@ -42,6 +42,9 @@ const router = createBrowserRouter([
 		path: "*",
 		element: <ErrorPage />,
 	},
-]);
+], {
+	// Add the basename to the router for Github Pages
+	basename: '/manage-my-residents'
+});
 
 export default router;

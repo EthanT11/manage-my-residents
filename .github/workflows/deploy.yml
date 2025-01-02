@@ -16,12 +16,16 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
       - name: Build project
         run: npm run build
+        env:
+          VITE_BASE_URL: /manage-my-residents
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v4
