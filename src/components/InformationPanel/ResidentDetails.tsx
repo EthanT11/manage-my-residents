@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DetailsSection, DetailsItem } from "@/components/Common/CustomDetails";
 import { useResidents } from "@/contexts/ResidentContext";
-import { CustomButton, LoadingSpinner } from "@/components/Common";
+import { CustomButton } from "@/components/Common";
 
 function dobToAge(dob: string) {
     const today = new Date();

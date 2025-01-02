@@ -7,7 +7,7 @@ interface DropdownInputProps extends FormFieldProps {
 }
 
 
-export default function DropdownInput( { name, placeholder, className, onChange, options=[] } : DropdownInputProps) {
+export default function DropdownInput( { name, placeholder, onChange, options=[] } : DropdownInputProps) {
 
 	function handleChange(value: string) {
 		const syntheticEvent = {
