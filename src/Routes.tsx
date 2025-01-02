@@ -35,6 +35,10 @@ const publicRoutes: RouteObject[] = [
 	},
 ];
 
+// Only add basename in production
+const isProduction = import.meta.env.PROD;
+const basename = isProduction ? '/manage-my-residents' : '/';
+
 const router = createBrowserRouter([
 	...publicRoutes,
 	...protectedRoutes,
@@ -43,8 +47,7 @@ const router = createBrowserRouter([
 		element: <ErrorPage />,
 	},
 ], {
-	// Add the basename to the router for Github Pages
-	basename: '/manage-my-residents'
+	basename
 });
 
 export default router;
