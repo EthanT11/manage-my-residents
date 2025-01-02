@@ -15,7 +15,7 @@ import { Calendar, Home, Settings, User, ForkKnife, LogOut, Moon, Sun } from "lu
 import { useTheme } from "@/hooks/useTheme"
 import { useAuth } from "@/contexts/AuthContext"
 import SelfPlug from "./SelfPlug"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 // TODO: Finish Calendar, Meals, and Residents | Out of scope for now
 
@@ -87,10 +87,17 @@ export default function SideManager() {
           onClick={item.action}
           className="hover:bg-sidebar-hover hover:text-sidebar-text data-[active=true]:bg-sidebar-hover data-[active=true]:text-sidebar-text"
         >
-          <a href={item.url}>
-            <item.icon className="text-sidebar-text-secondary" />
-            <span className="text-sidebar-text-secondary">{item.title}</span>
-          </a>
+          {item.url ? (
+            <Link to={item.url}>
+              <item.icon className="text-sidebar-text-secondary" />
+              <span className="text-sidebar-text-secondary">{item.title}</span>
+            </Link>
+          ) : (
+            <button>
+              <item.icon className="text-sidebar-text-secondary" />
+              <span className="text-sidebar-text-secondary">{item.title}</span>
+            </button>
+          )}
         </SidebarMenuButton>
       </SidebarMenuItem>
     ))
