@@ -26,6 +26,12 @@ export default {
 				'text': 'hsl(var(--error-page-text))'
 			},
 
+			'auth-page': {
+				'bg': 'hsl(var(--auth-page-bg))',
+				'text': 'hsl(var(--auth-page-text))',
+				'text-secondary': 'hsl(var(--auth-page-text-secondary))'
+			},
+
   			'sidebar': {
   				'bg': 'var(--sidebar-bg)',
   				'border': 'var(--sidebar-border)',

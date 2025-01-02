@@ -1,6 +1,7 @@
 import { Button } from "../ui/button";
 import React from "react";
 import { cn } from "@/lib/utils";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface CustomButtonProps {
 	text: string;
@@ -8,10 +9,11 @@ interface CustomButtonProps {
 	onClick?: () => void; 
 	variant?: 'default' | 'destructive' | 'submit';
 	className?: string;
+	isLoading?: boolean;
 }
 
 const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
-	({ text, onClick, variant, type, className }, ref) => {
+	({ text, onClick, variant, type, className, isLoading }, ref) => {
 		const baseStyles = "rounded-lg px-4 py-2 theme-transition";
 		
 		const variantStyles = {
@@ -33,7 +35,7 @@ const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
 				onClick={onClick}
 				type={type}
 			>
-				{text}
+				{isLoading ? <LoadingSpinner size="md" /> : text}
 			</Button>
 		);
 	}

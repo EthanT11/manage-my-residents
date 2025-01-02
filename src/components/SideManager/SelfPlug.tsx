@@ -16,7 +16,7 @@ export default function SelfPlug() {
 			</Avatar>
 			<div className="flex flex-col group-data-[collapsible=icon]:hidden">
 			  <span className="text-sm font-medium text-sidebar-text">
-				Ethan T
+				Ethan Tracey
 			  </span>
 			  <span className="text-xs text-sidebar-text-secondary">
 				Developer

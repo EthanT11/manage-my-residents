@@ -11,9 +11,10 @@ export interface FormFieldProps {
 	onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
 	fieldType?: string,
 	options?: string[],
+	required?: boolean
 }
 
-export default function FormField({name, label, type, placeholder, value, onChange, options, fieldType = "input" }: FormFieldProps) {
+export default function FormField({name, label, type, placeholder, value, onChange, options, required, fieldType = "input" }: FormFieldProps) {
     return (
         <div className="flex flex-col space-y-2">
             <CustomLabel 
@@ -29,9 +30,8 @@ export default function FormField({name, label, type, placeholder, value, onChan
                     placeholder={placeholder} 
                     value={value}
                     onChange={onChange}
-                    className="w-full bg-search-bg text-search-text border border-search-border rounded-md px-3 py-2 
-                             focus:ring-2 focus:ring-search-ring focus:border-transparent
-                             placeholder:text-search-placeholder"
+                    
+                    required={required}
                 />
             )}
             {fieldType === 'calendar' && (
@@ -44,6 +44,7 @@ export default function FormField({name, label, type, placeholder, value, onChan
                     inputClassname="w-full bg-search-bg text-search-text border border-search-border rounded-md px-3 py-2 
                              focus:ring-2 focus:ring-search-ring focus:border-transparent
                              placeholder:text-search-placeholder"
+                    required={required}
                 />
             )}
             {fieldType === 'dropdown' && (
@@ -56,6 +57,7 @@ export default function FormField({name, label, type, placeholder, value, onChan
                     className="w-full bg-search-bg text-search-text border border-search-border rounded-md px-3 py-2 
                              focus:ring-2 focus:ring-search-ring focus:border-transparent
                              placeholder:text-search-placeholder"
+                    required={required}
                 />
             )}
         </div>

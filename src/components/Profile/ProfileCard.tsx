@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { DetailsSection, DetailsItem, CustomButton } from "@/components/Common";
-import { EditProfileDialog } from "@/components/Profile";
+import { EditProfileDialog } from "@/components/Dialogs";
 import { Profile } from "@/hooks/useSupabase";
 import { User } from "@supabase/supabase-js";
 

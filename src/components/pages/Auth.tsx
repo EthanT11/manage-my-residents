@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { SignUpDialog } from '../Profile';
+import { SignUpDialog } from '../Dialogs';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { CustomButton, CustomInput } from '../Common';
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
@@ -26,44 +27,52 @@ export default function Auth() {
     }
     setLoading(false);
   }
-  // TODO: Style this page forgot during the great refactor
+
   return (
-    <div>
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-          <h1 className="text-2xl font-bold text-center text-gray-900">Welcome to Manage My Residents</h1>
-          <p className="text-center text-gray-600">Sign in with your email and password</p>
-          <form className="space-y-6" onSubmit={handlePasswordLogin}>
-            <div>
-              <input
-                className="w-full px-4 py-2 text-gray-900 bg-gray-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                type="email"
-                placeholder="Your email"
-                value={email}
-                required={true}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                className="w-full px-4 py-2 text-gray-900 bg-gray-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                type="password"
-                placeholder="Your password"
-                value={password}
-                required={true}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700"
-              disabled={loading}
-            >
-              {loading ? 'Signing In...' : 'Sign In'}
-            </button>
-			<SignUpDialog />
-          </form>
+    <div className="flex items-center justify-center min-h-screen bg-auth-page-bg theme-transition">
+      <div className="w-full max-w-md p-8 space-y-6 bg-dialog-bg border-2 border-dialog-border rounded-lg shadow-md">
+        <div className="space-y-2 text-center">
+          <h1 className="text-2xl font-bold text-auth-page-text">
+            Welcome to Manage My Residents
+          </h1>
+          <h2 className="text-lg text-auth-page-text">
+            Your home for managing your personal care home
+          </h2>
         </div>
+
+        <form className="space-y-6" onSubmit={handlePasswordLogin}>
+          <div className="space-y-4">
+            <p className="text-auth-page-text text-center">
+              Sign in with your email and password
+            </p>
+            <CustomInput
+              name="email"
+              type="email"
+              placeholder="Your email"
+              value={email}
+              required={true}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <CustomInput
+              name="password"
+              type="password"
+              placeholder="Your password"
+              value={password}
+              required={true}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <div className="flex justify-between items-center">
+            <CustomButton 
+              type="submit"
+              variant="submit"
+              text="Sign In"
+              isLoading={loading}
+            />
+            <SignUpDialog />
+          </div>
+        </form>
       </div>
     </div>
   );
