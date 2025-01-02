@@ -46,7 +46,7 @@ export interface ResidentAdditional extends Resident {
 }
 
 // Generate Resident Image
-const aiGen = true;
+const aiGen = false;
 
 const useSupabase = () => {
 	// TODO: Fix supabase Authentication | Been to long since i've done anything with it
