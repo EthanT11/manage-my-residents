@@ -46,7 +46,7 @@ export interface ResidentAdditional extends Resident {
 }
 
 // Generate Resident Image
-const aiGen = false;
+const aiGen = true;
 
 const useSupabase = () => {
 	// TODO: After saving generated images to supabase, need to keep in mind that the image url expires hense why I'm getting a cors error.

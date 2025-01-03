@@ -15,20 +15,23 @@ export default function SignUpDialog() {
   
   const handleSignUp = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    setLoading(true);
-    setError(null);
-    setSuccess(null);
+    // setLoading(true);
+    // setError(null);
+    // setSuccess(null);
 
     // TODO: Add a more robust error system, not going to worry about it for now since we're not using the sign up function
     // due to the email limit from supabase without SMTP
-    const { success: isSuccess, message } = await signUp(email, password);
-    if (!isSuccess) {
-      setError(message);
-    } else {
-      setSuccess(message);
-    }
+  //   const { success: isSuccess, message } = await signUp(email, password);
+  //   if (!isSuccess) {
+  //     setError(message);
+  //   } else {
+  //     setSuccess(message);
+  //   }
 
-    setLoading(false);
+  //   setLoading(false);
+    setSuccess(
+      `Sign up currently disabled due to email limit from supabase without SMTP. 
+      I've provided a test account for you to use, it should be in the slack post!`);
   };
 
   return (
