@@ -9,13 +9,14 @@
     <script type="text/javascript">
       // Handle GitHub Pages redirect for single page app
       // https://github.com/rafgraph/spa-github-pages
+      // Github Pages doesn't support single page apps, so we need to redirect to the root
       (function(l) {
         if (l.search[1] === '/' ) { // If the path is just /, we need to redirect to the root
-          var decoded = l.search.slice(1).split('&').map(function(s) { // Decode the URL
+          var decoded = l.search.slice(1).split('&').map(function(s) { // Decode the URL 
             return s.replace(/~and~/g, '&')
           }).join('?');
           window.history.replaceState(null, null, 
-              l.pathname.slice(0, -1) + decoded + l.hash 
+              l.pathname.slice(0, -1) + decoded + l.hash
           );
         }
       }(window.location))
