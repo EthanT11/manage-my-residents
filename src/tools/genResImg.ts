@@ -29,12 +29,12 @@ function generatePrompt(resident: Resident): string {
 	let residentGender = resident.gender;
 
 	console.log(residentGender === "Prefer not to say");
-	if (residentGender === "Prefer not to say") {
+	if (residentGender === "Prefer not to say" || residentGender === "Other") {
 		residentGender = "a person";
 	}
 
 	let prompt = `Create a headshot photo of ${residentName}, with ${residentFeatures[0]} hair and ${residentFeatures[1]} eyes.
-	 They are ${residentGender}. Try and make them look like they are ${residentAge} years old. 
+	 They are ${residentGender}. Try and make them look like they are ${residentAge} years old. Give them a random nationality. 
 	 Have them look at the camera and smile.`;
 	return prompt;
 }

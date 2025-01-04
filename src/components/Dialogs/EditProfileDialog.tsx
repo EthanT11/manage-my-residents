@@ -84,7 +84,7 @@ const EditProfileDialog = ({ profile, setProfile }: EditProfileDialogProps) => {
                 value={profileForm.home_name}
                 onChange={handleChange}
                 fieldType="dropdown"
-                options={["home_name_1", "home_name_2", "home_name_3"]}
+                options={["Test Care Home", "Test Care Home 2"]}
               />
               <FormField 
                 name="position"

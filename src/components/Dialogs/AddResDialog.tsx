@@ -26,6 +26,8 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 	}
 
 	const handleSubmit = (e: React.FormEvent) => {
+		const randomRoom = String(Math.floor(Math.random() * 100) + 1);
+		const randomWing = Math.random() < 0.5 ? "Left" : "Right";
 		e.preventDefault();
 		const newResident = {
 			first_name: resForm.first_name,
@@ -34,8 +36,8 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 			gender: resForm.gender,
 			hair: resForm.hair,
 			eye: resForm.eye,
-			wing: resForm.wing,
-			room: resForm.room
+			wing: randomWing,
+			room: randomRoom
 		}
 		addResident(newResident);
 	}
@@ -90,7 +92,7 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 								type="text"
 								placeholder="Select Gender"
 								value={resForm.gender}
-								options={["Male", "Female", "Non-Binary", "Prefer not to say"]}
+								options={["Male", "Female", "Non-Binary", "Other", "Prefer not to say"]}
 								onChange={handleChange}
 								fieldType="dropdown"
 							/>
@@ -113,23 +115,6 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 								type="text" 
 								placeholder="Enter Eye Color" 
 								value={resForm.eye}
-								onChange={handleChange}
-							/>
-							<DialogSectionHeader title="Other Information" />
-							<FormField 
-								name="room" 
-								label="Room" 
-								type="text" 
-								placeholder="Enter Room #" 
-								value={resForm.room}
-								onChange={handleChange}
-							/>
-							<FormField 
-								name="wing" 
-								label="Wing" 
-								type="text" 
-								placeholder="Enter Wing" 
-								value={resForm.wing}
 								onChange={handleChange}
 							/>
 						</div>
