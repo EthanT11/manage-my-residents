@@ -9,7 +9,7 @@ export default function SelfPlug() {
 		<div className="flex flex-col gap-2">
 		  <div className="flex items-center gap-3 group-data-[collapsible=icon]:justify-center">
 			<Avatar className="h-10 w-10 shrink-0">
-			  <AvatarImage src="/path-to-your-photo.jpg" alt="Developer" />
+			  <AvatarImage src="https://github.com/EthanT11.png" alt="Ethan Tracey - Developer" />
 			  <AvatarFallback className="bg-sidebar-hover text-sidebar-text">
 				ET
 			  </AvatarFallback>
