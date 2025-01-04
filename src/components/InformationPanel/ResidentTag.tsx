@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Resident, ResidentAdditional } from "@/hooks/useSupabase"
+import { Resident, ResidentAdditional } from "@/contexts/ResidentContext"
 import { useResidents } from "@/contexts/ResidentContext"
 
 interface ResidentTagProps {
