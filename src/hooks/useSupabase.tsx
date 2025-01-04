@@ -1,6 +1,7 @@
 import { supabase } from "@/supabaseClient";
 import generateResidentImage from "@/tools/genResImg";
 
+// TODO: Move interfaces to appropriate files now that context is implemented
 export interface Profile {
 	first_name: string | null;
 	last_name: string | null;
@@ -258,18 +259,68 @@ const useSupabase = () => {
 		}
 	};
 
-	// TODO: Implement editResident
-	// const editResident = async (resident: Resident) => {
-	// 	const { data, error } = await supabase
-	// 		.from('residents')
-	// 		.update(resident)
-	// 		.eq('id', resident.id);
-	// 	if (error) {
-	// 		console.error('Error editing resident:', error.message);
-	// 	} else {
-	// 		console.log('Resident edited successfully:', data);
-	// 	}
-	// }
+	const editResident = async (resident: ResidentAdditional) => {
+		try {
+			// Split the resident data into basic and additional information
+			const basicInfo: Resident = {
+				id: resident.id,
+				first_name: resident.first_name,
+				last_name: resident.last_name,
+				dob: resident.dob,
+				gender: resident.gender,
+				hair: resident.hair,
+				eye: resident.eye,
+				wing: resident.wing,
+				room: resident.room,
+				profile_picture_url: resident.profile_picture_url,
+			};
+
+			const additionalInfo = {
+				// Personal Information
+				marital_status: resident.marital_status,
+				diet: resident.diet,
+				religion: resident.religion,
+				weight: resident.weight,
+				height: resident.height,
+				// Medical Information
+				level_of_care: resident.level_of_care,
+				blood_type: resident.blood_type,
+				allergies: resident.allergies,
+				mobility: resident.mobility,
+				dnr: resident.dnr,
+				medications: resident.medications,
+				// Emergency Contact
+				emergency_contact_name: resident.emergency_contact_name,
+				emergency_contact_phone: resident.emergency_contact_phone,
+				emergency_contact_relationship: resident.emergency_contact_relationship,
+				// Additional Information
+				notes: resident.notes,
+			};
+
+			// Update the basic resident information
+			const { error: residentError } = await supabase
+				.from('residents')
+				.update(basicInfo)
+				.eq('id', resident.id);
+
+			if (residentError) throw residentError;
+
+			// Update or insert the additional information
+			const { error: additionalError } = await supabase
+				.from('resident_additional')
+				.upsert({ 
+					resident_id: resident.id,
+					...additionalInfo 
+				});
+
+			if (additionalError) throw additionalError;
+
+			return true;
+		} catch (error) {
+			console.error('Error editing resident:', (error as Error).message);
+			return false;
+		}
+	};
 
 
 	// Profile Avatar
@@ -321,6 +372,7 @@ const useSupabase = () => {
 		getResidents,
 		addResident,
 		removeResident,
+		editResident,
 	};
 }
 

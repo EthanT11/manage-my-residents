@@ -11,6 +11,7 @@ interface ResidentContextType {
     addResident: (resident: Omit<Resident, 'id'>) => Promise<void>;
     removeResident: (residentId: string) => Promise<void>;
     refreshResidents: () => Promise<void>;
+    editResident: (resident: ResidentAdditional) => Promise<void>;
 }
 
 const ResidentContext = createContext<ResidentContextType | undefined>(undefined);
@@ -21,7 +22,7 @@ export function ResidentProvider({ children }: { children: ReactNode }) {
     const [isLoading, setIsLoading] = useState(true);
     
     const { profile } = useUser();
-    const { getResidents, addResident: addResidentToDb, removeResident: removeResidentFromDb } = useSupabase();
+    const { getResidents, addResident: addResidentToDb, removeResident: removeResidentFromDb, editResident: editResidentInDb } = useSupabase();
 
     const refreshResidents = async () => {
         try {
@@ -55,6 +56,13 @@ export function ResidentProvider({ children }: { children: ReactNode }) {
         refreshResidents();
     };
 
+    const editResident = async (resident: ResidentAdditional) => {
+        const success = await editResidentInDb(resident);
+        if (success) {
+            await refreshResidents();
+        }
+    };
+
     const value = {
         residents,
         selectedResident,
@@ -62,6 +70,7 @@ export function ResidentProvider({ children }: { children: ReactNode }) {
         setSelectedResident,
         addResident,
         removeResident,
+        editResident,
         refreshResidents
     };
 
