@@ -7,7 +7,7 @@ export interface FormFieldProps {
 	label?: string,
 	type?: string,
 	placeholder: string,
-	value: string,
+	value: string | number | boolean | undefined,
 	onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
 	fieldType?: string,
 	options?: string[],

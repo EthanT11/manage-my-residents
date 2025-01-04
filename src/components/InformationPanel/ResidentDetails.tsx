@@ -14,7 +14,7 @@ function dobToAge(dob: string) {
 
 export default function ResidentDetails() {
     // Pull the selected resident from the context
-    const { selectedResident, setSelectedResident, removeResident, editResident, isLoading } = useResidents();
+    const { selectedResident, setSelectedResident, removeResident, isLoading } = useResidents();
 
     // If no resident is selected, return a placeholder card | Should never happen but just in case
     if (!selectedResident) {
@@ -42,19 +42,6 @@ export default function ResidentDetails() {
         setSelectedResident(null);
     };
 
-    const handleEdit = async () => {
-        if (!selectedResident) return;
-        
-        // TODO: Add edit form/dialog
-        // For now, this is just an example
-        const updatedResident = {
-            ...selectedResident,
-            // Add your updates here
-        };
-        
-        await editResident(updatedResident);
-    };
-
     return (
         <Card className={`lg:col-span-2 bg-resident-details-bg border-resident-details-border
                        resident-details-transition
@@ -76,12 +63,7 @@ export default function ResidentDetails() {
                         </div>
                     </div>
                     <div className="flex items-center gap-2">
-                        <EditResDialog />
-                        {/* <CustomButton 
-                            text="Edit Resident" 
-                            onClick={handleEdit}
-                            variant="default"
-                        />   */}
+                        <EditResDialog resident={selectedResident} />
                         <CustomButton 
                             text="Delete Resident" 
                             onClick={handleDelete}

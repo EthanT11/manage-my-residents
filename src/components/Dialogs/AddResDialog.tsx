@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { CustomButton } from "@/components/Common";
 import FormField from "./FormField";
-import { Resident } from "@/hooks/useSupabase";
+import { Resident } from "@/contexts/ResidentContext";
 import DialogSectionHeader from "./DialogSectionHeader";
 export default function AddResDialog({ addResident }: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
 	const [resForm, setResForm] = useState({

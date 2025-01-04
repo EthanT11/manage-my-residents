@@ -3,6 +3,7 @@ import { ProfileCard } from "../Profile";
 import { SideManager } from "../SideManager";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useUser } from "@/contexts/UserContext";
+import { LoadingSpinner } from "../Common";
 
 export default function Account() {
 	const navigate = useNavigate();
@@ -27,8 +28,7 @@ export default function Account() {
 			<SideManager />
 			<main className="flex flex-col font-roboto h-screen w-screen overflow-auto bg-resident-details-bg theme-transition">
 				{isLoading ? (
-					// TODO: Add a loading spinner here
-					<div className="flex items-center justify-center h-full">Loading...</div>
+					<LoadingSpinner />
 				) : (
 					user && profile && (
 						<>

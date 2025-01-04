@@ -4,7 +4,7 @@ interface CustomInputProps {
 	name: string,
 	type: string,
 	placeholder: string,
-	value: string,
+	value: string | number | boolean | undefined,
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 	onFocus?: () => void,
 	className?: string,
@@ -18,7 +18,7 @@ export default function CustomInput( {name, type, placeholder, value, onChange, 
 	  id={name}
 	  name={name}
 	  type={type}
-	  value={value}
+	  value={value?.toString() ?? ''}
 	  placeholder={placeholder}
 	  onChange={onChange}
 	  className={`w-full bg-search-bg text-search-text border border-search-border rounded-md px-3 py-2 

@@ -1,5 +1,6 @@
 import { supabase } from "@/supabaseClient";
 import generateResidentImage from "@/tools/genResImg";
+import { Resident, ResidentAdditional } from "@/contexts/ResidentContext";
 
 // TODO: Move interfaces to appropriate files now that context is implemented
 export interface Profile {
@@ -9,47 +10,11 @@ export interface Profile {
 	position: string | null;
 }
 
-export interface Resident {
-	id?: string;
-	first_name: string;
-	last_name: string;
-	age?: number;
-	dob: string;
-	gender: string;
-	hair: string;
-	eye: string;
-	wing: string;
-	room: string;
-	profile_picture_url?: string;
-}
-
-export interface ResidentAdditional extends Resident {
-	// Personal Information
-	marital_status?: string;
-	diet?: string;
-	religion?: string;
-    weight?: string;
-    height?: string;
-	// Medical Information
-	level_of_care?: string;
-	blood_type?: string;
-	allergies?: string;
-	mobility?: string;
-	dnr?: boolean;
-	medications?: string;
-	// Emergency Contact
-	emergency_contact_name?: string;
-	emergency_contact_phone?: string;
-	emergency_contact_relationship?: string;
-	// Additional Information
-	notes?: string;
-
-}
-
 // Generate Resident Image
 const aiGen = true;
 
 const useSupabase = () => {
+	
 	// TODO: After saving generated images to supabase, need to keep in mind that the image url expires hense why I'm getting a cors error.
 	// Will probably find a way to download the image rather then store the url directly from the AI
 
@@ -194,6 +159,7 @@ const useSupabase = () => {
 	};
 
 	// Resident Data
+	// Get all residents for a home
 	const getResidents = async () => {
 		try {
 			const home_id = await getHomeId().then((data) => data?.id);
@@ -216,6 +182,9 @@ const useSupabase = () => {
 			return [];
 		}
 	};
+
+	// Get a resident by id
+
 
 	const addResident = async (resident: Omit<Resident, 'id'>) => {
 		try {
@@ -259,11 +228,11 @@ const useSupabase = () => {
 		}
 	};
 
-	const editResident = async (resident: ResidentAdditional) => {
+	const updateResident = async (resident: ResidentAdditional) => {
 		try {
-			// Split the resident data into basic and additional information
-			const basicInfo: Resident = {
-				id: resident.id,
+			if (!resident.id) throw new Error('No resident ID provided');
+
+			const residentData = {
 				first_name: resident.first_name,
 				last_name: resident.last_name,
 				dob: resident.dob,
@@ -276,48 +245,42 @@ const useSupabase = () => {
 			};
 
 			const additionalInfo = {
-				// Personal Information
-				marital_status: resident.marital_status,
-				diet: resident.diet,
-				religion: resident.religion,
-				weight: resident.weight,
-				height: resident.height,
-				// Medical Information
-				level_of_care: resident.level_of_care,
-				blood_type: resident.blood_type,
-				allergies: resident.allergies,
-				mobility: resident.mobility,
-				dnr: resident.dnr,
-				medications: resident.medications,
-				// Emergency Contact
-				emergency_contact_name: resident.emergency_contact_name,
-				emergency_contact_phone: resident.emergency_contact_phone,
-				emergency_contact_relationship: resident.emergency_contact_relationship,
-				// Additional Information
-				notes: resident.notes,
+				marital_status: resident.marital_status?.trim() || 'N/A',
+				religion: resident.religion?.trim() || 'N/A',
+				diet: resident.diet?.trim() || 'N/A',
+				weight: resident.weight?.trim() || 'N/A',
+				height: resident.height?.trim() || 'N/A',
+				level_of_care: resident.level_of_care?.trim() || 'N/A',
+				blood_type: resident.blood_type?.trim() || 'N/A',
+				allergies: resident.allergies?.trim() || 'None',
+				mobility: resident.mobility?.trim() || 'N/A',
+				dnr: resident.dnr ?? false,
+				medications: resident.medications?.trim() || 'None',
+				emergency_contact_name: resident.emergency_contact_name?.trim() || 'N/A',
+				emergency_contact_phone: resident.emergency_contact_phone?.trim() || 'N/A',
+				emergency_contact_relationship: resident.emergency_contact_relationship?.trim() || 'N/A',
+				notes: resident.notes?.trim() || 'No additional notes',
 			};
 
 			// Update the basic resident information
 			const { error: residentError } = await supabase
 				.from('residents')
-				.update(basicInfo)
+				.update(residentData)
 				.eq('id', resident.id);
 
 			if (residentError) throw residentError;
 
-			// Update or insert the additional information
+			// Update resident additional information
 			const { error: additionalError } = await supabase
-				.from('resident_additional')
-				.upsert({ 
-					resident_id: resident.id,
-					...additionalInfo 
-				});
+				.from('residents_additional')
+				.update(additionalInfo)
+				.eq('id', resident.id);
 
 			if (additionalError) throw additionalError;
 
 			return true;
 		} catch (error) {
-			console.error('Error editing resident:', (error as Error).message);
+			console.error('Error updating resident:', (error as Error).message);
 			return false;
 		}
 	};
@@ -372,7 +335,7 @@ const useSupabase = () => {
 		getResidents,
 		addResident,
 		removeResident,
-		editResident,
+		updateResident,
 	};
 }
 

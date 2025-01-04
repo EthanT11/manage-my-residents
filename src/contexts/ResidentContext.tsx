@@ -1,8 +1,44 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import useSupabase, { Resident, ResidentAdditional } from '@/hooks/useSupabase';
+import useSupabase from '@/hooks/useSupabase';
 import { useUser } from './UserContext';
 
-// TODO: Move Resident Types
+export interface Resident {
+	id?: string;
+	first_name: string;
+	last_name: string;
+	age?: number;
+	dob: string;
+	gender: string;
+	hair: string;
+	eye: string;
+	wing: string;
+	room: string;
+	profile_picture_url?: string;
+}
+
+export interface ResidentAdditional extends Resident {
+	// Personal Information
+	marital_status?: string;
+	diet?: string;
+	religion?: string;
+    weight?: string;
+    height?: string;
+	// Medical Information
+	level_of_care?: string;
+	blood_type?: string;
+	allergies?: string;
+	mobility?: string;
+	dnr?: boolean;
+	medications?: string;
+	// Emergency Contact
+	emergency_contact_name?: string;
+	emergency_contact_phone?: string;
+	emergency_contact_relationship?: string;
+	// Additional Information
+	notes?: string;
+
+}
+
 interface ResidentContextType {
     residents: (Resident & ResidentAdditional)[];
     selectedResident: (Resident & ResidentAdditional) | null;
@@ -22,8 +58,9 @@ export function ResidentProvider({ children }: { children: ReactNode }) {
     const [isLoading, setIsLoading] = useState(true);
     
     const { profile } = useUser();
-    const { getResidents, addResident: addResidentToDb, removeResident: removeResidentFromDb, editResident: editResidentInDb } = useSupabase();
-
+    const { getResidents, addResident: addResidentToDb, removeResident: removeResidentFromDb, 
+        updateResident: updateResidentInDb } = useSupabase();
+    
     const refreshResidents = async () => {
         try {
             setIsLoading(true);
@@ -57,7 +94,7 @@ export function ResidentProvider({ children }: { children: ReactNode }) {
     };
 
     const editResident = async (resident: ResidentAdditional) => {
-        const success = await editResidentInDb(resident);
+        const success = await updateResidentInDb(resident);
         if (success) {
             await refreshResidents();
         }
@@ -71,7 +108,7 @@ export function ResidentProvider({ children }: { children: ReactNode }) {
         addResident,
         removeResident,
         editResident,
-        refreshResidents
+        refreshResidents,
     };
 
     return (
