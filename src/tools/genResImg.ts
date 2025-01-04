@@ -1,11 +1,11 @@
 import Together from 'together-ai'
-import { Resident } from '@/hooks/useSupabase';
+import { Resident } from '@/contexts/ResidentContext';
 
 
 // Init Together.AI
 const together = new Together({
-	apiKey: import.meta.env.VITE_TOGETHER_API_KEY || '', // TODO: Probably add a way for the user to provide their own API
-	baseURL: import.meta.env.VITE_TOGETHER_BASE_URL || '' // Need an explicit check for this, I don't want people to generate lots of images in pages
+	apiKey: import.meta.env.VITE_TOGETHER_API_KEY,
+	baseURL: import.meta.env.VITE_TOGETHER_BASE_URL
 });
 
 // Model
