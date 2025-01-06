@@ -2,9 +2,14 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { CustomButton } from "@/components/Common";
 import FormField from "./FormField";
-import { Resident } from "@/contexts/ResidentContext";
 import DialogSectionHeader from "./DialogSectionHeader";
-export default function AddResDialog({ addResident }: {addResident: (resident: Omit<Resident, 'id'>) => void}) {
+import { useResidents } from "@/contexts/ResidentContext";
+import { LoadingSpinner } from "@/components/Common";
+
+export default function AddResDialog() {
+	const { addResident, isLoading } = useResidents();
+	const [isOpen, setIsOpen] = useState(false);
+	const [localLoading, setLocalLoading] = useState(false);
 	const [resForm, setResForm] = useState({
 		first_name: "",
 		last_name: "",
@@ -25,25 +30,33 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 		})
 	}
 
-	const handleSubmit = (e: React.FormEvent) => {
-		const randomRoom = String(Math.floor(Math.random() * 100) + 1);
-		const randomWing = Math.random() < 0.5 ? "Left" : "Right";
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		const newResident = {
-			first_name: resForm.first_name,
-			last_name: resForm.last_name,
-			dob: resForm.dob,
-			gender: resForm.gender,
-			hair: resForm.hair,
-			eye: resForm.eye,
-			wing: randomWing,
-			room: randomRoom
+		setLocalLoading(true);
+		try {
+			const randomRoom = String(Math.floor(Math.random() * 100) + 1);
+			const randomWing = Math.random() < 0.5 ? "Left" : "Right";
+			
+			const newResident = {
+				first_name: resForm.first_name,
+				last_name: resForm.last_name,
+				dob: resForm.dob,
+				gender: resForm.gender,
+				hair: resForm.hair,
+				eye: resForm.eye,
+				wing: randomWing,
+				room: randomRoom
+			};
+			
+			await addResident(newResident);
+			setIsOpen(false);
+		} finally {
+			setLocalLoading(false);
 		}
-		addResident(newResident);
 	}
 
 	return (
-		<Dialog>
+		<Dialog open={isOpen} onOpenChange={setIsOpen}>
 			<DialogTrigger asChild>
 				<CustomButton text="Add Resident" variant="default" />
 			</DialogTrigger>
@@ -121,12 +134,13 @@ export default function AddResDialog({ addResident }: {addResident: (resident: O
 					</div>
 					
 					<div className="flex justify-end space-x-4 pt-4 border-t border-infopanel-border">
-						<CustomButton 
-							type="submit" 
-							text="Register Resident" 
-							variant="submit"
-							
-						/> 
+						{(localLoading || isLoading) ? <LoadingSpinner /> : (
+							<CustomButton 
+								type="submit" 
+								text="Register Resident" 
+								variant="submit"
+							/> 
+						)}
 					</div>
 				</form>
 			</DialogContent>

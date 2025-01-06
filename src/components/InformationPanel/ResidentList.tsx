@@ -42,7 +42,7 @@ function SearchBar({ searchQuery, setSearchQuery, children }: {
 }
 
 export default function ResidentList() {
-	const { residents, selectedResident, setSelectedResident, addResident, isLoading } = useResidents();
+	const { residents, selectedResident, setSelectedResident, isLoading } = useResidents();
 	const [searchQuery, setSearchQuery] = useState("");
 	const [isExpanded, setIsExpanded] = useState(true);
 
@@ -98,7 +98,7 @@ export default function ResidentList() {
 							Select a resident to view their details
 						</p>
 						<SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}>
-							<AddResDialog addResident={addResident}/>
+							<AddResDialog />
 						</SearchBar> 
 					</>
 				)}
