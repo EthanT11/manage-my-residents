@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DetailsSection, DetailsItem } from "@/components/Common/CustomDetails";
 import { useResidents } from "@/contexts/ResidentContext";
 import { CustomButton } from "@/components/Common";
-import { EditResDialog } from "../Dialogs";
+import { ConfirmDeleteDialog, EditResDialog } from "../Dialogs";
 
 function dobToAge(dob: string) {
     const today = new Date();
@@ -14,7 +14,7 @@ function dobToAge(dob: string) {
 
 export default function ResidentDetails() {
     // Pull the selected resident from the context
-    const { selectedResident, setSelectedResident, removeResident, isLoading } = useResidents();
+    const { selectedResident, isLoading } = useResidents();
 
     // If no resident is selected, return a placeholder card | Should never happen but just in case
     if (!selectedResident) {
@@ -32,15 +32,6 @@ export default function ResidentDetails() {
     }
 
     const selectedResidentName = selectedResident.first_name + " " + selectedResident.last_name;
-
-    const handleDelete = async () => {
-        if (!selectedResident?.id) return; // Should never happen but just in case
-        
-        // TODO: Add confirmation dialog before deleting
-        // TODO: Check if User is able to delete resident (Add Role Check)
-        await removeResident(selectedResident.id);
-        setSelectedResident(null);
-    };
 
     return (
         <Card className={`lg:col-span-2 bg-resident-details-bg border-resident-details-border
@@ -64,11 +55,7 @@ export default function ResidentDetails() {
                     </div>
                     <div className="flex items-center gap-2">
                         <EditResDialog resident={selectedResident} />
-                        <CustomButton 
-                            text="Delete Resident" 
-                            onClick={handleDelete}
-                            variant="destructive"
-                        />
+                        <ConfirmDeleteDialog />
                     </div>
                 </div>
             </CardHeader>
