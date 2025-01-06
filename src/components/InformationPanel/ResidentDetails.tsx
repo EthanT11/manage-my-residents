@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DetailsSection, DetailsItem } from "@/components/Common/CustomDetails";
 import { useResidents } from "@/contexts/ResidentContext";
-import { CustomButton } from "@/components/Common";
 import { ConfirmDeleteDialog, EditResDialog } from "../Dialogs";
 
 function dobToAge(dob: string) {

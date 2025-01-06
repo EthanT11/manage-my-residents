@@ -11,7 +11,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar"
 
-import { Calendar, Home, Settings, User, ForkKnife, LogOut, Moon, Sun, Construction } from "lucide-react"
+import { Home, Settings, LogOut, Moon, Sun, Construction } from "lucide-react"
 import { useTheme } from "@/hooks/useTheme"
 import { useAuth } from "@/contexts/AuthContext"
 import SelfPlug from "./SelfPlug"
