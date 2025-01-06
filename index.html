@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/manage-my-residents/vite.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage My Residents</title>
+    <script type="text/javascript">
+      // Handle GitHub Pages redirect for single page app
+      // https://github.com/rafgraph/spa-github-pages
+      // Github Pages doesn't support single page apps, so we need to redirect to the root
+      (function(l) {
+        if (l.search[1] === '/' ) { // If the path is just /, we need to redirect to the root
+          var decoded = l.search.slice(1).split('&').map(function(s) { // Decode the URL 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null, 
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+    <script type="module" crossorigin src="/manage-my-residents/assets/main-C2nTpnMg.js"></script>
+    <link rel="stylesheet" crossorigin href="/manage-my-residents/assets/main-DLUbY1sE.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
