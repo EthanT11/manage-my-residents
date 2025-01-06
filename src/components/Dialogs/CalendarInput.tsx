@@ -1,5 +1,5 @@
 import { Calendar } from "@/components/ui/calendar"
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { CustomInput } from "@/components/Common";
 import { FormFieldProps } from "./FormField";
 
@@ -8,24 +8,40 @@ interface CalendarInputProps extends Omit<FormFieldProps, 'label'> {
 }
 
 interface CalendarLayoutProps {
-	date: Date | undefined,
-	handleDateSelect: (date: Date | undefined) => void,
+	date: Date | undefined;
+	handleDateSelect: (date: Date | undefined) => void;
+	showCalendar: boolean;
+	setShowCalendar: (show: boolean) => void;
 }
 
-function CalendarLayout( {date, handleDateSelect}: CalendarLayoutProps ) {
-	
+function CalendarLayout({ date, handleDateSelect, showCalendar, setShowCalendar }: CalendarLayoutProps) {
+	const calendarRef = useRef<HTMLDivElement>(null); // get the calendar element
+
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) { // if the calendar is not clicked, close it
+				setShowCalendar(false);
+			}
+		}
+
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [setShowCalendar]);
+
+	if (!showCalendar) return null;
+
 	return (
-        <div className="absolute z-10">
-            <Calendar
-                mode="single"
-                selected={date}
-                onSelect={handleDateSelect}
-                className="rounded-md bg-white p-2 z-10 shadow-lg border-2"
+		<div ref={calendarRef} className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+			<Calendar
+				mode="single"
+				selected={date}
+				onSelect={handleDateSelect}
+				className="rounded-md bg-white p-2 z-10 shadow-lg border-2"
 				fromYear={1900}
-				toYear={2024}
+				toYear={1981}
 				captionLayout="dropdown"
-				// TODO: Fix dropdown placement: Year dropdown opens and populates up as opposed to down like the months dropdown
-				// TODO: When you click off calendar, close it. Probably need to use  to control visibility
 				// TODO: Add more styling to the calendar, hesitant to do since there's a lot of styling involved
 				classNames={{
 					caption: "flex flex-row items-center justify-center",
@@ -36,32 +52,30 @@ function CalendarLayout( {date, handleDateSelect}: CalendarLayoutProps ) {
 					dropdown_year: "w-[80px] inline-block relative",
 					months: "flex flex-row"
 				}}
-
-            />
-        </div>
-	)
+			/>
+		</div>
+	);
 }
 
-
-export default function CalendarInput( { name, type, placeholder, inputClassname, onChange } : CalendarInputProps ) {
-	const [date, setDate] = useState<Date | undefined>(new Date())
-	const [showCalendar, setShowCalendar] = useState(false)
+export default function CalendarInput({ name, type, placeholder, inputClassname, onChange }: CalendarInputProps) {
+	const [date, setDate] = useState<Date | undefined>(new Date(1980, 0, 1));
+	const [showCalendar, setShowCalendar] = useState(false);
 	
 	const handleDateSelect = (selectedDate: Date | undefined) => {
 		if (selectedDate) {
-			setDate(selectedDate)
-			setShowCalendar(false)
-			onChange({ target: {name, value: handleDateFormat(selectedDate) } } as React.ChangeEvent<HTMLInputElement>)
+			setDate(selectedDate);
+			setShowCalendar(false);
+			onChange({ target: {name, value: handleDateFormat(selectedDate) }} as React.ChangeEvent<HTMLInputElement>);
 		}
-	}
+	};
 
 	// Change to this format since it's convient for supabase
-    const handleDateFormat = (date: Date) => {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}/${month}/${day}`;
-    };
+	const handleDateFormat = (date: Date) => {
+		const year = date.getFullYear();
+		const month = String(date.getMonth() + 1).padStart(2, '0');
+		const day = String(date.getDate()).padStart(2, '0');
+		return `${year}/${month}/${day}`;
+	};
 
 	return (
 		<div className="relative">
@@ -75,12 +89,12 @@ export default function CalendarInput( { name, type, placeholder, inputClassname
 				onFocus={() => setShowCalendar(true)}
 				className={inputClassname || 'bg-white p-2 rounded-lg'}
 			/>
-			{showCalendar && (
-				<CalendarLayout 
-					date={date}
-					handleDateSelect={handleDateSelect}
-				/>
-			)}
+			<CalendarLayout 
+				date={date}
+				handleDateSelect={handleDateSelect}
+				showCalendar={showCalendar}
+				setShowCalendar={setShowCalendar}
+			/>
 		</div>
-	)
+	);
 }
