@@ -15,6 +15,8 @@ function SearchBar({ searchQuery, setSearchQuery, children }: {
 		<div className="flex items-center space-x-2 theme-transition">
 			<div className="relative">
 				<input
+					id="resident-search"
+					name="resident-search"
 					type="text"
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
@@ -28,6 +30,7 @@ function SearchBar({ searchQuery, setSearchQuery, children }: {
 				<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-search-icon" />
 				{searchQuery && (
 					<button
+						type="button"
 						onClick={() => setSearchQuery("")}
 						className="absolute right-3 top-1/2 transform -translate-y-1/2 
 								 text-search-icon hover:text-search-icon/50"
