@@ -96,7 +96,14 @@ export function ResidentProvider({ children }: { children: ReactNode }) {
     const editResident = async (resident: ResidentAdditional) => {
         const success = await updateResidentInDb(resident);
         if (success) {
-            await refreshResidents();
+            setResidents(prevResidents => 
+                prevResidents.map(r => // map through residents and update the resident with the new data
+                    r.id === resident.id ? resident : r
+                )
+            );
+            if (selectedResident?.id === resident.id) {
+                setSelectedResident(resident);
+            }
         }
     };
 
