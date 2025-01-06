@@ -2,6 +2,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { useState, useRef, useEffect } from "react";
 import { CustomInput } from "@/components/Common";
 import { FormFieldProps } from "./FormField";
+import { useResidents } from "@/contexts/ResidentContext";
 
 interface CalendarInputProps extends Omit<FormFieldProps, 'label'> {
 	inputClassname?: string
@@ -58,9 +59,19 @@ function CalendarLayout({ date, handleDateSelect, showCalendar, setShowCalendar 
 }
 
 export default function CalendarInput({ name, type, placeholder, inputClassname, onChange }: CalendarInputProps) {
-	const [date, setDate] = useState<Date | undefined>(new Date(1980, 0, 1));
+	const [date, setDate] = useState<Date | undefined>();
 	const [showCalendar, setShowCalendar] = useState(false);
-	
+	const { selectedResident } = useResidents();
+
+	useEffect(() => {
+		if (selectedResident?.dob) {
+			const [year, month, day] = selectedResident.dob.split('-');
+			setDate(new Date(parseInt(year), parseInt(month) - 1, parseInt(day)));
+		} else {
+			setDate(new Date(1980, 0, 1)); // Default date if no resident selected
+		}
+	}, [selectedResident]);
+
 	const handleDateSelect = (selectedDate: Date | undefined) => {
 		if (selectedDate) {
 			setDate(selectedDate);
@@ -77,6 +88,7 @@ export default function CalendarInput({ name, type, placeholder, inputClassname,
 		return `${year}/${month}/${day}`;
 	};
 
+
 	return (
 		<div className="relative">
 			{/* TODO: Add calendar icon and hover effects for ease of use */}
@@ -89,7 +101,7 @@ export default function CalendarInput({ name, type, placeholder, inputClassname,
 				onFocus={() => setShowCalendar(true)}
 				className={inputClassname || 'bg-white p-2 rounded-lg'}
 			/>
-			<CalendarLayout 
+			<CalendarLayout
 				date={date}
 				handleDateSelect={handleDateSelect}
 				showCalendar={showCalendar}
