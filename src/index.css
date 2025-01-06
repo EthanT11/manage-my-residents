@@ -38,7 +38,8 @@ html, body, #root {
    --dark-text-secondary-color: #cbd5e1;
    --dark-hover-color: #334155;
    --dark-active-color: #1e293b;
-   --dark-disabled: #0f172a;
+   --dark-disabled: #cbd5e1;
+   
    /* Destructive colors */
    --light-destructive-bg: #ef4444;
    --light-destructive-border: #dc2626;

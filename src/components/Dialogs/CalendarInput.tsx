@@ -50,7 +50,7 @@ function CalendarLayout({ date, handleDateSelect, showCalendar, setShowCalendar 
 				classNames={{
 					caption: "flex flex-row items-center justify-center p-1", // Top of the calendar Month and Year
 					caption_label: "hidden", // hide the caption label, doubles the caption
-					dropdown: "p-1 border-calendar-dropdown-border border shadow-sm",
+					dropdown: "p-1 border-calendar-dropdown-border border shadow-sm bg-calendar-dropdown-bg",
 					dropdown_month: "w-[110px] inline-block relative",
 					dropdown_year: "w-[80px] inline-block relative",
 					head_cell: "text-secondary-text w-full font-normal",
