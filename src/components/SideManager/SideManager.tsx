@@ -11,7 +11,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar"
 
-import { Calendar, Home, Settings, User, ForkKnife, LogOut, Moon, Sun } from "lucide-react"
+import { Calendar, Home, Settings, User, ForkKnife, LogOut, Moon, Sun, Construction } from "lucide-react"
 import { useTheme } from "@/hooks/useTheme"
 import { useAuth } from "@/contexts/AuthContext"
 import SelfPlug from "./SelfPlug"
@@ -47,18 +47,20 @@ export default function SideManager() {
     {
       title: "Calendar",
       url: "/dashboard",
-      icon: Calendar,
+      // icon: Calendar,
+      icon: Construction,
     },
     {
       title: "Meals",
       url: "/dashboard",
-      icon: ForkKnife,
+      // icon: ForkKnife,
+      icon: Construction,
     },
-    {
-      title: "Residents",
-      url: "/dashboard",
-      icon: User,
-    },
+    // {
+    //   title: "Residents",
+    //   url: "/dashboard",
+    //   icon: User,
+    // },
   ]
 
   const settingsItems = [
