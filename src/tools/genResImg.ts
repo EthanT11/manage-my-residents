@@ -1,6 +1,9 @@
 import Together from 'together-ai'
 import { Resident } from '@/contexts/ResidentContext';
 
+// TODO: Because of the way cors is handled, we need to call the edge function to download the image and store it in supabase
+
+
 
 // Init Together.AI
 const together = new Together({
