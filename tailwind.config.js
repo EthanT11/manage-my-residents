@@ -117,7 +117,18 @@ export default {
   				'ring': 'var(--dropdown-ring)',
   			},
 
-			// TODO: Calendar colors
+			// Calendar colors
+			'calendar': {
+				'bg': 'var(--calendar-bg)',
+				'border': 'var(--calendar-border)',
+				'text': 'var(--calendar-text)',
+				'cell-disabled': 'var(--calendar-cell-disabled)',
+				'dropdown': {
+					'bg': 'var(--calendar-dropdown-bg)',
+					'border': 'var(--calendar-dropdown-border)',
+					'text': 'var(--calendar-dropdown-text)',
+				},
+			},
 
 			// Resident Details colors
 			'resident-details': {

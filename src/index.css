@@ -28,7 +28,7 @@ html, body, #root {
    --light-text-secondary-color: #5d5683;  
    --light-hover-color: #dcd9e7;  
    --light-active-color: #ccc8dc;
-
+   --light-disabled: #5a585e;
    
    --dark-page-bg: #0f172a;
    --dark-bg-color: #0f172a;
@@ -38,7 +38,7 @@ html, body, #root {
    --dark-text-secondary-color: #cbd5e1;
    --dark-hover-color: #334155;
    --dark-active-color: #1e293b;
-   
+   --dark-disabled: #0f172a;
    /* Destructive colors */
    --light-destructive-bg: #ef4444;
    --light-destructive-border: #dc2626;
@@ -119,6 +119,15 @@ html, body, #root {
     --search-placeholder: var(--light-text-secondary-color);
     --search-icon: var(--light-text-color);
     --search-ring: var(--light-border-color);
+
+    /* Calendar colors */
+    --calendar-bg: var(--light-bg-color);
+    --calendar-border: var(--light-border-color);
+    --calendar-text: var(--light-text-color);
+    --calendar-cell-disabled: var(--light-disabled);
+    --calendar-dropdown-bg: var(--light-bg-color);
+    --calendar-dropdown-border: var(--light-border-color);
+    --calendar-dropdown-text: var(--light-text-color);
 
     /* Dropdown colors */
     --dropdown-bg: var(--light-bg-color);
@@ -223,6 +232,15 @@ html, body, #root {
     --search-placeholder: var(--dark-text-secondary-color);
     --search-icon: var(--dark-text-color);
     --search-ring: var(--dark-border-color);
+
+    /* Calendar colors */
+    --calendar-bg: var(--dark-bg-color);
+    --calendar-border: var(--dark-border-color);
+    --calendar-text: var(--dark-text-color);
+    --calendar-cell-disabled: var(--dark-disabled);
+    --calendar-dropdown-bg: var(--dark-bg-color);
+    --calendar-dropdown-border: var(--dark-border-color);
+    --calendar-dropdown-text: var(--dark-text-color);
 
     /* Dropdown colors */
     --dropdown-bg: var(--dark-bg-color);

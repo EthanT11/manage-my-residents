@@ -40,9 +40,8 @@ function generatePrompt(resident: Resident): string {
 }
 
 export default async function generateResidentImage(resident: Resident) {
-	console.log(resident);
 	let prompt = generatePrompt(resident);
-	console.log(prompt);
+	console.log("Prompt: ", prompt);
 	if (prompt === "") {
 		throw new Error("Failed to generate prompt");
 	}

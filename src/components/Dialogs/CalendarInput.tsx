@@ -33,25 +33,31 @@ function CalendarLayout({ date, handleDateSelect, showCalendar, setShowCalendar 
 
 	if (!showCalendar) return null;
 
+
+	// TODO: Look into Calendar and Daypicker components to split up the year and month dropdowns
 	return (
 		<div ref={calendarRef} className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
 			<Calendar
+				initialFocus
 				mode="single"
 				selected={date}
 				onSelect={handleDateSelect}
-				className="rounded-md bg-white p-2 z-10 shadow-lg border-2"
 				fromYear={1900}
 				toYear={1981}
 				captionLayout="dropdown"
-				// TODO: Add more styling to the calendar, hesitant to do since there's a lot of styling involved
+				className="p-2 z-10 shadow-lg rounded-md border-2 border-calendar-border
+					bg-calendar-bg text-calendar-text theme-transition"
 				classNames={{
-					caption: "flex flex-row items-center justify-center",
-					caption_label: "hidden",
-					nav: "space-x-1 flex items-center",
-					dropdown: "p-1 bg-white rounded-md border shadow-sm",
+					caption: "flex flex-row items-center justify-center p-1", // Top of the calendar Month and Year
+					caption_label: "hidden", // hide the caption label, doubles the caption
+					dropdown: "p-1 border-calendar-dropdown-border border shadow-sm",
 					dropdown_month: "w-[110px] inline-block relative",
 					dropdown_year: "w-[80px] inline-block relative",
-					months: "flex flex-row"
+					head_cell: "text-secondary-text w-full font-normal",
+					cell: "relative",
+					day: "h-9 w-9 p-0 font-normal rounded-md hover:bg-button-submit-hover focus:bg-button-submit-hover aria-selected:bg-button-submit aria-selected:text-white",
+					day_selected: "bg-button-submit-active text-white hover:bg-button-submit-hover",	
+					day_outside: "text-calendar-cell-disabled opacity-50 hover:bg-gray-100/50",
 				}}
 			/>
 		</div>
